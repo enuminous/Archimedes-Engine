@@ -1,0 +1,14 @@
+'use strict';
+const fs = require('node:fs'), path = require('node:path');
+const root = path.resolve(__dirname, '..');
+const read = name => fs.readFileSync(path.join(root, name), 'utf8');
+let html = read('index.html');
+html = html.replace('<link rel="stylesheet" href="styles.css">', `<style>${read('styles.css')}</style>`);
+html = html.replace(/<script src="(?:engine|app)\.js" defer><\/script>/g, '');
+html = html.replaceAll('href="icon.svg"', `href="data:image/svg+xml;base64,${Buffer.from(read('icon.svg')).toString('base64')}"`);
+html = html.replaceAll('src="icon.svg"', `src="data:image/svg+xml;base64,${Buffer.from(read('icon.svg')).toString('base64')}"`);
+html = html.replace('href="./index.html"', 'href="#"');
+html = html.replace(/href="(docs\/[^" ]+\.md)" download/g, (_, name) => `href="data:text/markdown;charset=utf-8;base64,${Buffer.from(read(name)).toString('base64')}" download="${path.basename(name)}"`);
+html = html.replace('</body>', `<script>${read('engine.js').replace(/<\/script/gi, '<\\/script')}</script><script>${read('app.js').replace(/<\/script/gi, '<\\/script')}</script></body>`);
+fs.writeFileSync(path.join(root, 'Archimedes-Engine.html'), html);
+console.log('Archimedes-Engine.html written with embedded scripts, style, icon and math documents.');
