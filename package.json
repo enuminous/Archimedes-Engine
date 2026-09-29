@@ -1,0 +1,13 @@
+{
+  "name": "archimedes-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A deterministic WorldEngine laboratory with an EFMW-inspired recursive coherence kernel.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "experiment": "node scripts/experiment.js",
+    "build": "node scripts/build.js"
+  },
+  "engines": { "node": ">=22" }
+}

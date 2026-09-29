@@ -1,0 +1,14 @@
+{
+  "project": "The Archimedes Engine",
+  "version": "0.1.0",
+  "specification_frozen": "2026-09-27",
+  "packaged": "2026-09-28",
+  "entry_point": "index.html",
+  "standalone": "Archimedes-Engine.html",
+  "engine_tests_passed": 22,
+  "interface_contract_tests_passed": 10,
+  "development_runs": 48,
+  "real_browser_review": "not performed: environment restriction",
+  "publication": "not published to GitHub",
+  "license": "not selected"
+}

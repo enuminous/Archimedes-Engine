@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101b22"><meta name="description" content="The Archimedes Engine: an inspectable, recursive world simulation by Monolithic.">
+  <title>The Archimedes Engine · Monolithic</title>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTMiIGZpbGw9IiNjN2U3YzQiLz48ZyBzdHJva2U9IiMxMzI1MmIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMi44Ij48Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyMCIvPjxlbGxpcHNlIGN4PSIzMiIgY3k9IjMyIiByeD0iOSIgcnk9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgzNSAzMiAzMikiLz48cGF0aCBkPSJNMTEgMzJoNDJNMzIgOXY0NiIvPjwvZz48Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSI0IiBmaWxsPSIjMTMyNTJiIi8+PC9zdmc+Cg==" type="image/svg+xml"><style>:root{color-scheme:dark;--bg:#101b22;--panel:#15232c;--line:#2b3a43;--ink:#e5e9e7;--muted:#96a8ad;--green:#c7e7c4;--teal:#6cbfc2;--orange:#eeb77f;--mono:ui-monospace,SFMono-Regular,Consolas,monospace;--sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px}button,input,select,textarea{font:inherit}button,a,input,select,textarea,summary{outline-offset:4px}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}button,a{touch-action:manipulation}button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:5px;padding:9px 12px;transition:background .16s}button:hover{background:#24363f}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--green)}button.primary,.primary{background:var(--green);border:1px solid var(--green);color:#13252b;font-weight:650;text-decoration:none;border-radius:5px;padding:10px 13px;display:inline-flex;align-items:center;justify-content:space-between;gap:12px}.primary:hover{background:#ddf1d9}button.quiet,.quiet{border-color:transparent}.outline{border:1px solid #53636a;color:var(--ink);text-decoration:none;padding:9px 12px;border-radius:5px}.full{width:100%}.topbar{height:78px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:40px;padding:0 32px}.brand{display:flex;align-items:center;gap:12px;color:var(--ink);font-size:17px;font-weight:650;letter-spacing:2px;text-decoration:none}.brand-sub{display:block;font:9px var(--mono);letter-spacing:1.6px;color:var(--muted);margin-top:5px}.topbar nav{align-self:stretch;display:flex;gap:20px}.nav{border:0;border-radius:0;color:var(--muted);padding:0 3px}.nav.active{color:var(--green);box-shadow:inset 0 -2px var(--green)}.header-actions{margin-left:auto;display:flex;align-items:center;gap:12px}.version{font:10px var(--mono);color:var(--muted);letter-spacing:1px}main{max-width:1780px;margin:auto;padding:32px}.page-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:27px}.eyebrow{font:10px var(--mono);letter-spacing:2px;color:var(--green);margin:0 0 11px}h1{font-size:32px;letter-spacing:-1px;font-weight:500;line-height:1.2;margin:0}p.subtitle{margin:9px 0 0;color:var(--muted);font-size:13px}.run-status{display:flex;gap:10px;align-items:center;font:11px var(--mono);color:var(--muted)}.status-dot{width:7px;height:7px;border-radius:50%;background:var(--orange)}.status-dot.running{background:var(--green);box-shadow:0 0 10px #c7e7c466}.separator{margin:0 6px;color:#54666e}.workspace{display:grid;grid-template-columns:230px minmax(340px,1fr) 280px;gap:18px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:7px;overflow:hidden}.panel-title{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line);gap:8px}.panel-title h2{font-size:12px;font-weight:550;margin:0}.index{font:9px var(--mono);letter-spacing:.6px;color:var(--muted)}.controls{padding:0 17px 17px}.controls .panel-title{padding:17px 0;margin-bottom:16px}.controls label:not(.check-label),.journal>label{font:9px var(--mono);color:var(--muted);letter-spacing:.7px;display:block;margin:17px 0 8px}input:not([type=range]):not([type=checkbox]),select,textarea{width:100%;background:#101c24;color:var(--ink);border:1px solid #394952;border-radius:4px;padding:10px;min-height:37px}select{font-size:12px}input[type=checkbox]{accent-color:var(--green)}.seed-row{display:flex;gap:5px}.seed-row input{font:10px var(--mono);min-width:0}.seed-row button{padding:6px 11px;font-size:19px}h3{font-size:12px;font-weight:550;margin:0 0 14px}.section-rule{border-top:1px solid var(--line);margin:22px 0}.label-row{display:flex;align-items:center;justify-content:space-between}.label-row label{margin:0!important;text-transform:none!important;font-family:var(--sans)!important;font-size:11px!important}.label-row output{font:11px var(--mono);color:var(--green)}input[type=range]{accent-color:var(--green);width:100%;height:18px;margin:9px 0 0}.micro{font-size:10px;color:var(--muted);line-height:1.6}.check-label{display:flex;align-items:center;gap:6px;color:var(--muted);font-size:11px;margin-top:12px}.interventions{display:grid;gap:7px}.interventions button{text-align:left;font-size:11px;padding:10px 12px;background:#182832}.interventions button>span:first-child{width:19px;display:inline-block;color:var(--orange)}.text-button{font-size:10px;color:var(--muted);padding:11px 0;border:0;text-align:left}details{border-top:1px solid var(--line);margin-top:10px;padding-top:14px}summary{font-size:11px;color:var(--muted);cursor:pointer}details output{float:right;color:var(--green)}.central,.inspector{display:flex;flex-direction:column;gap:18px}.room-label{display:flex;gap:9px;align-items:center}.live-square{width:5px;height:5px;background:var(--green)}.muted{color:var(--muted);font:10px var(--mono)}.canvas-options{display:flex;gap:10px;font-size:10px;color:var(--muted)}.canvas-options label{display:flex;align-items:center;gap:3px}.canvas-wrap{background:#101d25;position:relative}#world{display:block;width:100%;aspect-ratio:3/2;height:auto}.canvas-caption{position:absolute;bottom:13px;left:18px;right:18px;display:flex;justify-content:space-between;font:9px var(--mono);letter-spacing:1px;pointer-events:none}.canvas-caption>span:first-child{color:var(--teal)}.canvas-caption i{margin-right:15px}.canvas-caption>span:last-child{color:var(--green)}.transport{padding:13px 16px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);gap:10px}.transport>div{display:flex;align-items:center;gap:6px}.transport button{font-size:10px;padding:8px 10px}.transport .play{background:var(--green);color:#14262b;border-color:var(--green);min-width:102px;font-weight:650}.transport select{min-height:32px;width:90px;font-size:10px;padding:7px}.empty-state{display:flex;align-items:center;gap:16px;padding:25px 18px}.orbit{font-size:31px;color:#75988f}.empty-state strong{font-size:12px;font-weight:500}.empty-state p{font-size:10px;color:var(--muted);line-height:1.6;margin:6px 0 0}.empty-state button{margin-left:auto;font-size:10px;white-space:nowrap}.metric-grid{display:grid;grid-template-columns:1fr 1fr;padding:18px;gap:20px 10px}.metric-grid label{font:8px var(--mono);letter-spacing:.5px;color:var(--muted);display:block}.metric-grid strong{font:27px var(--mono);display:block;margin:7px 0 4px;color:var(--green);font-weight:400;letter-spacing:-1px}.metric-grid span{font-size:9px;color:var(--muted)}#chart{margin:0 16px;height:69px}#chart svg{width:100%;height:100%}.chart-legend{display:flex;gap:18px;justify-content:center;font-size:9px;color:var(--green);padding:8px 0 14px}.chart-legend span:last-child{color:var(--orange)}.alarm{border-top:1px solid var(--line);padding:11px 17px;font-size:9px;color:var(--muted);background:#172932}.alarm.warning{color:var(--orange);background:#362b25}.agent{padding:17px;border-bottom:1px solid var(--line)}.agent:last-child{border:0}.agent-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}.agent-dot{width:7px;height:7px;background:var(--teal);border-radius:50%}.agent:nth-child(2) .agent-dot{background:var(--orange)}.agent-name{font:11px var(--mono);letter-spacing:1px}.agent-head .muted{margin-left:auto;font-size:9px}.agent-row{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);line-height:2}.agent-row b{color:var(--ink);font:10px var(--mono)}.energy-bar{height:3px;background:#2d3b44;margin-top:8px}.energy-bar>span{display:block;height:100%;background:var(--teal)}.agent:nth-child(2) .energy-bar>span{background:var(--orange)}.journal{padding:0 16px 12px}.journal-tabs{display:flex;border-bottom:1px solid var(--line);gap:14px}.journal-tabs button{border:0;border-radius:0;padding:14px 0;font-size:11px;color:var(--muted)}.journal-tabs button.selected{color:var(--green);box-shadow:inset 0 -1px var(--green)}#journal{height:148px;overflow:auto;padding:9px 0}.log-entry{display:grid;grid-template-columns:43px 1fr;gap:8px;padding:7px 0;font-size:10px;line-height:1.5}.log-entry time{font:9px var(--mono);color:#80969c}.log-entry span{color:#c2cecf}.journal textarea{font-size:11px;resize:vertical;min-height:60px}.journal>.micro{font-size:9px}#history{display:flex;gap:8px;overflow:auto;padding:16px 18px;max-height:112px}.history-node{min-width:81px;flex-shrink:0;text-align:left;font:10px var(--mono);padding:9px;border:1px solid var(--line);background:#132129}.history-node strong{display:block;color:#cbd7d8;font-size:10px;font-weight:400;margin-top:4px}.history-node small{display:block;font-size:8px;color:var(--muted);max-width:91px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:6px}.history-node.current{border-color:#aecba9;background:#223b38}.timeline-footer{display:flex;justify-content:space-between;gap:12px;padding:0 18px 12px;font-size:9px;color:var(--muted)}footer{display:flex;gap:20px;align-items:center;justify-content:space-between;margin-top:24px;border-top:1px solid var(--line);padding-top:15px;font-size:9px;color:var(--muted)}footer b{font-weight:500;color:#cfdbdc;letter-spacing:1px}#tree{height:145px;margin:12px 12px 0;overflow:hidden}#tree svg{width:100%;height:100%}.alternatives{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:4px 16px 14px}.alternative{text-align:left;font:9px var(--mono);padding:9px;min-width:0}.alternative strong{display:block;color:var(--green);font-size:13px;margin:7px 0 3px}.alternative small{font-size:8px;color:var(--muted)}.alternative.selected{border-color:var(--green)}.future-footer{padding:12px 16px;border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;justify-content:space-between}.future-footer>span{color:var(--muted);font:9px var(--mono);line-height:1.6}.future-footer button{font-size:10px;white-space:nowrap}.janus-result{margin:0 16px 16px;padding:12px;background:#172e33;font-size:11px;line-height:1.7;border-left:2px solid var(--teal)}.reading{max-width:1100px;margin:26px auto 50px}.reading h1{font-size:44px}.lede{font-size:17px;line-height:1.7;color:var(--muted);max-width:780px}.math-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:35px}.math-grid article{background:var(--panel);padding:30px}.math-grid h2{font-size:21px;font-weight:500;margin:15px 0 22px}.math-grid p:not(.formula){color:var(--muted);font-size:13px;line-height:1.8}.equation-number{font:9px var(--mono);color:var(--green);letter-spacing:1px}.formula{font:16px Georgia,serif;color:var(--green);line-height:1.8;overflow-wrap:anywhere}.doc-links{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.operator-row{padding:23px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:100px 1fr 230px;gap:20px;align-items:start}.operator-row h2{font:14px var(--mono);color:var(--green);margin:0}.operator-row p{margin:0;font-size:14px;line-height:1.6}.operator-row small{font-size:11px;color:var(--muted);line-height:1.7}.roadmap{padding:30px;background:var(--panel);margin-top:30px;border:1px solid var(--line);border-radius:7px}.roadmap h2{font-size:18px}.roadmap ol{padding-left:18px;color:var(--muted);line-height:1.8}.roadmap li{padding:6px 0}#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);border:1px solid #7d9897;background:#203b3e;color:var(--ink);padding:12px 19px;border-radius:6px;max-width:90vw;font-size:12px;z-index:20;display:none;box-shadow:0 5px 30px #0005}#toast.visible{display:block}dialog{max-width:640px;max-height:90vh;overflow:auto;background:var(--panel);color:var(--ink);border:1px solid #536970;border-radius:10px;padding:35px}dialog::backdrop{background:#071016cc}dialog h2{font-size:27px;font-weight:500}dialog p,dialog li{font-size:13px;line-height:1.8;color:var(--muted)}dialog li{padding:4px 0}.dialog-close{position:absolute;top:10px;right:12px;border:0;font-size:24px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}
+@media(min-width:1550px){.workspace{grid-template-columns:245px minmax(450px,1fr) 305px}.controls{padding-bottom:23px}.controls .interventions button{padding:13px 12px}.metric-grid strong{font-size:32px}.metric-grid{gap:24px 14px}.agent{padding:21px}}
+@media(max-width:1180px){main{padding:24px}.topbar{padding:0 24px;gap:25px}.version{display:none}.workspace{grid-template-columns:205px minmax(320px,1fr)}.inspector{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr}.metric-grid strong{font-size:25px}.transport{padding:12px}.header-actions{gap:3px}.topbar nav{gap:14px}.timeline-footer{line-height:1.6}.empty-state{gap:10px}.empty-state .orbit{display:none}}
+@media(max-width:760px){main{padding:20px 14px}.topbar{height:auto;min-height:80px;flex-wrap:wrap;padding:15px 14px 0;gap:14px}.brand{font-size:13px;letter-spacing:1.5px}.brand-sub{font-size:7px}.brand img{width:28px;height:28px}.topbar nav{order:3;width:100%;height:38px;gap:25px}.header-actions{margin-left:auto}.header-actions button{font-size:10px;padding:8px}.page-heading{gap:15px;align-items:flex-start;margin:6px 0 20px}.page-heading h1{font-size:27px}.eyebrow{font-size:8px;letter-spacing:1.3px}.subtitle{max-width:230px;line-height:1.6}.run-status{font-size:9px;gap:5px;flex-wrap:wrap;max-width:95px;justify-content:flex-end;margin-top:23px}.run-status .separator{display:none}.workspace{grid-template-columns:1fr;gap:14px}.central{order:1;gap:14px}.controls{order:2;display:grid;grid-template-columns:1fr 1fr;column-gap:20px;padding-bottom:20px}.controls>*{grid-column:1/-1}.controls .panel-title{margin-bottom:0}.controls .interventions{grid-template-columns:1fr 1fr;gap:8px}.controls .check-label{padding-bottom:5px}.inspector{order:3;grid-column:auto;grid-template-columns:1fr 1fr;gap:14px}.journal{grid-column:1/-1}.panel-title{padding:14px}.transport{flex-wrap:wrap;gap:7px;padding:10px}.transport button{padding:8px}.transport>div:last-child{margin-left:auto}.transport #checkpoint{font-size:9px;padding:8px 4px}.empty-state{padding:20px 14px}.empty-state strong{font-size:11px}.empty-state p{font-size:10px}.empty-state button{padding:8px 0}.canvas-caption{font-size:7px;bottom:8px;left:14px;right:14px}.canvas-options{font-size:9px;gap:6px}.metric-grid{padding:14px;gap:16px 8px}.metric-grid label{font-size:7px}.metric-grid strong{font-size:23px}.metric-grid span{font-size:8px}.agent{padding:14px}.agent-panel .panel-title{flex-wrap:wrap}.agent-row{font-size:9px}.agent-row b{font-size:9px}.chart-legend{font-size:8px;gap:8px}.alarm{font-size:8px;padding:10px}.future-footer{align-items:flex-start;flex-direction:column}.future-footer button{align-self:flex-end}.alternatives{padding:4px 12px 12px;gap:5px}.alternative{padding:7px 5px;font-size:8px}.alternative small{font-size:7px}.timeline-footer{font-size:8px}footer{flex-wrap:wrap;font-size:8px;gap:9px}footer>span:nth-child(2){order:3;width:100%}.reading{margin-top:18px}.reading h1{font-size:34px}.lede{font-size:15px}.math-grid{grid-template-columns:1fr;margin-top:25px}.math-grid article{padding:23px}.operator-row{grid-template-columns:80px 1fr;gap:14px}.operator-row>small{grid-column:2}.roadmap{padding:20px}.doc-links a{font-size:12px}.room-label .muted{font-size:8px}dialog{margin:auto 14px;padding:26px}#tree{height:130px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+  
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Archimedes Engine home"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTMiIGZpbGw9IiNjN2U3YzQiLz48ZyBzdHJva2U9IiMxMzI1MmIiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMi44Ij48Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyMCIvPjxlbGxpcHNlIGN4PSIzMiIgY3k9IjMyIiByeD0iOSIgcnk9IjIwIiB0cmFuc2Zvcm09InJvdGF0ZSgzNSAzMiAzMikiLz48cGF0aCBkPSJNMTEgMzJoNDJNMzIgOXY0NiIvPjwvZz48Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSI0IiBmaWxsPSIjMTMyNTJiIi8+PC9zdmc+Cg==" alt="" width="34" height="34"><span>ARCHIMEDES<span class="brand-sub">MONOLITHIC / WORLDENGINE</span></span></a>
+    <nav aria-label="Views"><button class="nav active" data-view="laboratory">Laboratory</button><button class="nav" data-view="mathematics">Mathematics</button><button class="nav" data-view="registry">Operators</button></nav>
+    <div class="header-actions"><span class="version">BUILD 0.1.0</span><button id="import" class="quiet">Import</button><button id="export" class="outline">Export session ↗</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
+  </header>
+  <main>
+    <section id="laboratory" class="view">
+      <div class="page-heading"><div><p class="eyebrow">THE TOTALITY LAB / EXPERIMENT 001</p><h1>A world that remembers.</h1><p class="subtitle">Observe. Intervene. Explore what could happen next.</p></div><div class="run-status"><span id="status-dot" class="status-dot"></span><span id="run-status">Paused</span><span class="separator">/</span><span id="clock">t = 0.0 s</span></div></div>
+      <div class="workspace">
+        <aside class="controls panel">
+          <div class="panel-title"><h2>World controls</h2><span class="index">01</span></div>
+          <label for="seed">WORLD SEED</label><div class="seed-row"><input id="seed" value="ARCHIMEDES-001" maxlength="80" spellcheck="false"><button id="reset" title="Create a new world from this seed" aria-label="Create new seeded world">↻</button></div>
+          <label for="goal">PLAYER OBJECTIVE</label><select id="goal"><option value="balance">Balance the system</option><option value="discovery">Discover the room</option><option value="resilience">Preserve energy</option></select>
+          <label for="intention">CURRENT INTENTION</label><select id="intention"><option value="survey">Survey the room</option><option value="anchor">Hold relay & archive</option><option value="exchange">Exchange positions</option><option value="recharge">Return to source</option></select>
+          <div class="section-rule"></div><h3>Recursive exploration</h3>
+          <div class="label-row"><label for="depth">Search depth</label><output id="depth-value">3</output></div><input id="depth" type="range" min="1" max="4" step="1" value="3">
+          <p class="micro">Four intentions · three retained branches<br>Two simulation seconds per level</p>
+          <button id="explore" class="primary full">Explore possible futures <span>↗</span></button>
+          <label class="check-label"><input id="autopilot" type="checkbox"> Replan automatically</label>
+          <div class="section-rule"></div><h3>Interventions</h3>
+          <div class="interventions"><button data-intervene="pulse"><span>⌁</span> Field pulse</button><button data-intervene="blackout"><span>◌</span> Sensor blackout</button><button data-intervene="source"><span>⏻</span> <span id="source-label">Switch source off</span></button><button data-intervene="reset-model"><span>↺</span> Reset self-models</button></div>
+          <button id="janus" class="text-button">Compare opposite source state →</button>
+          <details><summary>Kernel parameters</summary><label for="coupling">Recursive coupling λ <output id="coupling-value">0.80</output></label><input id="coupling" type="range" min="0" max="2" step="0.05" value="0.8"><label for="learning">Model learning α <output id="learning-value">1.80</output></label><input id="learning" type="range" min="0.1" max="5" step="0.1" value="1.8"><label for="noise">Sensor noise <output id="noise-value">0.025</output></label><input id="noise" type="range" min="0" max="0.15" step="0.005" value="0.025"><p class="micro">λ = 0 disables the memory force. Parameters are saved with every checkpoint.</p></details>
+        </aside>
+        <div class="central">
+          <section class="world-panel panel">
+            <div class="panel-title"><div class="room-label"><span class="live-square"></span><h2>Room 001</h2><span class="muted">24 × 16</span></div><div class="canvas-options"><label><input id="field-visible" type="checkbox" checked> Field</label><label><input id="belief-visible" type="checkbox" checked> Beliefs</label></div></div>
+            <div class="canvas-wrap"><canvas id="world" width="1200" height="800" tabindex="0" role="img" aria-label="Top view of a simulated room with two agents, a source, relay, archive, and obstacles"></canvas><div class="canvas-caption"><span>● ADA <i></i> ● NOETHER</span><span id="regime">TRACKING</span></div></div>
+            <div class="transport"><div><button id="play" class="play">▶ Run world</button><button id="step" class="outline">Step +0.1s</button></div><div><label for="speed" class="sr-only">Playback speed</label><select id="speed"><option value="1">1× speed</option><option value="2">2× speed</option><option value="4">4× speed</option></select><button id="checkpoint" class="quiet" title="Save checkpoint">◇ Checkpoint</button></div></div>
+          </section>
+          <section class="futures panel"><div class="panel-title"><h2>Possible futures</h2><span id="branch-count" class="index">READY TO EXPLORE</span></div><div id="future-empty" class="empty-state"><span class="orbit">⌘</span><div><strong>One present. Several possible futures.</strong><p>Expand the tree to compare intentions. Forecasts stay separate from the world.</p></div><button id="explore-inline" class="quiet">Explore →</button></div><div id="future-results" hidden><div id="tree" aria-label="Recursive branch tree"></div><div id="alternatives" class="alternatives"></div><div class="future-footer"><span id="sequence"></span><button id="apply" class="primary">Apply first intention →</button></div></div><div id="janus-result" class="janus-result" hidden></div></section>
+          <section class="timeline panel"><div class="panel-title"><h2>Traversed history</h2><span class="index" id="history-count">1 CHECKPOINT</span></div><div id="history" aria-label="Checkpoint history"></div><div class="timeline-footer"><span>Click a checkpoint to return. Your next action creates a branch.</span><span id="storage-state">Local session</span></div></section>
+        </div>
+        <aside class="inspector">
+          <section class="metrics panel"><div class="panel-title"><h2>Kernel observatory</h2><span class="index">02</span></div><div class="metric-grid"><div><label>COHERENCE C</label><strong id="metric-c">1.000</strong><span>state / self-model</span></div><div><label>ORDER PARAMETER Φ</label><strong id="metric-phi">0.800</strong><span>feedback gate</span></div><div><label>DIVERGENCE D</label><strong id="metric-d">0.000</strong><span>signed diagnostic</span></div><div><label>COVERAGE</label><strong id="metric-coverage">0.5%</strong><span>cells visited</span></div></div><div id="chart" role="img" aria-label="Recent coherence and order parameter history"></div><div class="chart-legend"><span>— Coherence</span><span>— Φ / 1.5</span></div><div id="alarm" class="alarm">Monitor within demo thresholds</div></section>
+          <section class="panel agent-panel"><div class="panel-title"><h2>Two observers</h2><span class="index">PARTIAL SENSING</span></div><div id="agents"></div></section>
+          <section class="panel journal"><div class="journal-tabs" role="group" aria-label="Journal view"><button class="selected" data-journal="events">Event log</button><button data-journal="evidence">Sensors</button></div><div id="journal"></div><label for="note">PLAYER NOTE</label><textarea id="note" maxlength="240" rows="2" placeholder="Record your intention or observation…"></textarea><p class="micro">Notes are recorded verbatim; controls determine behavior.</p></section>
+        </aside>
+      </div>
+      <footer><span><b>ARCHIMEDES</b> / A Monolithic experiment</span><span>Deterministic toy world · EFMW-inspired kernel · physical interpretation unvalidated</span><button id="about" class="text-button">How to read this →</button></footer>
+    </section>
+    <section id="mathematics" class="view reading" hidden><p class="eyebrow">THE EQUATIONS / IMPLEMENTATION 0.1.0</p><h1>From state to possibility.</h1><p class="lede">An explicit numerical adaptation of the Archimedes kernel. Every simulated transition has a defined operation, a bounded domain, and a trace.</p><div class="math-grid">
+      <article><span class="equation-number">AE–001 / WORLD</span><h2>A state with a history</h2><p class="formula">W<sub>n</sub> = (F, O, A, M, H, P, U, E, Θ, s)<sub>n</sub></p><p>A scalar field, objects, two agents, their self-models, checkpoint graph, player state, intention, simulated evidence, parameters, and pseudorandom state. One tick is 0.1 simulation seconds.</p></article>
+      <article><span class="equation-number">AE–002 / FIELD</span><h2>Diffuse, source, decay</h2><p class="formula">F′ = Π<sub>[0,1]</sub>[F + Δt (d∇²<sub>h</sub>F + q − μF)]</p><p>A five-point grid Laplacian with reflecting boundaries. The explicit positivity condition is Δt(4d + μ) ≤ 1. The allowed range gives at most 0.4055.</p></article>
+      <article><span class="equation-number">AE–004 / SELF-MODEL</span><h2>Observe, then update</h2><p class="formula">m′ = m + (1 − e<sup>−αΔt</sup>)(y − m)</p><p>Position and energy are observed each tick. Field readings are noisy, intermittent, and held during a blackout. This is an exponential observer, with no language model.</p></article>
+      <article><span class="equation-number">AE–006 / COHERENCE</span><h2>Measure disagreement</h2><p class="formula">C = 1 − ‖x − m‖ / (‖x‖ + ‖m‖ + ε)</p><p class="formula">D = ‖x − m‖² + 0.02‖ẋ − ṁ‖² − 0.06R</p><p>C is bounded from zero to one; D can be negative. High coherence describes agreement inside this model. It does not authenticate a claim.</p></article>
+      <article><span class="equation-number">AE–007 / FEEDBACK</span><h2>Let coherence affect motion</h2><p class="formula">a<sub>rec</sub> = λΦ (S m<sub>pos</sub> − p)</p><p class="formula">2Φ̇ = 0.9Φ − 0.9Φ³ − 1.5Φ‖x − m‖² − 0.02Φ‖ẋ − ṁ‖² + 0.1R</p><p>The lagged self-model supplies a restoring acceleration. Set λ to zero to remove this causal pathway. Φ is projected onto [0, 1.5].</p></article>
+      <article><span class="equation-number">AE–009 / RECURSIVE SEARCH</span><h2>Explore. Score. Retain.</h2><p class="formula">J(a₀…a<sub>d−1</sub>) = ∑<sub>k=0</sub><sup>d−1</sup> 0.9<sup>k</sup> U(W<sub>k+1</sub>, a<sub>k−1</sub>)</p><p>Expand four intentions, keep the best three branches, and repeat for one to four levels. Only the first chosen intention is applied. This is bounded beam search in a receding horizon, with no global optimality claim.</p></article>
+    </div><div class="doc-links"><a class="primary" href="data:text/markdown;charset=utf-8;base64,IyBUaGUgQXJjaGltZWRlcyBFbmdpbmU6IGNvbXBsZXRlIG1hdGhlbWF0aWNhbCBzcGVjaWZpY2F0aW9uCgoqKlZlcnNpb246KiogQUUgMC4xLjAsIDIwMjYtMDktMjcuICoqU3RhdHVzOioqIGltcGxlbWVudGVkIGNvbXB1dGF0aW9uYWwgbW9kZWw7IHByb3Bvc2VkIEVGTVcgaW50ZXJwcmV0YXRpb24gdW52YWxpZGF0ZWQuICoqQ29kZToqKiBgZW5naW5lLmpzYC4gVGhlIGZyb3plbiBkZXZlbG9wbWVudGFsIGV4cGVyaW1lbnQgaXMgQUUtU0lNLTAwMS4KClRoaXMgZG9jdW1lbnQgZGVmaW5lcyB0aGUgYWN0dWFsIGV4ZWN1dGFibGUgc3lzdGVtLiBJdCBpcyBhIG51bWVyaWNhbCBzcGVjaWFsaXphdGlvbiBhbmQgZXh0ZW5zaW9uIG9mIHRoZSBlYXJsaWVyIEFyY2hpbWVkZXMgcGFwZXIsIG5vdCBhIGRlcml2YXRpb24gb2YgdGhlIGVudGlyZSBNb25vbGl0aGljIDEwMi4gQWxsIGFkZGl0aW9uYWwgY2hvaWNlcyBhcmUgZGVjbGFyZWQgaGVyZS4gVGhlIG9yaWdpbmFsIHNvdXJjZSByZW1haW5zIGluIGBBUkNISU1FREVTLVNPVVJDRS5tZGAuCgojIyAxLiBTY29wZSwgc2NhbGVzLCBhbmQgbm90YXRpb24KClRoZXJlIGFyZSB0d28gYWdlbnRzIGluIGEgcmVjdGFuZ3VsYXIgcm9vbSB3aXRoIGZpeGVkIGNpcmN1bGFyIG9ic3RhY2xlcyBhbmQgdGhyZWUgbm9uLXNvbGlkIHN0YXRpb25zLiBBZ2VudHMgY2Fubm90IGxlYXZlIHRoZSByb29tIG9yIHBlbmV0cmF0ZSBvYnN0YWNsZXMuIEFnZW50cyBjYW4gb3ZlcmxhcCBlYWNoIG90aGVyOiBpbnRlci1hZ2VudCBjb250YWN0LCBtb21lbnR1bSBleGNoYW5nZSwgZ3Jhdml0eSwgYWNvdXN0aWNzLCBmbHVpZCBmbG93LCByZWxhdGl2aXN0aWMgZWZmZWN0cywgYW5kIG5hdHVyYWwtbGFuZ3VhZ2UgZ2VuZXJhdGlvbiBhcmUgb3V0c2lkZSB0aGlzIHZlcnNpb24uCgpMZXQgJEwkIGRlbm90ZSBvbmUgKipzaW11bGF0aW9uIGxlbmd0aCB1bml0KiosIGFuZCAkVCQgb25lICoqc2ltdWxhdGlvbiB0aW1lIHVuaXQqKi4gVGhlIGludGVyZmFjZSBkaXNwbGF5cyAkVCQgYXMgc2Vjb25kcyBmb3IgY29udmVuaWVuY2UuIFRoaXMgaXMgbm90IGEgbWVhc3VyZWQgY2FsaWJyYXRpb24gdG8gYSBwaHlzaWNhbCBleHBlcmltZW50LiBUaGUgcm9vbSBpcyAkMjRMXHRpbWVzMTZMJC4gVGhlIHNjYWxhciBmaWVsZCwgbm9ybWFsaXplZCBmZWF0dXJlcywgZW5lcmd5IHJlc2VydmUsICRDJCwgJEQkLCAkUiQsIGFuZCAkXFBoaSQgYXJlIGRpbWVuc2lvbmxlc3MuIEFnZW50IHBvc2l0aW9uIGhhcyB1bml0cyAkTCQsIHZlbG9jaXR5ICRML1QkLCBhbmQgYWNjZWxlcmF0aW9uICRML1ReMiQuCgpUaGUgaW50ZWdyYXRvciB1c2VzIGEgZml4ZWQgc3RlcCAkXERlbHRhIHQ9MC4xVCQuIEJyb3dzZXIgZnJhbWUgcmF0ZSBhbmQgcGxheWJhY2sgc3BlZWQgY2hhbmdlIHdhbGwtY2xvY2sgcGFjaW5nLCBub3QgJFxEZWx0YSB0JC4gRGlzY3JldGUgZGlmZmVyZW5jZXMgZGVub3RlZCBieSBhIGRvdCBiZWxvdyBhcmUgZXN0aW1hdGVzIGluIHVuaXRzICRUXnstMX0kLCBub3QgZXhhY3QgY29udGludW91cyBkZXJpdmF0aXZlcy4KCldyaXRlICRcUGlfe1thLGJdfSh6KT1cbWluKGIsXG1heChhLHopKSQgZm9yIGludGVydmFsIHByb2plY3Rpb24sICRcfFxjZG90XHxfMiQgZm9yIHRoZSBFdWNsaWRlYW4gbm9ybSwgYW5kICRcdmFyZXBzaWxvbj0xMF57LTl9JCBpbiBhIGRpbWVuc2lvbmFsbHkgbm9ybWFsaXplZCBleHByZXNzaW9uLiBXaGVuIGEgbm9ybSBwcm9kdWN0IGhhcyB1bml0cyAkVF57LTF9JCwgdGhlIGNvcnJlc3BvbmRpbmcgZXBzaWxvbiBpcyBpbnRlcnByZXRlZCBhcyAkMTBeey05fVReey0xfSQuCgojIyAyLiBBRS0wMDE6IGNvbXBsZXRlIHN0YXRlCgpUaGUgYXJjaGl0ZWN0dXJlLWxldmVsIHN0YXRlIGlzCgokJFdfbj0oRl9uLE8sQV9uLE1fbixIX24sUF9uLFVfbixFX24sXFRoZXRhLHNfbikuJCQKCnwgU3ltYm9sIHwgRXhlY3V0YWJsZSByZXByZXNlbnRhdGlvbiB8IERvbWFpbiAvIHJvbGUgfAp8LS0tfC0tLXwtLS18CnwgJEYkIHwgYGZpZWxkYCwgMzg0IHZhbHVlcyB8IFNjYWxhciBjZWxsIGNvbmNlbnRyYXRpb25zIGluICRbMCwxXSQgfAp8ICRPJCB8IGV4cG9ydGVkIGBPQkpFQ1RTYCB8IFNvdXJjZSwgcmVsYXksIGFyY2hpdmUsIHR3byBzb2xpZCBvYnN0YWNsZXMgfAp8ICRBJCB8IGBhZ2VudHNgLCB0d28gcmVjb3JkcyB8IFBvc2l0aW9uLCB2ZWxvY2l0eSwgcmVzZXJ2ZSwgaGlzdG9yeSB0cmFpbCwga2VybmVsIHN0YXRpc3RpY3MgfAp8ICRNJCB8IHBlci1hZ2VudCBgbWAsIGBzZW5zZWRgLCBgbGFzdFNlZW5gLCBgcHJldmlvdXNgIHwgRm91ci1kaW1lbnNpb25hbCBzZWxmLW1vZGVsIGFuZCBvYnNlcnZhdGlvbiBtZW1vcnkgfAp8ICRIJCB8IGBzZXNzaW9uLmhpc3RvcnlgLCBgY3Vyc29yYCwgYG5leHRJZGAgfCBQYXJlbnQtbGlua2VkIHNuYXBzaG90czsgbWF4aW11bSA5NiB8CnwgJFAkIHwgYHBsYXllcmAgfCBJbnRlcnZlbnRpb24gY291bnRlciBhbmQgbGl0ZXJhbCBub3RlIHwKfCAkVSQgfCBgYWN0aW9uYCwgYGdvYWxgIHwgRm91ciBpbnRlbnRpb25zIGFuZCB0aHJlZSBvYmplY3RpdmUgd2VpZ2h0IHNldHMgfAp8ICRFJCB8IGBldmlkZW5jZWAgfCBBdCBtb3N0IDQwIHNpbXVsYXRlZCBmaWVsZCByZWFkaW5ncyB3aXRoIHRpbWUgYW5kIGFnZW50IHwKfCAkXFRoZXRhJCB8IGBwYXJhbXNgLCBmcm96ZW4gY29uc3RhbnRzIHwgRGVjbGFyZWQgcGFyYW1ldGVycyBhbmQgbnVtZXJpY2FsIGNob2ljZXMgfAp8ICRzJCB8IGBybmdgLCBgc2VlZGAsIGB0aWNrYCB8IFBzZXVkb3JhbmRvbSBzdGF0ZSwgc291cmNlIHNlZWQsIHNpbXVsYXRpb24gY2xvY2sgfAoKVGhlIHdvcmxkIGFsc28gcmVjb3JkcyBgc291cmNlT25gLCByZW1haW5pbmcgYGJsYWNrb3V0YCB0aWNrcywgMzg0IGJpbmFyeSBgdmlzaXRlZGAgY2VsbHMsIDY0IHJlY2VudCBldmVudHMsIDE4MCBkaWFnbm9zdGljIHNhbXBsZXMsIGFuZCBwcm9qZWN0aW9uL2NvbnRhY3QgY291bnRlcnMuIFN0YXRpYyBnZW9tZXRyeSBpcyB2ZXJzaW9uZWQgd2l0aCB0aGUgY29kZS4gU25hcHNob3RzIGNvcHkgKiphbGwgbXV0YWJsZSB3b3JsZCBmaWVsZHMqKiwgaW5jbHVkaW5nIHJhbmRvbSBzdGF0ZSwgb2JzZXJ2YXRpb25zLCBjb3ZlcmFnZSwgYW5kIGhpc3RvcnktZGVwZW5kZW50IHN0YXRpc3RpY3MuIEEgY2hlY2twb2ludCBzdG9yZXMgdGhlIHdvcmxkLCBub3QgYSByZWN1cnNpdmUgY29weSBvZiB0aGUgd2hvbGUgZ3JhcGguCgpGb3IgYWdlbnQgJGlcaW5cezAsMVx9JCwgZGVmaW5lCgokJHhfe2ksbn09XGxlZnQocF54X3tpLG59LzI0TCxcO3BeeV97aSxufS8xNkwsXDtlX3tpLG59LFw7Rl9uW1xvcGVyYXRvcm5hbWV7Y2VsbH0ocF97aSxufSldXHJpZ2h0KVxpblswLDFdXjQuJCQKClRoZSBuZXN0ZWQga2VybmVsIGlzICRYX2k9KHhfaSxtX2ksXFBoaV9pLFJfaSxEX2ksQ19pLElfaSkkLiBUaGUgb3JpZ2luYWwgc291cmNlJ3MgdW5zcGVjaWZpZWQgY29uZmlkZW5jZSBhbmQgZXZpZGVuY2UgYWNjdW11bGF0b3IgYXJlIG5vdCBhc3NpZ25lZCBpbnZlbnRlZCBwcm9iYWJpbGl0aWVzLiBGaWVsZCByZWFkaW5ncyBmb3JtIGFuIG9ic2VydmF0aW9uIGxlZGdlci4gRXh0ZXJuYWwgY2xhaW1zIGNhbiBiZSBzdG9yZWQgYXMgbGl0ZXJhbCBwbGF5ZXIgbm90ZXM7IHRoZXkgbmV2ZXIgYmVjb21lIHZlcmlmaWVkIGV2aWRlbmNlIGF1dG9tYXRpY2FsbHkuCgojIyMgSW5pdGlhbGl6YXRpb24KCkF0IGNlbGwgY2VudGVycyAkKGorXHRmcmFjMTIsaytcdGZyYWMxMilMJCwKCiQkRl97aixrLDB9PTAuMTIrMC41XGV4cFwhXGxlZnRbLVxmcmFjeyhqK1x0ZnJhYzEyLTMuNSleMisoaytcdGZyYWMxMi04KV4yfXsyNX1ccmlnaHRdLiQkCgpBZ2VudHMgYmVnaW4gYXQgJHBeeD00LjhMJCBhbmQgJHBeeT0oNis0aSswLjUodV9pLTAuNSkpTCQsIHdpdGggJHVfaVxpblswLDEpJCBmcm9tIHRoZSBzZWVkZWQgZ2VuZXJhdG9yLiBWZWxvY2l0eSBpcyB6ZXJvLCByZXNlcnZlICRlPTAuNzgkLCAkbT14JCwgcHJldmlvdXMgZmVhdHVyZXMgJD14JCwgJFxQaGk9MC44JCwgJEM9MSQsICREPVI9ST0wJCwgYW5kIGJhc2VsaW5lIG1vbml0b3IgJEI9MCQuIFRoZSBpbml0aWFsIGZpZWxkIHJlYWRpbmcgZXF1YWxzIHRoZSBhY3R1YWwgZmllbGQgYW5kIGlzIG5vaXNlbGVzcy4gSW5pdGlhbCBjZWxscyBhcmUgbWFya2VkIHZpc2l0ZWQuIFRodXMgdGhlIGRpc3BsYXllZCBpbml0aWFsIG5ldXRyYWwgbWV0cmljcyBhcmUgc3BlY2lmaWVkIGluaXRpYWwgY29uZGl0aW9ucywgbm90IGFuIGVtcGlyaWNhbCBkaXNjb3ZlcnkuCgojIyAzLiBBRS0wMDI6IGZpZWxkIHByb3BhZ2F0aW9uCgpUaGUgZ3JpZCBzcGFjaW5nIGlzICRoPUwkLiBBIGZpdmUtcG9pbnQgc3RlbmNpbCBjb21wdXRlcwoKJCRcRGVsdGFfaCBGX3tqLGt9PVxmcmFje0Zfe2otMSxrfStGX3tqKzEsa30rRl97aixrLTF9K0Zfe2osaysxfS00Rl97aixrfX17aF4yfS4kJAoKSW5kaWNlcyBiZXlvbmQgYW4gZWRnZSByZXBlYXQgdGhlIGFkamFjZW50IGJvdW5kYXJ5IGNlbGwuIFRoaXMgaXMgYSBkaXNjcmV0ZSB6ZXJvLW5vcm1hbC1mbHV4IGNvbmRpdGlvbi4gRmllbGQgcHJvcGFnYXRpb24gZG9lcyBub3QgbW9kZWwgb2JzdGFjbGVzOiBvYnN0YWNsZXMgY29uc3RyYWluIGFnZW50cyBvbmx5LgoKVGhlIHNvdXJjZSBpcyBjZW50ZXJlZCBhdCAkKDMuNSw4KUwkOgoKJCRxX3tqLGt9PTAuMTZUXnstMX1cLFxtYXRoYmYxX3tcbWF0aHJte3NvdXJjZU9ufX1cZXhwXCFcbGVmdFstXGZyYWN7KGorXHRmcmFjMTItMy41KV4yKyhrK1x0ZnJhYzEyLTgpXjJ9ezh9XHJpZ2h0XS4kJAoKVGhlIHNvdXJjZeKAk2RpZmZ1c2lvbuKAk2RlY2F5IHN0ZXAgaXMKCiQkRl97aixrLG4rMX09XFBpX3tbMCwxXX1cbGVmdFtGX3tqLGssbn0rXERlbHRhIHRcbGVmdChkXERlbHRhX2hGX3tqLGssbn0rcV97aixrfS1cbXUgRl97aixrLG59XHJpZ2h0KVxyaWdodF0sJCQKCndoZXJlICRkPTAuNjVMXjIvVCQgYnkgZGVmYXVsdCBhbmQgJFxtdT0wLjA1NVReey0xfSQuIFVzZXIvQVBJIGJvdW5kcyByZXN0cmljdCAkMFxsZSBkXGxlMUxeMi9UJC4KCioqUG9zaXRpdml0eSBjb25kaXRpb24uKiogQmVmb3JlIHNvdXJjZSBhZGRpdGlvbiBhbmQgcHJvamVjdGlvbiwgdGhlIHN0ZW5jaWwgaXMgYSBub25uZWdhdGl2ZSBsaW5lYXIgY29tYmluYXRpb24gb2YgbmVpZ2hib3JpbmcgdmFsdWVzIGlmCgokJFxEZWx0YSB0XGxlZnQoNGQvaF4yK1xtdVxyaWdodClcbGUxLiQkCgpBdCBtYXhpbXVtIGFsbG93ZWQgZGlmZnVzaXZpdHksIHRoZSBsZWZ0LWhhbmQgc2lkZSBpcyAkMC40MDU1JC4gQXQgemVybyBzb3VyY2UsIHN1bW1pbmcgdGhlIHN0ZW5jaWwgZ2l2ZXMgemVybyB0b3RhbCBMYXBsYWNpYW4gY29udHJpYnV0aW9uLCBzbyB0aGUgdG90YWwgZmllbGQgc3VtIGRlY3JlYXNlcyBieSBleGFjdGx5IHRoZSBmYWN0b3IgJDEtXG11XERlbHRhIHQkLCBwcm92aWRlZCBwcm9qZWN0aW9uIGlzIGluYWN0aXZlLiBXaXRoIGEgc3BhdGlhbGx5IHVuaWZvcm0gZmllbGQsIGV2ZXJ5IGNlbGwgb2JleXMgdGhhdCBzYW1lIGRlY2F5LiBCb3RoIHByb3BlcnRpZXMgYXJlIHRlc3RlZC4KClByb2plY3Rpb24gZW5mb3JjZXMgdGhlIGRlY2xhcmVkIGZpZWxkIGRvbWFpbiB3aGVuIHNvdXJjZXMvcHVsc2VzIHNhdHVyYXRlIGNlbGxzLiBJdCBjaGFuZ2VzIHRoZSB1bmNvbnN0cmFpbmVkIGR5bmFtaWNzIGFuZCBpcyBjb3VudGVkIGluIGBmaWVsZENsaXBzYDsgbm8gbWFzcy1jb25zZXJ2YXRpb24gY2xhaW0gaXMgbWFkZSBkdXJpbmcgc2F0dXJhdGlvbi4gVGhlIGZpZWxkIGlzIG5vdCBwaHlzaWNhbCBlbmVyZ3kgYW5kIGhhcyBubyBjb25zZXJ2YXRpb24gY291cGxpbmcgdG8gYWdlbnQgcmVzZXJ2ZXMuCgojIyA0LiBBRS0wMDM6IGludGVudGlvbnMsIG1vdGlvbiwgYW5kIHJlc2VydmVzCgpUaGUgaW50ZW50aW9uIHNldCBpcyAkXG1hdGhjYWwgQT1ce1xtYXRocm17c3VydmV5fSxcbWF0aHJte2FuY2hvcn0sXG1hdGhybXtleGNoYW5nZX0sXG1hdGhybXtyZWNoYXJnZX1cfSQuIFRoZSBzYW1lIGludGVudGlvbiBkaXNwYXRjaGVzIGRpZmZlcmVudCB0YXJnZXRzIHRvIHRoZSB0d28gYWdlbnRzLgoKfCBJbnRlbnRpb24gfCBBREEgdGFyZ2V0IHwgTk9FVEhFUiB0YXJnZXQgfAp8LS0tfC0tLXwtLS18CnwgUmVjaGFyZ2UgfCAkKDMuNSw3KUwkIHwgJCgzLjUsOSlMJCB8CnwgQW5jaG9yIHwgUmVsYXkgJCgxMiw4KUwkIHwgQXJjaGl2ZSAkKDIwLjUsOClMJCB8CnwgRXhjaGFuZ2UgfCBBcmNoaXZlICQoMjAuNSw4KUwkIHwgU291cmNlICQoMy41LDgpTCQgfAp8IFN1cnZleSB8IENvcm5lciBjeWNsZSBwaGFzZSAkayQgfCBTYW1lIGN5Y2xlIHBoYXNlICRrKzIkIHwKClRoZSBjb3JuZXIgc2VxdWVuY2UgaXMgJCgyMCwzKSwoMjAsMTMpLCg0LDEzKSwoNCwzKSQgaW4gJEwkLiBQaGFzZSBpcyAkaz1cbGZsb29yIG4vMTgwXHJmbG9vclxibW9kNCQuIEFuIGFnZW50IHdpdGggcmVzZXJ2ZSBiZWxvdyAkMC4yMiQgb3ZlcnJpZGVzIGFueSBpbnRlbnRpb24gd2l0aCBpdHMgcmVjaGFyZ2UgdGFyZ2V0LiBUaGlzIGlzIGFuIGV4cGxpY2l0IGZpbml0ZS1zdGF0ZSBydWxlLCBub3QgbGVhcm5lZCBhdXRvbm9teS4KCkZvciB0YXJnZXQgJHRfaSQsIGRpc3RhbmNlICRyPVx8dF9pLXBfaVx8JCwgYW5kIHJlc2VydmUgJGVfaSQsCgokJHZfe1xtYXRocm17ZGVzfX09MS43XGZyYWMgTFRcLFxQaV97WzAuMTIsMV19KGVfaS8wLjMpXG1pbigxLHIvTClcZnJhY3t0X2ktcF9pfXtyfS4kJAoKU2V0ICR2X3tcbWF0aHJte2Rlc319PTAkIGF0ICRyPTAkLiBUaGUgdW5wcm9qZWN0ZWQgYWNjZWxlcmF0aW9uIGlzCgokJGFfaT0yLjJUXnstMX0odl97XG1hdGhybXtkZXN9fS12X2kpK1xsYW1iZGFcUGhpX2koU21fe2ksXG1hdGhybXtwb3N9fS1wX2kpK2Ffe1xtYXRocm17b2JzfX0sXHFxdWFkIFM9XG9wZXJhdG9ybmFtZXtkaWFnfSgyNEwsMTZMKS4kJAoKSGVyZSAkXGxhbWJkYT0wLjhUXnstMn0kIGJ5IGRlZmF1bHQsIHdpdGggJDBcbGVcbGFtYmRhXGxlMlReey0yfSQuIFRoaXMgZXhwbGljaXRseSBjaG9zZW4gbWVtb3J5IGZvcmNlIGlzIHJlc3RvcmF0aXZlIHRvd2FyZCB0aGUgbGFnZ2VkIGludGVybmFsIHBvc2l0aW9uIGVzdGltYXRlLiBJdCBjYW4gc2xvdyBvciBhbHRlciB0cmFqZWN0b3JpZXM7IGJlbmVmaWNpYWwgZWZmZWN0cyBhcmUgbm90IGFzc3VtZWQuCgpUd28gb2JzdGFjbGVzIGhhdmUgY2VudGVycyAkKDgsNS43KUwkLCAkKDE2LDEwLjMpTCQgYW5kIHJhZGl1cyAkMS4xTCQuIEZvciBlYWNoIG9ic3RhY2xlLCB3aXRoIGNlbnRlci10by1hZ2VudCB2ZWN0b3IgJHokIGFuZCBkaXN0YW5jZSAkcl9vJCwgYWRkCgokJGFfe1xtYXRocm17b2JzfSxvfT01VF57LTJ9KHJfb157XG1hdGhybXtib2R5fX0rMS4yTC1yX28pXGZyYWN7en17cl9vfSQkCgpvbmx5IHdoZW4gJDA8cl9vPHJfb157XG1hdGhybXtib2R5fX0rMS4yTCQuIENsaXAgdG90YWwgYWNjZWxlcmF0aW9uIG1hZ25pdHVkZSB0byAkNUwvVF4yJC4gVXNlIHNlbWktaW1wbGljaXQgRXVsZXI6CgokJHZfe24rMX09XG9wZXJhdG9ybmFtZXtjbGlwTm9ybX1fezJML1R9KHZfbitcRGVsdGEgdFwsYV9uKSxccXF1YWQgcF97bisxfT1wX24rXERlbHRhIHRcLHZfe24rMX0uJCQKClRoZSBhZ2VudCByYWRpdXMgaXMgJDAuM0wkLiBXYWxsIHByb2plY3Rpb24gcmVzdHJpY3RzICRwXnhcaW5bMC4zLDIzLjddTCQsICRwXnlcaW5bMC4zLDE1LjddTCQsIHplcm9pbmcgdGhlIHZlbG9jaXR5IGNvbXBvbmVudCBub3JtYWwgdG8gYSBjb250YWN0ZWQgd2FsbC4gT2JzdGFjbGUgcGVuZXRyYXRpb24gcHJvamVjdHMgdG8gcmFkaXVzICQxLjRMJCBhbmQgemVyb2VzIGJvdGggdmVsb2NpdHkgY29tcG9uZW50cy4gQXQgY29pbmNpZGVudCBjZW50ZXJzLCB0aGUgcHJvamVjdGlvbiBkaXJlY3Rpb24gaXMgdGhlIHBvc2l0aXZlIHgtYXhpcy4gVGhlc2UgYXJlIGdlb21ldHJpYyByZXBhaXJzLCBub3QgZW5lcmd5LWNvbnNlcnZpbmcgY29sbGlzaW9ucy4gVGhlIG1heGltdW0gc2luZ2xlLXN0ZXAgZGlzcGxhY2VtZW50IGlzICQwLjJMJDsgY29udGludW91cyBjb2xsaXNpb24gZGV0ZWN0aW9uIGlzIG5vdCBpbXBsZW1lbnRlZC4KCkFmdGVyIG1vdGlvbiwgcmVzZXJ2ZXMgdXBkYXRlOgoKJCRlX3tuKzF9PVxQaV97WzAsMV19XGxlZnRbZV9uK1xEZWx0YSB0XGxlZnQoMC4wNzVUXnstMX1cbWF0aGJmMV97XG1hdGhybXtzb3VyY2VPbn1cbGFuZFx8cC1wX3NcfDwyLjJMfS0wLjAwM1Reey0xfS0wLjAwNVxmcmFje1R9e0xeMn1cfHZcfF4yXHJpZ2h0KVxyaWdodF0uJCQKClRoZXJlIGlzIG5vIHNpbXVsYXRlZCBiaW9sb2dpY2FsIGludGVycHJldGF0aW9uLiBgdmlzaXRlZGAgcmVjb3JkcyBjZWxscyBvY2N1cGllZCBieSBlaXRoZXIgYWdlbnQ7IGNvdmVyYWdlIGlzIHRoZSBudW1iZXIgb2Ygc3VjaCBjZWxscyBkaXZpZGVkIGJ5IDM4NC4gSXQgZG9lcyBub3QgY291bnQgYSBzZW5zaW5nIHJhZGl1cyBvciBpbmNsdWRlIHVuc2VlbiBjZWxscyBhbG9uZyBhIGh5cG90aGV0aWNhbCBicmFuY2ggaW4gdGhlIGFjdHVhbCB3b3JsZC4KCiMjIDUuIEFFLTAwNDogb2JzZXJ2YXRpb25zIGFuZCBzZWxmLW1vZGVsCgpPd24gbm9ybWFsaXplZCBwb3NpdGlvbiBhbmQgcmVzZXJ2ZSBhcmUgb2JzZXJ2ZWQgZXZlcnkgdGljay4gVGhlIGVudmlyb25tZW50YWwgZmllbGQgaXMgc2FtcGxlZCBldmVyeSAkcT01JCB0aWNrcyBieSBkZWZhdWx0LCBwcm92aWRlZCB0aGVyZSBpcyBubyBibGFja291dDoKCiQkXHRpbGRlIEZfe2ksbn09XFBpX3tbMCwxXX1cbGVmdChGX25bXG9wZXJhdG9ybmFtZXtjZWxsfShwX3tpLG59KV0rXHNpZ21hX28oMnUtMSlccmlnaHQpLFxxdWFkXHNpZ21hX289MC4wMjUuJCQKClRodXMgdGhlIHNpbXVsYXRlZCBtZWFzdXJlbWVudCBub2lzZSBpcyB1bmlmb3JtLCAqKm5vdCBHYXVzc2lhbioqLiBBIGZpZWxkIHNhbXBsZSBjb25zdW1lcyBvbmUgcmFuZG9tIGRyYXcgcGVyIGFnZW50LiBCZXR3ZWVuIHJlYWRpbmdzLCB0aGUgbGFzdCByZWFkaW5nIGlzIGhlbGQuIFNlbnNvciBjYWRlbmNlIG1heSBiZSBzZXQgdGhyb3VnaCB0aGUgZW5naW5lIEFQSSB0byBpbnRlZ2VycyAx4oCTMjAuIEJsYWNrb3V0IHN0YXRlIGlzIHRlc3RlZCBiZWZvcmUgaXRzIGNvdW50ZG93biBkZWNyZW1lbnQ6IGEgZnJlc2hseSBhcHBsaWVkIDgwLXRpY2sgYmxhY2tvdXQgc3VwcHJlc3NlcyBhbGwgcmVhZGluZ3MgZm9yIHRob3NlIDgwIHRpY2tzLiBJZiBjYWRlbmNlIGlzIGZpdmUsIHRoZSBuZXh0IHNhbXBsZSBhZnRlciBhIGJsYWNrb3V0IHN0YXJ0aW5nIGF0IHRpY2sgemVybyBpcyBhdCB0aWNrIDg1LgoKV2l0aCAkeT0ocF54LzI0TCxwXnkvMTZMLGUsXHRpbGRlIEYpJCwgZGVmaW5lCgokJG1fe24rMX09bV9uK1xsZWZ0KDEtZV57LVxhbHBoYVxEZWx0YSB0fVxyaWdodCkoeV97bisxfS1tX24pLFxxdWFkXGFscGhhPTEuOFReey0xfS4kJAoKVGhpcyBpcyB0aGUgZXhhY3Qgc29sdXRpb24gb2YgJFxkb3QgbT1cYWxwaGEoeS1tKSQgb3ZlciBvbmUgc3RlcCB3aGVuICR5JCBpcyBoZWxkIGNvbnN0YW50LiBTaW5jZSB0aGUgZ2FpbiBsaWVzIGluICQoMCwxKSQsIHRoZSB1cGRhdGUgaXMgYSBjb252ZXggY29tYmluYXRpb24sIHByZXNlcnZpbmcgJG1caW5bMCwxXV40JC4gVGhpcyBwcm9vZiBkb2VzIG5vdCBpbXBseSBjb3JyZWN0IGluZmVyZW5jZSBhYm91dCBhbiB1bm9ic2VydmVkIGVudmlyb25tZW50LiBUaGUgZmllbGQgY29tcG9uZW50IGNvbnRpbnVlcyBjb252ZXJnaW5nIHRvd2FyZCBhIHN0YWxlIG9ic2VydmF0aW9uIGR1cmluZyBhIGJsYWNrb3V0OyB0aGUgaW50ZXJmYWNlIGV4cG9zZXMgb2JzZXJ2YXRpb24gYWdlLgoKIyMgNi4gQUUtMDA1LzAwNjogbG9jYWwgcmVjdXJzaXZlIGFsaWdubWVudCwgY29oZXJlbmNlLCBkaXZlcmdlbmNlCgpMZXQgJHg9eF97bisxfSQsICRtPW1fe24rMX0kLCBhbmQKCiQkXGRvdCB4PVxmcmFje3hfe24rMX0teF9ufXtcRGVsdGEgdH0sXHF1YWQgXGRvdCBtPVxmcmFje21fe24rMX0tbV9ufXtcRGVsdGEgdH0sXHF1YWQgXGRlbHRhPXgtbSxccXVhZFxudT1cZG90IHgtXGRvdCBtLiQkCgpUaGUgb3JpZ2luYWwgcGFwZXIncyAkXGxhbmdsZVxwYXJ0aWFsX20gZixcZG90IG1ccmFuZ2xlJCBpcyBub3QgYSBkZWZpbmVkIHNjYWxhciBmb3IgYSBnZW5lcmFsIHZlY3RvciBmaWVsZCAkZiQsIGFuZCBpdHMgc3RhdGVkICRmKHgsZTtcdGhldGEpJCBkb2VzIG5vdCBleHBsaWNpdGx5IGRlcGVuZCBvbiAkbSQuIFRoaXMgaW1wbGVtZW50YXRpb24gKipyZXBsYWNlcyoqLCByYXRoZXIgdGhhbiBjbGFpbXMgdG8gZXZhbHVhdGUsIHRoYXQgZXhwcmVzc2lvbiB3aXRoIHRoZSBmdWxseSBzcGVjaWZpZWQgbG9jYWwgc3Vycm9nYXRlCgokJGc9KG1eMV9uLXheMV97bisxfSxcO21eMl9uLXheMl97bisxfSxcOzAsXDswKSxccXF1YWQgUj1cZnJhY3tnXlx0b3BcZG90IG19e1x8Z1x8XHxcZG90IG1cfCtcdmFyZXBzaWxvbn0uJCQKClRoaXMgbWVhc3VyZXMgYWxpZ25tZW50IGJldHdlZW4gbm9ybWFsaXplZCBtZW1vcnkgZGlzcGxhY2VtZW50IGFuZCBtb2RlbCBjaGFuZ2UuICRSPTAkIHdoZW4gZWl0aGVyIHZlY3RvciBpcyB6ZXJvLiBDYXVjaHnigJNTY2h3YXJ6IGdpdmVzICR8UnxcbGUxJC4gJFIkIGlzICoqbm90KiogdGhlIHJlY3Vyc2l2ZSBjb3VwbGluZyBwYXJhbWV0ZXI6IHNldHRpbmcgJFxsYW1iZGE9MCQgcmVtb3ZlcyB0aGUgbW90aW9uIHBhdGh3YXkgYnV0IGxlYXZlcyB0aGlzIGRpYWdub3N0aWMgZGVmaW5lZC4KCiQkQz1cUGlfe1swLDFdfVxsZWZ0KDEtXGZyYWN7XHxcZGVsdGFcfH17XHx4XHwrXHxtXHwrXHZhcmVwc2lsb259XHJpZ2h0KS4kJAoKQnkgdGhlIHRyaWFuZ2xlIGluZXF1YWxpdHksIHRoZSB1bnByb2plY3RlZCBmb3JtdWxhIGFscmVhZHkgbGllcyBpbiAkWzAsMV0kOyBwcm9qZWN0aW9uIHByb3RlY3RzIGFnYWluc3QgZmxvYXRpbmctcG9pbnQgZXJyb3IuIEZvciAkeD1tJCBpdCBnaXZlcyAkQz0xJCwgaW5jbHVkaW5nIHRoZSBqb2ludC16ZXJvIHZlY3Rvci4gQWdyZWVtZW50IGlzIG5vdCB0cnV0aDsgdHdvIGVxdWFsbHkgd3JvbmcgZXN0aW1hdGVzIGNhbiBhZ3JlZS4KCkRlZmluZSBhIG5vbm5lZ2F0aXZlIHJlc2lkdWFsICREXyskIGFuZCB0aGUgc291cmNlLWluc3BpcmVkIHNpZ25lZCBkaWFnbm9zdGljICREJDoKCiQkRF8rPVx8XGRlbHRhXHxeMisoMC4wMlReMilcfFxudVx8XjIsXHFxdWFkIEQ9RF8rLTAuMDZSLiQkCgpUaGVuICREXytcZ2UwJCBhbmQgJERcZ2UtMC4wNiQuIENhbGxpbmcgJEQkIGEgZGlzdGFuY2Ugb3IgYXNzdW1pbmcgaXQgaXMgbm9ubmVnYXRpdmUgd291bGQgYmUgaW5jb3JyZWN0LiBUaGUgZnVsbCBzaW11bGF0b3Igc3RhdGUgaXMgdXNlZCB0byBldmFsdWF0ZSAkeCQsIHNvIHRoZXNlIG1vbml0b3JpbmcgbWV0cmljcyBhcmUgYSBwcml2aWxlZ2VkIGxhYm9yYXRvcnkgZGlhZ25vc3RpYy4gVGhleSBhcmUgbm90IGF1dG9tYXRpY2FsbHkgYXZhaWxhYmxlIHRvIGFuIGV4dGVybmFsIGRlcGxveWVkIG9ic2VydmVyLgoKIyMgNy4gQUUtMDA3OiBjb2hlcmVuY2UgZ2F0ZQoKVGhlIGNvbnRpbnVvdXMtZm9ybSB1cGRhdGUgYmVpbmcgZGlzY3JldGl6ZWQgaXMKCiQkXHRhdV9cUGhpXGRvdFxQaGk9YlxQaGktYVxQaGleMy1ca2FwcGFfXFBoaVxQaGlcfFxkZWx0YVx8XjItXGV0YV9cUGhpXFBoaVx8XG51XHxeMitcZ2FtbWFfXFBoaSBSLiQkCgpVc2UgJFx0YXVfXFBoaT0yVCQsICRhPWI9MC45JCwgJFxrYXBwYV9cUGhpPTEuNSQsICRcZXRhX1xQaGk9MC4wMlReMiQsIGFuZCAkXGdhbW1hX1xQaGk9MC4xJC4gVGhlcmUgaXMgbm8gYWRkaXRpdmUgc3RvY2hhc3RpYyBmb3JjaW5nIGluICRcUGhpJDsgdGhlIHNvdXJjZSBwYXBlcidzICRcc2lnbWFceGkodCkkIGlzIGZpeGVkIHRvIHplcm8gaW4gdGhpcyB2ZXJzaW9uLiBNZWFzdXJlbWVudCBub2lzZSBjYW4gYWZmZWN0ICRcUGhpJCBpbmRpcmVjdGx5IHRocm91Z2ggdGhlIHN0YXRlLW1vZGVsIGRpZmZlcmVuY2UuCgpUaGUgaW1wbGVtZW50ZWQgc3RlcCBpcwoKJCRcUGhpX3tuKzF9PVxQaV97WzAsMS41XX1cbGVmdFtcUGhpX24rXGZyYWN7XERlbHRhIHR9ezJUfVxsZWZ0KDAuOVxQaGlfbi0wLjlcUGhpX25eMy0xLjVcUGhpX25cfFxkZWx0YVx8XjItMC4wMlReMlxQaGlfblx8XG51XHxeMiswLjFSXHJpZ2h0KVxyaWdodF0uJCQKClRoZSBvbGQgJFxQaGlfbiQgYWZmZWN0cyBtb3Rpb24gZHVyaW5nIHRoZSBjdXJyZW50IHN0ZXA7IHRoZSBuZXcgZ2F0ZSBhZmZlY3RzIHRoZSBuZXh0IHN0ZXAuIGBwaGlDbGlwc2AgY291bnRzIHByb2plY3Rpb24uIFRoZSBjdWJpYyBhbG9uZSBoYXMgZXF1aWxpYnJpYSAkXFBoaT0wLFxwbTEkLCB3aXRoIHRoZSBwb3NpdGl2ZSBlcXVpbGlicml1bSBsb2NhbGx5IHN0YWJsZSBvbiB0aGUgcG9zaXRpdmUgaGFsZi1saW5lLiBUaGF0IGZhY3QgZG9lcyAqKm5vdCoqIHByb3ZlIHN0YWJpbGl0eSBvZiB0aGUgY291cGxlZCwgc3dpdGNoZWQsIHByb2plY3RlZCB3b3JsZC4gTm8gZ2xvYmFsIGNvbnZlcmdlbmNlIHRoZW9yZW0gaXMgY2xhaW1lZC4KCiMjIDguIEFFLTAwODogYWNjdW11bGF0ZWQgY29oZXJlbmNlIGFuZCBtb25pdG9ycwoKJCRJX3tuKzF9PUlfbitDX3tuKzF9XERlbHRhIHQuJCQKCiRJJCBoYXMgdW5pdHMgb2Ygc2ltdWxhdGlvbiB0aW1lLiBJdCBpcyBjdW11bGF0aXZlIGNvaGVyZW5jZSwgbm90IGFuIGlkZW50aXR5IGF1dGhlbnRpY2F0aW9uIHNjb3JlLiBJZiAkQ19uXGdlIGM+MCQgaW5kZWZpbml0ZWx5LCAkSV9uXGdlIElfMCtuY1xEZWx0YSB0JCBkaXZlcmdlcy4gVGhlcmVmb3JlIGEgZnVsbC1zdGF0ZSBhdHRyYWN0b3IgdGhhdCBpbmNsdWRlcyAkSSQgY2Fubm90IGJlIGluZmVycmVkIGZyb20gc3RhYmxlICR4LG0sXFBoaSQuIFRoaXMgY29ycmVjdHMgYSBwb3NzaWJsZSBjb25mbGF0aW9uIGluIHRoZSBzb3VyY2UgZGlzY3Vzc2lvbi4KClRoZSBkYXNoYm9hcmQgZGlzcGxheXMgYXJpdGhtZXRpYyBhZ2VudCBtZWFucyAkXGJhciBDLFxiYXIgRCxcYmFyXFBoaSxcYmFyIGUkLiBJdHMgaWxsdXN0cmF0aXZlIHdhcm5pbmcgaXMKCiQkXG1hdGhybXthbGFybX1fbj1cbWF0aGJmMV97XGJhciBEX25cZ2UwLjA5XDtcbG9yXDtcYmFyXFBoaV9uXGxlMC40NX0uJCQKCkFuIGFkZGl0aW9uYWwgcmVzaWR1YWwgRVdNQSBpcyBtYWludGFpbmVkIHBlciBhZ2VudDoKCiQkQl97bisxfT0wLjk3Ql9uKzAuMDNcbGVmdHxGX25bXG9wZXJhdG9ybmFtZXtjZWxsfShwX2kpXS1cdGlsZGUgRl9pXHJpZ2h0fC4kJAoKVGhpcyBiYXNlbGluZSBpcyBhIGRpYWdub3N0aWMgb25seS4gTm8gdGhyZXNob2xkIGlzIGNhbGlicmF0ZWQgZm9yIGl0IGFuZCBubyBtYXRjaGVkLUZQUiB3YXJuaW5nIGFkdmFudGFnZSBpcyBjbGFpbWVkLiBBbiBhbGFybSByYXRlIHVuZGVyIGEgZGVsaWJlcmF0ZSBpbnRlcnZlbnRpb24gaXMgbm90IGFuIGVzdGltYXRlIG9mIGZhbHNlLWFsYXJtIHByb2JhYmlsaXR5LiBNRS0xMDIgd291bGQgcmVxdWlyZSBhIGRlZmluZWQgZmFpbHVyZSBlbmRwb2ludCwgc2VwYXJhdGUgY2FsaWJyYXRpb24gYW5kIGhlbGQtb3V0IGV2YWx1YXRpb24sIG1hdGNoZWQgZmFsc2UtYWxhcm0gcmF0ZSBhbmQgY29tcHV0ZSwgdW5jZXJ0YWludHkgZXN0aW1hdGVzLCBhbmQgaW5kZXBlbmRlbnQgcmVwbGljYXRpb24uIE5vbmUgaXMgYXNzZXJ0ZWQgaGVyZS4KClRoZSBEUkFHT04gYWxpYXMgYXBwbGllcyB0aGlzIHByaW9yaXR5IG9yZGVyOiBgZGVwbGV0ZWRgIGlmIG1lYW4gcmVzZXJ2ZSAkPDAuMjUkOyBvdGhlcndpc2UgYG9jY2x1ZGVkYCBpZiBibGFja291dCByZW1haW5zOyBvdGhlcndpc2UgYGRpdmVyZ2VudGAgaWYgJFxiYXIgQzwwLjkyJCBvciAkXG92ZXJsaW5le0RfK30+MC4wMzUkOyBvdGhlcndpc2UgYHNldHRsZWRgIGlmIGJvdGggc3BlZWRzICQ8MC4xMkwvVCQ7IG90aGVyd2lzZSBgdHJhY2tpbmdgLiBJdCBpcyBhIGhldXJpc3RpYyBsYWJlbCwgbm90IGFuIGF0dHJhY3RvciBjbGFzc2lmaWVyIHByb3ZlZCBjb21wbGV0ZS4KCiMjIDkuIEFFLTAwOTogcmVjdXJzaXZlIGZ1dHVyZSBzZWxlY3Rpb24KClRoZSBwbGF5ZXItbGV2ZWwgcGxhbm5lciBoYXMgYWNjZXNzIHRvIHRoZSBmdWxsIGN1cnJlbnQgc2ltdWxhdG9yIHNuYXBzaG90LiBJdCBjYW5ub3QgaW5mZXIgYW4gdW5rbm93biBwaHlzaWNhbCB3b3JsZCBmcm9tIHRoaXMgdG95IG1vZGVsLiBFYWNoIGludGVudGlvbiBpcyBoZWxkIGZvciAkaF9wPTIwJCBpbnRlZ3JhdGlvbiB0aWNrcywgb3IgJDJUJC4gQXQgYSByb290IHN0YXRlICRXXzAkLCBsZXQgJGNfMCQgYmUgY292ZXJhZ2UgYW5kICRhX3stMX0kIGl0cyBleGlzdGluZyBpbnRlbnRpb24uCgpGb3IgZ29hbCB3ZWlnaHRzICQod19lLHdfQyx3X04sd19ELHdfUikkLCB1c2UKCiQkVShXLGFfe1xybSBwcmV2fSk9d19lXGJhciBlK3dfQ1xiYXIgQyt3X04oXG9wZXJhdG9ybmFtZXtjb3ZlcmFnZX0oVyktY18wKS13X0RcbWF4KDAsXGJhciBEKS13X1JcbWF0aGJmMV97YShXKT1hX3tccm0gcHJldn19LiQkCgp8IEdvYWwgfCAkd19lJCB8ICR3X0MkIHwgJHdfTiQgfCAkd19EJCB8ICR3X1IkIHwKfC0tLXwtLS06fC0tLTp8LS0tOnwtLS06fC0tLTp8CnwgQmFsYW5jZSB8IDEuMCB8IDAuNDUgfCAzLjAgfCAwLjMgfCAwLjA3IHwKfCBEaXNjb3ZlcnkgfCAwLjQ1IHwgMC4yIHwgOC4wIHwgMC4yIHwgMC4xMCB8CnwgUmVzaWxpZW5jZSB8IDIuNCB8IDAuNjUgfCAwLjggfCAwLjYgfCAwLjAzIHwKClRoZXNlIGFyZSBkZWNsYXJlZCBlbmdpbmVlcmluZyBwcmVmZXJlbmNlcywgbm90IGZpdHRlZCBwaHlzaWNhbCBjb25zdGFudHMgb3IgZW1waXJpY2FsbHkgY2FsaWJyYXRlZCB1dGlsaXRpZXMuIE5vdmVsdHkgaXMgbmV3bHkgdmlzaXRlZCBjZWxscyByZWxhdGl2ZSB0byB0aGUgcGxhbm5pbmcgcm9vdC4gSXQgaXMgZGVsaWJlcmF0ZWx5IGNvdW50ZWQgYXQgZWFjaCBmdXR1cmUgbGV2ZWwgYXMgc3VzdGFpbmVkIGNvdmVyYWdlLCBub3QgU2hhbm5vbiBpbmZvcm1hdGlvbi4gUmVwZXRpdGlvbiBtZWFucyBlcXVhbCBhZGphY2VudCBpbnRlbnRpb25zLCBpbmNsdWRpbmcgdGhlIHJvb3QgaW50ZW50aW9uLiBBIGxhcmdlIG5vdmVsdHkgd2VpZ2h0IGNhbiB0cmFkZSBhd2F5IGVuZXJneSBvciBjb2hlcmVuY2UuCgpGb3IgZGVwdGggJGRcaW5cezEsMiwzLDRcfSQgYW5kIGJlYW0gd2lkdGggJGJcaW5cezEsMiwzLDRcfSQsCgokJEooYV8wLFxsZG90cyxhX3tkLTF9KT1cc3VtX3trPTB9XntkLTF9MC45XmtVKFdfe2srMX0sYV97ay0xfSksXHF1YWQgV197aysxfT1GXntoX3B9KFdfayxhX2spLiQkCgpBdCBldmVyeSBsZXZlbCwgZXhwYW5kIGV2ZXJ5IHJldGFpbmVkIGNhbmRpZGF0ZSB1c2luZyBhbGwgZm91ciBpbnRlbnRpb25zLCBzaW11bGF0ZSwgZXZhbHVhdGUsIHNvcnQsIGFuZCByZXRhaW4gdGhlIGJlc3QgJGIkLiBUaWVzIHVzZSB0aGUgb3JpZ2luYWwgZXhwYW5zaW9uIG9yZGVyLiBUaGUgZGVmYXVsdCBpcyAkZD0zLGI9MyQuIFNpbmNlICRiXGxlNCQsIGV4cGFuc2lvbiBjb3VudCBpcyBleGFjdGx5CgokJE4oZCxiKT00KzRiKGQtMSkuJCQKClRoZSBkZWZhdWx0IGV2YWx1YXRlcyAyOCBub2RlcyBhbmQgNTYwIHNpbXVsYXRlZCB0aWNrcy4gVGhlIG1heGltdW0gQVBJIHNldHRpbmcgKGRlcHRoIDQsIHdpZHRoIDQsIGhvcml6b24gNTApIGV2YWx1YXRlcyA1MiBub2RlcyBhbmQgMiw2MDAgdGlja3MuIEJyb3dzZXIgY29udHJvbHMgdXNlIHdpZHRoIDMgYW5kIGhvcml6b24gMjAuIE1lbW9yeSB1c2UgaXMgYm91bmRlZCBieSB0aGUgYmVhbSwgZGlhZ25vc3RpY3MgcmV0YWluZWQgcGVyIGNhbmRpZGF0ZSwgYW5kIHJldHVybmVkIG5vZGUgbWV0YWRhdGEuIFJ1bm5pbmcgdGltZSBpcyAkTyhOaF9wKEsrQSkpJCBmb3IgJEs9Mzg0JCBmaWVsZCBjZWxscyBhbmQgJEE9MiQgYWdlbnRzLCBwbHVzIGJvdW5kZWQgc3RhdGUtY29weSBvdmVyaGVhZC4KClRoZSByZXR1cm4gdmFsdWUgY29udGFpbnMgdGhlIGJlc3Qgc2VxdWVuY2UgYW5kIHBhdGggc2NvcmUsIGFsbCBldmFsdWF0ZWQgbm9kZSBtZXRhZGF0YSwgYW5kIGZvdXIgZmlyc3QtbGV2ZWwgYWx0ZXJuYXRpdmVzLiBDYXJkcyBkaXNwbGF5IGZpcnN0LWxldmVsIHNjb3JlczsgdGhlIGhpZ2hsaWdodGVkIHRyZWUgZGlzcGxheXMgdGhlIGJlc3QgZnVsbCBzZXF1ZW5jZS4gVGhlc2UgYXJlIGRpZmZlcmVudCBxdWFudGl0aWVzLiBBIG1hbnVhbGx5IHNlbGVjdGVkIGZpcnN0LWxldmVsIGFsdGVybmF0aXZlIG5lZWQgbm90IGJlIHRoZSBmaXJzdCBhY3Rpb24gb2YgdGhlIGJlc3QgZnVsbCBzZXF1ZW5jZS4KCkFwcGx5ICoqb25seSB0aGUgZmlyc3QgaW50ZW50aW9uKiosIHRoZW4gaW50ZWdyYXRlIHRoZSBhY3R1YWwgc3RhdGUuIEF1dG9tYXRpYyBtb2RlIHJlcGxhbnMgZXZlcnkgMjAgdGlja3MuIFRoaXMgaXMgYSByZWNlZGluZy1ob3Jpem9uIGJlYW0tc2VhcmNoIGhldXJpc3RpYy4gUHJ1bmluZyBtZWFucyBpdCBpcyBub3QgZXhoYXVzdGl2ZSBkeW5hbWljIHByb2dyYW1taW5nIGFuZCBjYXJyaWVzIG5vIGdsb2JhbCBvcHRpbWFsaXR5IGd1YXJhbnRlZS4gQ29tbW9uIHJhbmRvbSBzdHJlYW1zIGFjcm9zcyBicmFuY2hlcyBzdXBwb3J0IHBhaXJlZCBjb21wYXJpc29uczsgdGhleSBkbyBub3QgY3JlYXRlIGluZGVwZW5kZW50IGV2aWRlbmNlIG9yIGFwcHJveGltYXRlIGFuIHVuY2VydGFpbnR5IGRpc3RyaWJ1dGlvbi4gTm8gZW5zZW1ibGUgZXhwZWN0YXRpb24gb3IgcHJvYmFiaWxpc3RpYyBjb25maWRlbmNlIGlzIGNvbXB1dGVkLgoKIyMgMTAuIEFFLTAxMDogaW50ZXJ2ZW50aW9ucyBhbmQgcGFpcmVkIGNvdW50ZXJzdGF0ZXMKCi0gKipQdWxzZToqKiBhZGQgJDAuNzVcZXhwKC0oKHgtMTJMKV4yKyh5LThMKV4yKS8oMTZMXjIpKSQgdG8gdGhlIGNlbGwgZmllbGQsIHRoZW4gcHJvamVjdCB0byAkWzAsMV0kLgotICoqQmxhY2tvdXQ6Kiogc2V0IHJlbWFpbmluZyBibGFja291dCB0byA4MCB0aWNrczsgcmVwZWF0ZWQgYXBwbGljYXRpb24gcmVzdGFydHMgdGhhdCBpbnRlcnZhbC4KLSAqKlNvdXJjZSB0b2dnbGU6KiogaW52ZXJ0IGBzb3VyY2VPbmAsIGFmZmVjdGluZyBib3RoIGZpZWxkIHNvdXJjaW5nIGFuZCByZXNlcnZlIHJlY2hhcmdlLgotICoqUmVzZXQgbW9kZWxzOioqIHJlcGxhY2UgYm90aCAkbSQgdmVjdG9ycyB3aXRoICQoMC41LDAuNSwwLjUsMC41KSQ7IHByZXNlcnZlIGFjdHVhbCB3b3JsZCBmZWF0dXJlcyBhbmQgcHJldmlvdXMtZmVhdHVyZSBkZXJpdmF0aXZlIG1lbW9yeS4gVGhpcyBjYW4gZGVsaWJlcmF0ZWx5IGNyZWF0ZSBhIHRyYW5zaWVudCBpbiAkXGRvdCBtJC4KClRoZSBKQU5VUyBhbGlhcyByZXR1cm5zIG1ldHJpY3MgYWZ0ZXIgODAgdGlja3MgZm9yIChhKSBhbiB1bmNoYW5nZWQgY29weSBhbmQgKGIpIGEgY29weSB3aXRoIHRoZSBzb3VyY2UgdG9nZ2xlZC4gQWxsIG90aGVyIGluaXRpYWwgbnVtZXJpYyBzdGF0ZSBhbmQgcmFuZG9tIHN0YXRlIG1hdGNoLiBUaGUgYWN0aW9uIHJlbWFpbnMgdGhlIGV4aXN0aW5nIGFjdGlvbjsgbm8gcmVwbGFubmluZyBvY2N1cnMgaW5zaWRlIHRoaXMgY29tcGFyaXNvbi4gTmVpdGhlciBicmFuY2ggbXV0YXRlcyB0aGUgb3JpZ2luYWwuCgojIyAxMS4gQUUtMDExOiBkZXRlcm1pbmlzdGljIGhpc3RvcnkgYW5kIHJhbmRvbSBzdGF0ZQoKU2VlZCBzdHJpbmdzIG9mIDHigJM4MCBVVEYtMTYgY29kZSB1bml0cyBhcmUgaGFzaGVkIHdpdGggMzItYml0IEZOVi0xYS4gQSB6ZXJvIHJlc3VsdCBpcyByZXBsYWNlZCB3aXRoIG9uZS4gRWFjaCByYW5kb20gZHJhdyB1c2VzIHhvcnNoaWZ0MzIsIHdpdGggYml0IG9wZXJhdGlvbnMgcGVyZm9ybWVkIGFzIEphdmFTY3JpcHQgMzItYml0IGludGVnZXIgb3BlcmF0aW9uczoKCiQkc1xsZWZ0YXJyb3cgc1xvcGx1cyhzXGxsMTMpLFxxdWFkIHNcbGVmdGFycm93IHNcb3BsdXMoc1xtYXRoYmlue1xtYXRocm17Pj4+fX0xNyksXHF1YWQgc1xsZWZ0YXJyb3cgc1xvcGx1cyhzXGxsNSksXHF1YWQgdT0oc1xtYXRoYmlue1xtYXRocm17Pj4+fX0wKS8yXnszMn0uJCQKClRoaXMgZ2VuZXJhdG9yIGlzIGZvciByZXByb2R1Y2libGUgc2ltdWxhdGlvbiwgbm90IGNyeXB0b2dyYXBoeSBvciBoaWdoLXF1YWxpdHkgcGh5c2ljYWwgcmFuZG9tbmVzcy4gSW5pdGlhbGl6YXRpb24gdXNlcyB0d28gZHJhd3MsIHRoZW4gZWFjaCBwZXJtaXR0ZWQgZmllbGQtc2FtcGxpbmcgZXZlbnQgdXNlcyB0d28gbW9yZS4gU25hcHNob3QgcmVzdG9yZSByZWNvdmVycyAkcyQsIG5vdCBtZXJlbHkgdGhlIHNlZWQuCgpDaGVja3BvaW50cyBjYXJyeSBpbmNyZWFzaW5nIElEcyBhbmQgcGFyZW50IHBvaW50ZXJzLiBSZXN0b3JpbmcgYW4gb2xkIG5vZGUgc2V0cyB0aGUgbGl2ZSBzdGF0ZSBhbmQgYWN0aXZlIHBhcmVudC4gVGhlIG5leHQgY2hlY2twb2ludCBhZGRzIGEgY2hpbGQgd2l0aG91dCByZXdyaXRpbmcgZXhpc3RpbmcgZGVzY2VuZGFudHMuIEF0IDk3IG5vZGVzIHRoZSBvbGRlc3QgaXMgcmVtb3ZlZCwgYW5kIGNoaWxkcmVuIHdob3NlIHBhcmVudHMgYXJlIG5vIGxvbmdlciByZXRhaW5lZCBiZWNvbWUgbmV3IHJvb3RzLiBFeHBvcnQgYmVmb3JlIHRoZSByb2xsaW5nIGxpbWl0IHRvIHJldGFpbiBsb25nZXIgcmVzZWFyY2ggaGlzdG9yaWVzLiBUaGUgZXhwb3J0IGlzIGEgcmVjb3JkLCBub3QgYW4gYXBwZW5kLW9ubHkgdGFtcGVyLXByb29mIGxlZGdlci4KClRoZSBlaWdodC1kaWdpdCBzdGF0ZSBjaGVja3N1bSBpcyBGTlYtMWEgb2YgdGhlIHdvcmxkIEpTT04uIEl0IGhlbHBzIGRldGVjdCBhY2NpZGVudGFsIGRpZmZlcmVuY2VzIGFuZCBzdGFsZSBVSSBmb3JlY2FzdHM7IGl0IGlzIG5vdCBjb2xsaXNpb24tcmVzaXN0YW50IGF1dGhlbnRpY2F0aW9uLiBFcXVhbCBzZWVkLCB2ZXJzaW9uLCBwYXJhbWV0ZXJzLCByYW5kb20gc3RhdGUsIGFjdGlvbi9pbnRlcnZlbnRpb24gc2NoZWR1bGUsIGFuZCBzdGVwIGNvdW50IHByb2R1Y2UgZGV0ZXJtaW5pc3RpYyBudW1lcmljIGNvbnRpbnVhdGlvbiBvbiB0aGUgc2FtZSBKYXZhU2NyaXB0IHJ1bnRpbWUuIENyb3NzLWVuZ2luZSBmbG9hdGluZy1wb2ludCB0cmFuc2NlbmRlbnRhbCByZXN1bHRzIG5lZWQgbm90IGJlIGJpdHdpc2UgaWRlbnRpY2FsLiBTY3JlZW5zaG90cywgYnJvd3NlciBwbGF5YmFjayB0aW1pbmcsIGFuZCBleHBlcmltZW50IHdhbGwgdGltZXMgYXJlIG5vdCBjb3ZlcmVkIGJ5IHRoaXMgZ3VhcmFudGVlLgoKIyMgMTIuIEFFLTAxMjogdXBkYXRlIG9yZGVyIGFuZCBleHBsaWNpdCBjb250cmFjdHMKCkVhY2ggdGljayBwZXJmb3JtcyBleGFjdGx5OgoKMS4gSW5jcmVtZW50IHRpY2suCjIuIFVwZGF0ZSB0aGUgZmllbGQgZnJvbSB0aGUgb2xkIGZpZWxkLCBzb3VyY2UsIGFuZCBkZWNsYXJlZCBwYXJhbWV0ZXJzLgozLiBGb3IgQURBLCB0aGVuIE5PRVRIRVI6IGNob29zZSB0YXJnZXQsIGNhbGN1bGF0ZSBjYXBwZWQgYWNjZWxlcmF0aW9uLCB1cGRhdGUgdmVsb2NpdHkgYW5kIHBvc2l0aW9uLCBlbmZvcmNlIGNvbnRhY3RzLCB1cGRhdGUgcmVzZXJ2ZSBhbmQgdmlzaXRlZCBjZWxscywgb2JzZXJ2ZSBpZiBhbGxvd2VkLCB1cGRhdGUgdGhlIHNlbGYtbW9kZWwsIGNhbGN1bGF0ZSBkaWFnbm9zdGljcywgdXBkYXRlICRcUGhpJCwgJEkkLCBhbmQgYmFzZWxpbmUsIHN0b3JlIGN1cnJlbnQgZmVhdHVyZXMgYXMgcHJldmlvdXMuCjQuIERlY3JlbWVudCBibGFja291dCBpZiBwb3NpdGl2ZS4KNS4gRXZlcnkgZml2ZSB0aWNrcywgYXBwZW5kIGEgZGlhZ25vc3RpYyBzYW1wbGUuCgpBZ2VudHMgZG8gbm90IGFsdGVyIHRoZSBmaWVsZCBhbmQgZG8gbm90IGNvbGxpZGUgd2l0aCBvbmUgYW5vdGhlciwgc28gaXRlcmF0aW9uIG9yZGVyIG9ubHkgYXNzaWducyBwc2V1ZG9yYW5kb20gbWVhc3VyZW1lbnQgZHJhd3MsIG5vdCBwaHlzaWNhbCBjb3VwbGluZy4gUGxhbm5lciBjb3BpZXMgcmVwZWF0IGV4YWN0bHkgdGhpcyBpbnRlZ3JhdG9yLiBOb3RoaW5nIHVzZXMgYnJvd3NlciB3YWxsIHRpbWUgdG8gY2FsY3VsYXRlIHBoeXNpY3MuCgojIyAxMy4gUHJvb2Ygb2JsaWdhdGlvbnMgYW5kIGV2aWRlbmNlCgp8IE9ibGlnYXRpb24gfCBTdGF0dXMgYW5kIGxpbWl0IHwKfC0tLXwtLS18CnwgU3ltYm9sL3R5cGUvdW5pdCBjb21wbGV0ZW5lc3MgfCBEZWZpbmVkIGhlcmUsIHdpdGggc2ltdWxhdGlvbiB1bml0cyBhbmQgZXhwbGljaXQgUiByZXBsYWNlbWVudCB8CnwgRmllbGQgbm9ubmVnYXRpdmUgc3RlbmNpbCBhbmQgemVyby1zb3VyY2UgbWFzcyBkZWNheSB8IEFsZ2VicmEgYWJvdmU7IGV4ZWN1dGFibGUgY2hlY2tzIHwKfCBPYnNlcnZlciBkb21haW4gcHJlc2VydmF0aW9uIHwgQ29udmV4LWNvbWJpbmF0aW9uIHByb29mOyBleGVjdXRhYmxlIGNoZWNrcyB8CnwgJDBcbGUgQ1xsZTEkIGFuZCAkfFJ8XGxlMSQgfCBUcmlhbmdsZSBpbmVxdWFsaXR5IGFuZCBDYXVjaHnigJNTY2h3YXJ6IHwKfCAkRFxnZTAkIHwgUmVqZWN0ZWQ7IHNpZ25lZCBkZWZpbml0aW9uIGFsbG93cyBuZWdhdGl2ZSB2YWx1ZXMgfAp8IEdsb2JhbCBjb3VwbGVkIHN0YWJpbGl0eSBvciBjb252ZXJnZW5jZSB8IFVucmVzb2x2ZWQ7IHByb2plY3Rpb24gYW5kIGZpbml0ZSB0ZXN0IHRyYWplY3RvcmllcyBhcmUgaW5zdWZmaWNpZW50IHwKfCBGdWxsLXN0YXRlIGNvbnZlcmdlbmNlIGluY2x1ZGluZyAkSSQgd2l0aCBwZXJzaXN0ZW50ICRDPjAkIHwgUmVqZWN0ZWQgYnkgYWNjdW11bGF0aW9uIGluZXF1YWxpdHkgfAp8IFJlY3Vyc2l2ZSBmZWVkYmFjayBpcyBjYXVzYWxseSBhY3RpdmUgfCBEZW1vbnN0cmF0ZWQgYnkgbWF0Y2hlZC1zZWVkIHRyYWplY3RvcnkgY2hhbmdlIGluIHRoaXMgaW1wbGVtZW50YXRpb24gfAp8IEZlZWRiYWNrIG9yIGRlZXBlciBwbGFubmluZyBhbHdheXMgaW1wcm92ZXMgb3V0Y29tZXMgfCBOb3QgY2xhaW1lZDsgb2JqZWN0aXZlIHRyYWRlb2ZmcyBhcmUgcmVwb3J0ZWQgfAp8IENhbm9uaWNhbCBlcXVhdGlvbi1vbmx5IE1FLTAwMeKAkzEwMiBleGVjdXRpb24gfCBOb3QgY2xhaW1lZDsgZGVjbGFyZWQgd29ybGQgcnVsZXMgYW5kIHNlYXJjaCBhcmUgZXh0ZW5zaW9ucyB8CnwgUGh5c2ljYWwgRUZNVyBub3ZlbHR5LCBBR0ksIGNvbnNjaW91c25lc3MsIE1FLTEwMiB8IFVucmVzb2x2ZWQgLyB1bnRlc3RlZCBieSB0aGlzIHJlbGVhc2UgfAoKIyMgMTQuIEtub3duLXJlc3VsdCBjb21wYXJpc29uIGFuZCBmYWxzaWZpY2F0aW9uCgpUaGUgZmllbGQgdXBkYXRlIGlzIGNvbnZlbnRpb25hbCBmaW5pdGUtZGlmZmVyZW5jZSBkaWZmdXNpb24gd2l0aCBzb3VyY2VzIGFuZCBkZWNheS4gVGhlIG9ic2VydmVyIGlzIGV4cG9uZW50aWFsIHJlbGF4YXRpb24uIFRoZSBjdWJpYyBnYXRlIGlzIGFkamFjZW50IHRvIHN0YW5kYXJkIHNhdHVyYXRpb24vb3JkZXItcGFyYW1ldGVyIGR5bmFtaWNzLiBUaGUgZmVlZGJhY2sgaXMgYSBtZW1vcnktZGVwZW5kZW50IHJlc3RvcmluZyBjb250cm9sbGVyLiBSZWN1cnNpdmUgc2VhcmNoIGlzIGJlYW0gc2VhcmNoIHdpdGggcmVjZWRpbmctaG9yaXpvbiBleGVjdXRpb24sIGFuZCB0aGUgaGlzdG9yeSBpcyBhIGRpcmVjdGVkIGFjeWNsaWMgZ3JhcGggb2Ygc25hcHNob3RzLiBUaGVzZSBpbmdyZWRpZW50cyBhcmUgbm90IGVzdGFibGlzaGVkIGFzIG1hdGhlbWF0aWNhbGx5IG5vdmVsIGJ5IGJlaW5nIG5hbWVkIEFyY2hpbWVkZXMuCgpNYXR0aW5nbGV5LCBXYW5nLCBhbmQgQm95ZCBkZXNjcmliZSByZWNlZGluZy1ob3Jpem9uIGNvbnRyb2wgYXMgcmVwZWF0ZWQgb3B0aW1pemF0aW9uIHVzaW5nIGEgbW92aW5nIHByZWRpY3Rpb24gaG9yaXpvbjsgdGhpcyBidWlsZCB1c2VzIHRoYXQgYnJvYWQgYXJjaGl0ZWN0dXJlIHdpdGggYSBzbWFsbCBkaXNjcmV0ZSBoZXVyaXN0aWMsIG5vdCB0aGVpciBjb252ZXggc29sdmVyOiBbYXV0aG9ycycgcHVibGljYXRpb24gcGFnZV0oaHR0cHM6Ly93ZWIuc3RhbmZvcmQuZWR1L35ib3lkL3BhcGVycy9jb2RlX2dlbl9yaGMuaHRtbCksIElFRUUgQ29udHJvbCBTeXN0ZW1zIE1hZ2F6aW5lIDMxKDMpLCA1MuKAkzY1ICgyMDExKS4gTm8gcGVyZm9ybWFuY2UgcmVzdWx0IGZyb20gdGhhdCBwYXBlciBpcyB0cmFuc2ZlcnJlZCB0byB0aGlzIGNvZGUuCgoqKkltbWVkaWF0ZSBmYWxzaWZpZXJzOioqIGEgZGlmZmVyZW50IHJlcGxheSBmcm9tIGFuIGlkZW50aWNhbCBzdGF0ZSBvbiB0aGUgc2FtZSBydW50aW1lOyBhbiB1bnJlcG9ydGVkIG11dGF0aW9uIG9mIHRoZSBsaXZlIHdvcmxkIGR1cmluZyBwbGFubmluZzsgYW4gb3V0LW9mLWRvbWFpbiBzdGF0ZSB1bmRlciBzdXBwb3J0ZWQgcGFyYW1ldGVyczsgYWNjZXB0aW5nIHNpbXVsYXRvciBvYnNlcnZhdGlvbnMgYXMgaW5kZXBlbmRlbnQgZXh0ZXJuYWwgZXZpZGVuY2U7IG9yIGEgbWlzbWF0Y2ggYmV0d2VlbiBhbiBlcXVhdGlvbiBhbmQgaXRzIGV4ZWN1dGFibGUgc3RlcC4gVGVzdHMgYWRkcmVzcyBzcGVjaWZpYyBleGFtcGxlcywgbm90IHVuaXZlcnNhbCBmb3JtYWwgdmVyaWZpY2F0aW9uLgoKKipOZXh0IGV4dGVybmFsIHRlc3Q6Kiogc2VsZWN0IG9uZSBtZWFzdXJlZCBjb250cm9sIHN0cmVhbTsgZnJlZXplIG9ic2VydmFibGVzLCBmYWlsdXJlIGVuZHBvaW50LCBiYXNlbGluZSBmYW1pbHksIGNhbGlicmF0aW9uIHNwbGl0LCBwYXJhbWV0ZXIgYnVkZ2V0LCBhbmQgY29tcHV0ZSBhY2NvdW50aW5nLiBFdmFsdWF0ZSBmaXhlZCBtb2RlbHMgb24gaGVsZC1vdXQgdHJhamVjdG9yaWVzLCBjb21wYXJlIGxlYWQgdGltZSBhdCBtYXRjaGVkIGZhbHNlLWFsYXJtIHJhdGUsIHJlcG9ydCBuZWdhdGl2ZSBhcyB3ZWxsIGFzIHBvc2l0aXZlIHJlc3VsdHMsIGFuZCBzZWVrIGluZGVwZW5kZW50IHJlcHJvZHVjdGlvbi4gTm8gc3VjY2VzcyB0aHJlc2hvbGQgaXMgaW52ZW50ZWQgaGVyZSBpbiB0aGUgYWJzZW5jZSBvZiB0aGF0IHByb3RvY29sIGFuZCBkYXRhc2V0Lgo=" download="MATHEMATICS.md">Full mathematical specification ↓</a><a class="outline" href="data:text/markdown;charset=utf-8;base64,IyBTb3VyY2UtdG8tY29kZSBtYXBwaW5nIGFuZCBwcm92ZW5hbmNlCgoqKkZyb3plbiBpbXBsZW1lbnRhdGlvbjoqKiAwLjEuMCwgU2VwdGVtYmVyIDI3LCAyMDI2LgoKIyMgU291cmNlcyBhY3R1YWxseSB1c2VkCgoxLiAqKk1hdHRoZXcgQ2hlbm93ZXRoIFdyaWdodCAvIE1vbm9saXRoaWMgTExDLCBfVGhlIEFyY2hpbWVkZXMgRW5naW5lOiBBbiBFcXVhdGlvbi1Pbmx5IFJlY3Vyc2l2ZSBDb2hlcmVuY2UgS2VybmVsIGFuZCBJdHMgQ2FuZGlkYXRlIFBoeXNpY2FsIEludGVycHJldGF0aW9uIHdpdGhpbiBFRk1XXy4qKiBDdXJyZW50IHNhdmVkIHRleHQgcmVhZCBvbiBTZXB0ZW1iZXIgMjcsIDIwMjY7IHRoZSBzYXZlZCBhcnRpZmFjdCB3YXMgY3JlYXRlZCBTZXB0ZW1iZXIgMTcuIEl0IG5hbWVzIHNvdXJjZSBjb21taXQgYDI2YTNjMDU3YCwgYnV0IHRoZSB1bmRlcmx5aW5nIDEwMi1lcXVhdGlvbiByZXBvc2l0b3J5IHdhcyBub3QgaW5kZXBlbmRlbnRseSBmZXRjaGVkIG9yIHZlcmlmaWVkIGR1cmluZyB0aGlzIGJ1aWxkLiBUaGUgdGV4dCBpcyBwcmVzZXJ2ZWQgaW4gW0FSQ0hJTUVERVMtU09VUkNFLm1kXShBUkNISU1FREVTLVNPVVJDRS5tZCkuIEl0cyBwdWJsaWMgcmVmZXJlbmNlIGlzIFt0aGUgQXJjaGltZWRlcyBwYXBlciBpbiBlbnVtaW5vdXMvcGFwZXJzXShodHRwczovL2dpdGh1Yi5jb20vZW51bWlub3VzL3BhcGVycy9ibG9iL21haW4vYXJjaGltZWRlcy1lbmdpbmUtZWZtdy1wYXBlci5tZCkuCjIuIFRoZSBTZXB0ZW1iZXIgMjYgV29ybGRFbmdpbmUvQXJjaGltZWRlcy9Ub3RhbGl0eSBjb252ZXJzYXRpb24sIHJlY292ZXJlZCB0aHJvdWdoIGNvbnZlcnNhdGlvbiBjb250ZXh0OiBvbmUgcm9vbSwgb2JqZWN0cywgdHdvIHBhcnRpYWxseSBvYnNlcnZlZCBhZ2VudHMsIGludGVydmVudGlvbiwgYnJhbmNoaW5nLCBoaXN0b3J5LCBhbmQgYSByZWdpc3RyeSBvZiBuYW1lZCBvcGVyYXRvcnMuIFJlY292ZXJlZCBhcmNoaXRlY3R1cmU6IFdvcmxkRW5naW5lIG1hbmFnZXMgZ2xvYmFsIHN0YXRlLCBBcmNoaW1lZGVzIGlzIHRoZSBtYXRoZW1hdGljYWwga2VybmVsLCBhbmQgVG90YWxpdHkgaXMgdGhlIHNpbXVsYXRpb24vZ2FtZS4gVGhpcyBpcyBkZXNpZ24gY29udGV4dCwgbm90IHZlcmlmaWVkIGNhbm9uaWNhbCBvcGVyYXRvciBkb2N1bWVudGF0aW9uLgozLiBbR2l0SHViIFBhZ2VzIGNyZWF0aW9uXShodHRwczovL2RvY3MuZ2l0aHViLmNvbS9lbi9wYWdlcy9nZXR0aW5nLXN0YXJ0ZWQtd2l0aC1naXRodWItcGFnZXMvY3JlYXRpbmctYS1naXRodWItcGFnZXMtc2l0ZSkgYW5kIFtjdXN0b20gd29ya2Zsb3dzXShodHRwczovL2RvY3MuZ2l0aHViLmNvbS9lbi9wYWdlcy9nZXR0aW5nLXN0YXJ0ZWQtd2l0aC1naXRodWItcGFnZXMvdXNpbmctY3VzdG9tLXdvcmtmbG93cy13aXRoLWdpdGh1Yi1wYWdlcyksIGNoZWNrZWQgU2VwdGVtYmVyIDI3LCAyMDI2LiBUaGVzZSBncm91bmQgdGhlIGRlcGxveW1lbnQgaW5zdHJ1Y3Rpb25zIG9ubHkuCjQuIFtNYXR0aW5nbGV5LCBXYW5nLCBhbmQgQm95ZCwgX1JlY2VkaW5nIEhvcml6b24gQ29udHJvbDogQXV0b21hdGljIEdlbmVyYXRpb24gb2YgSGlnaC1TcGVlZCBTb2x2ZXJzX10oaHR0cHM6Ly93ZWIuc3RhbmZvcmQuZWR1L35ib3lkL3BhcGVycy9jb2RlX2dlbl9yaGMuaHRtbCksIDIwMTEuIFVzZWQgdG8gY2xhc3NpZnkgcmVjZWRpbmctaG9yaXpvbiBhcmNoaXRlY3R1cmUgYXMgZXN0YWJsaXNoZWQgd29yaywgbm90IHRvIGNvcHkgY29kZSBvciBpbXBvcnQgcGVyZm9ybWFuY2UgY2xhaW1zLgoKIyMgRXhwbGljaXQgaW1wbGVtZW50YXRpb24gZGVjaXNpb25zCgp8IFNvdXJjZSBjb25zdHJ1Y3QgfCBJbXBsZW1lbnRhdGlvbiB8IFdoeSAvIGV2aWRlbmNlIHN0YXR1cyB8CnwtLS18LS0tfC0tLXwKfCBHZW5lcmljIHN0YXRlICR4JCBhbmQgc2VsZi1tb2RlbCAkbSQgfCBGb3VyIG5vcm1hbGl6ZWQgb2JzZXJ2YWJsZXMgcGVyIGFnZW50OiBvd24geC95IHBvc2l0aW9uLCByZXNlcnZlLCBsb2NhbCBmaWVsZCB8IEVuZ2luZWVyaW5nIHNwZWNpYWxpemF0aW9uOyB1bml0cyBhbmQgb2JzZXJ2YXRpb24gY2hhbm5lbHMgZGVjbGFyZWQgfAp8ICRcZG90IHg9Zih4LGU7XHRoZXRhKStcbGFtYmRhXFBoaSBHKHgsbSxlKSQgfCBXb3JsZCBmaWVsZCBhbmQgc2VtaS1pbXBsaWNpdCBhZ2VudCBtb3Rpb247IHJlc3RvcmluZyBhY2NlbGVyYXRpb24gJFxsYW1iZGFcUGhpKFNtX3twb3N9LXApJCB8IERlY2xhcmVkIGxvY2FsIGZlZWRiYWNrIHBhdGgsIG5vdCBhIGRlcml2YXRpb24gb2YgY2Fub25pY2FsIGYvRyB8CnwgJFxkb3QgbT1cYWxwaGEoSCh4LGUpLW0pJCB8IEV4cG9uZW50aWFsIHVwZGF0ZSBmcm9tIG93biBzdGF0ZSBhbmQgaW50ZXJtaXR0ZW50IG5vaXN5IGZpZWxkIHwgJEgkIGlzIGV4cGxpY2l0bHkgZGVmaW5lZDsgaGVsZC1vYnNlcnZhdGlvbiBpbnRlZ3JhdGlvbiBpcyBhbmFseXRpYyB8CnwgQ3ViaWMgJFxQaGkkIGVxdWF0aW9uIHwgUHJvamVjdGVkIGV4cGxpY2l0IEV1bGVyIHdpdGggbGlzdGVkIGNvZWZmaWNpZW50cyBhbmQgemVybyBhZGRpdGl2ZSBmb3JjaW5nIHwgU291cmNlLWluc3BpcmVkIGltcGxlbWVudGF0aW9uOyBubyBjYWxpYnJhdGlvbiBjbGFpbSB8CnwgSmFjb2JpYW4tbGlrZSBjbG9zdXJlICRSJCB8IFZlY3RvciBhbGlnbm1lbnQgb2Ygbm9ybWFsaXplZCBtZW1vcnkgZGlzcGxhY2VtZW50IGFuZCBtb2RlbCBjaGFuZ2UgfCBJbnRlbnRpb25hbCByZXBsYWNlbWVudDogb3JpZ2luYWwgdmVjdG9yL21hdHJpeCBjb250cmFjdGlvbiBpcyB1bmRlci1zcGVjaWZpZWQgfAp8IERpdmVyZ2VuY2UgJEQkIHwgU3F1YXJlZCByZXNpZHVhbCBwbHVzIGRlcml2YXRpdmUgcmVzaWR1YWwgbWludXMgJDAuMDZSJCB8IFByZXNlcnZlcyBzaWduZWQgbmF0dXJlOyBub3QgYSBtZXRyaWMgfAp8IENvaGVyZW5jZSAkQyQgfCBOb3JtLXJhdGlvIGV4cHJlc3Npb24gd2l0aCBlcHNpbG9uIGFuZCBudW1lcmljIHByb2plY3Rpb24gfCBTYW1lIGFsZ2VicmFpYyBmYW1pbHkgYXMgc291cmNlOyBtZWFzdXJlcyBpbnRlcm5hbCBhZ3JlZW1lbnQgfAp8ICRJX3tuKzF9PUlfbitcbGFtYmRhIEMkIHwgJElfe24rMX09SV9uK0NcRGVsdGEgdCQgfCBFeHBsaWNpdCByYXRlIGFuZCB1bml0czsgYWNjdW11bGF0ZWQgY29oZXJlbmNlLCBub3QgaWRlbnRpdHkgcHJvb2YgfAp8IFN0YXRlIGNvbnZlcmdlbmNlIGNvbmRpdGlvbiB8IE5vIHVuY29uZGl0aW9uYWwgY29udmVyZ2VuY2UgY2xhaW0gfCBBY2N1bXVsYXRpbmcgSSBhbmQgb25nb2luZyBzb3VyY2UvY29udHJvbCBwcmV2ZW50IGEgZ2VuZXJhbCBjb25jbHVzaW9uIHwKfCAkXEdhbW1hPVxQaGkgUkMkLCBjcml0aWNhbCBjb25zY2lvdXNuZXNzIHRocmVzaG9sZCB8IE5vdCB1c2VkIHRvIGluZmVyIGNvbnNjaW91c25lc3Mgb3IgZGlzcGxheWVkIGFzIGEgdmVyaWZpZWQgc2NvcmUgfCBObyBvcGVyYXRpb25hbCB0aHJlc2hvbGQgb3IgZXh0ZXJuYWwgZXZpZGVuY2UgfAp8IEV2aWRlbmNlIGFuZCBjb25maWRlbmNlIHwgVGFnZ2VkIHNpbXVsYXRlZCByZWFkaW5nIGxlZGdlcjsgbGl0ZXJhbCBwbGF5ZXIgbm90ZXMgfCBObyBpbnZlbnRlZCBhdXRoZW50aWNhdGlvbiBvciBjYWxpYnJhdGVkIHByb2JhYmlsaXR5IHwKfCBNRS0xMDIgY29tcGFyYXRpdmUgd2FybmluZyBjcml0ZXJpb24gfCBSZW1haW5zIHVudGVzdGVkOyBkZXZlbG9wbWVudGFsIHBvbGljeSBjb21wYXJpc29uIGlzIGEgc2VwYXJhdGUgZXhwZXJpbWVudCB8IE5vIGV4dGVybmFsIGZhaWx1cmUgZW5kcG9pbnQsIG1hdGNoZWQgRlBSIG9yIGluZGVwZW5kZW50IHJlcGxpY2F0aW9uIHwKfCBDVUJZIC8gSkFOVVMgLyBEUkFHT04gLyBUSE9SIC8gQk9SR0VTIHwgUHJlY2lzZWx5IHNjb3BlZCBsb2NhbCBpbXBsZW1lbnRhdGlvbnMgfCBDYW5vbmljYWwgZXF1aXZhbGVuY2UgdW52ZXJpZmllZDsgbm8gYXNzZXJ0aW9uIHRoYXQgYSBmdWxsIFpvbyBydW4gb2NjdXJyZWQgfAp8IFdvcmxkRW5naW5lIGdsb2JhbCBzY2hlbWEgfCBGaWVsZCwgb2JqZWN0cywgYWdlbnRzLCBtb2RlbHMsIGhpc3RvcnksIHBsYXllciwgaW50ZW50aW9uLCBldmlkZW5jZSwgcGFyYW1ldGVycywgcmFuZG9tIHN0YXRlIHwgQ29uY3JldGUgTVZQIGFkYXB0YXRpb24gb2YgbGF0ZXIgZGVzaWduLCB3aXRoIG5vIGNsYWltIHRvIHNpbXVsYXRlIGFsbCBzY2FsZXMgfAoKIyMgU291cmNlIGFtYmlndWl0aWVzIHRoYXQgcmVtYWluIHZpc2libGUKCi0gVGhlIHNvdXJjZSB3cml0ZXMgJGYkIHdpdGhvdXQgYW4gZXhwbGljaXQgJG0kIGFyZ3VtZW50LCB0aGVuIGRpZmZlcmVudGlhdGVzIGl0IHdpdGggcmVzcGVjdCB0byAkbSQuIElmIHRoZXJlIGlzIHRydWx5IG5vIGRlcGVuZGVuY2UsIHRoYXQgZGVyaXZhdGl2ZSBpcyB6ZXJvLiBJZiBkZXBlbmRlbmNlIGlzIGludGVuZGVkLCBpdCBuZWVkcyBkZWZpbml0aW9uLgotIEZvciB2ZWN0b3IgJGYkLCAkXHBhcnRpYWxfbSBmJCBpcyBhIEphY29iaWFuLiBBbiBpbm5lciBwcm9kdWN0IHdpdGggYSB2ZWN0b3IgZG9lcyBub3QgdW5pcXVlbHkgc3BlY2lmeSBhIHNjYWxhciBjbG9zdXJlLiBUaGlzIGJ1aWxkIGRvZXMgbm90IHNpbGVudGx5IGNob29zZSBhIHRlbnNvciBjb250cmFjdGlvbiBhbmQgY2FsbCBpdCBjYW5vbmljYWwuCi0gJHg9bSQgYWxvbmUgZG9lcyBub3QgaW1wbHkgJEQ9MCQgd2hlbiBkZXJpdmF0aXZlIG1pc21hdGNoIG9yICRSJCBpcyBub256ZXJvLiBUaGlzIGJ1aWxkIGluaXRpYWxpemVzIGFsbCByZWxhdGVkIHF1YW50aXRpZXMgZXhwbGljaXRseS4KLSBJZiAkSSQgYWNjdW11bGF0ZXMgcG9zaXRpdmUgY29oZXJlbmNlIGluZGVmaW5pdGVseSwgaXQgaXMgbm90IGJvdW5kZWQuIFN0YWJsZSBpZGVudGl0eSBsYW5ndWFnZSBpbiB0aGUgc291cmNlIGlzIG5vdCBhIG1hdGhlbWF0aWNhbCBjb252ZXJnZW5jZSBwcm9vZiBmb3IgdGhlIHdob2xlIHN0YXRlLgotIFRoZSBvcmlnaW5hbCBlcXVhdGlvbi1vbmx5IGNvbnN0cmFpbnQgY2Fubm90IGJlIGNsYWltZWQgYnkgdGhpcyByZWxlYXNlOiBmaWVsZCBkaXNjcmV0aXphdGlvbiwgZmluaXRlLXN0YXRlIGludGVudGlvbnMsIGNvbGxpc2lvbiByZXBhaXIsIG9iamVjdGl2ZSB3ZWlnaHRzLCBhbmQgYmVhbSBzZWFyY2ggYXJlIG9wZW5seSBhZGRlZCBlbmdpbmVlcmluZyBjaG9pY2VzLgoKIyMgQXVkaXQgZGlzY2lwbGluZQoKVGhlIEVGTVcgWm9vIGFuYWx5c2lzIG1ldGhvZCBpbmZvcm1lZCB0aGUgY2hlY2tzOiBmcmVlemUgZGVmaW5pdGlvbnMsIGRlY2xhcmUgcHJvb2Ygb2JsaWdhdGlvbnMsIGV4cG9zZSBjaXJjdWxhcml0eSwgZGlzdGluZ3Vpc2ggc3RhbmRhcmQgbWF0aGVtYXRpY3MsIGFuZCBzZXBhcmF0ZSBzaW11bGF0aW9uIGZyb20gZXhwZXJpbWVudC4gVGhpcyByZWxlYXNlIGRvZXMgbm90IGFzc2lnbiBpbnZlbnRlZCBjYW5vbmljYWwgYW5pbWFsIGRlZmluaXRpb25zIG9yIHByb2R1Y2UgYW4gdW5zdXBwb3J0ZWQg4oCcYWxsIGFuaW1hbHMgcGFzc2Vk4oCdIHZlcmRpY3QuIFRlc3QgY2hlY2tzIGFyZSBuYW1lZCBmb3IgdGhlIGludmFyaWFudCB0aGV5IGFjdHVhbGx5IGV4YW1pbmUuCgpObyBzcGVjaWZpYyBjYW5vbmljYWwgTUUgbnVtYmVyIGlzIGF0dGFjaGVkIHRvIGEgbG9jYWwgZXF1YXRpb24gdW5sZXNzIGl0IGFwcGVhcnMgaW4gdGhlIHNvdXJjZSB0ZXh0LiBMb2NhbCBJRHMgQUUtMDAx4oCTQUUtMDEyIGJlbG9uZyB0byB0aGlzIGltcGxlbWVudGF0aW9uIG9ubHkuIFRoZSBwcmVzZXJ2ZWQgc291cmNlIGlzIG5vdCByZXdyaXR0ZW4gdG8gbWFrZSBpdHMgaGlzdG9yaWNhbCBjbGFpbXMgbWF0Y2ggdGhlIG5ldyBpbXBsZW1lbnRhdGlvbi4K" download="SOURCE-MAPPING.md">Source-to-code mapping ↓</a><a class="outline" href="data:text/markdown;charset=utf-8;base64,IyBWYWxpZGF0aW9uIHJlY29yZCDigJQgQXJjaGltZWRlcyBFbmdpbmUgMC4xLjAKCkltcGxlbWVudGF0aW9uIGFuZCBleHBlcmltZW50IHNwZWNpZmljYXRpb24gZnJvemVuIFNlcHRlbWJlciAyNywgMjAyNi4gUGFja2FnaW5nIGFuZCBhZGRpdGlvbmFsIGludGVyZmFjZS1jb250cmFjdCBjaGVja3MgY29tcGxldGVkIFNlcHRlbWJlciAyOCwgMjAyNi4KCiMjIEV4ZWN1dGVkIGNoZWNrcwoKVGhlIHN1aXRlIGlzIHJ1biB3aXRoIGBucG0gdGVzdGAsIHVzaW5nIE5vZGUncyBidWlsdC1pbiB0ZXN0IHJ1bm5lci4gSXQgaW5jbHVkZXMgMjIgZW5naW5lIGNoZWNrcyBhbmQgMTAgaW50ZXJmYWNlLWNvbnRyYWN0IGNoZWNrcy4gVGhlIGRldGFpbGVkIG1hY2hpbmUgb3V0cHV0IGlzIHByZXNlcnZlZCBpbiBgcmVzdWx0cy90ZXN0cy50YXBgLgoKKipFeGVjdXRlZCByZXN1bHQ6IDMyIHBhc3NlZCwgMCBmYWlsZWQsIDAgc2tpcHBlZC4qKiBTdGF0aWMgcGFja2FnaW5nIGNoZWNrcyBhbHNvIHZlcmlmaWVkIDU5IHVuaXF1ZSBpbnRlcmZhY2UgSURzLCBhbGwgbmluZSBsb2NhbCBhc3NldC9kb2N1bWVudCBsaW5rcywgbWF0Y2hpbmcgZW1iZWRkZWQvc291cmNlIHNjcmlwdHMsIGFuZCB6ZXJvIGV4dGVybmFsIGFzc2V0IGRlcGVuZGVuY2llcyBpbiB0aGUgc3RhbmRhbG9uZSBIVE1MLiBTZWUgYHJlc3VsdHMvcGFja2FnZS1jaGVja3MuanNvbmAuCgojIyMgRW5naW5lIGNoZWNrcwoKMS4gTmV1dHJhbCBpbml0aWFsaXphdGlvbjogbWF0Y2hpbmcgc2VsZi1tb2RlbCwgQz0xLCBEPVI9MC4KMi4gRXhhY3QgcmVwZWF0ZWQgc2VlZC9hY3Rpb24vaW50ZXJ2ZW50aW9uIHJlcGxheS4KMy4gRGlzdGluY3Qgc2VlZGVkIGluaXRpYWwgc3RhdGVzLgo0LiBQdXJlIGludGVncmF0aW9uIGFuZCB6ZXJvLXN0ZXAgaWRlbnRpdHkuCjUuIFVuaWZvcm0gZmllbGQncyBkaXNjcmV0ZSBleHBvbmVudGlhbCBkZWNheS4KNi4gRmllbGQgbWFzcyBhY2NvdW50aW5nIHVuZGVyIHNvdXJjZS1mcmVlIGRpZmZ1c2lvbiBhbmQgZGVjYXkuCjcuIE9ic2VydmVyIHVwZGF0ZSBhZ2FpbnN0IHRoZSBhbmFseXRpYyBoZWxkLW9ic2VydmF0aW9uIHNvbHV0aW9uLgo4LiBFeGFjdCBibGFja291dCBkdXJhdGlvbiBhbmQgc2Vuc29yIHJlc3VtcHRpb24gY2FkZW5jZS4KOS4gUGFyYW1ldGVyIGxpbWl0cyBhbmQgZXhwbGljaXQgZmllbGQgcG9zaXRpdml0eSBjb25kaXRpb24uCjEwLiBTdGF0ZSwgb2JzdGFjbGUsIGFuZCBmaW5pdGUtbnVtYmVyIGJvdW5kcyBvdmVyIDUsNDAwIHRpY2tzIGFjcm9zcyBzaXggc2VlZHMgd2l0aCBleHRyZW1lIGFsbG93ZWQgcGFyYW1ldGVycyBhbmQgaW50ZXJ2ZW50aW9ucy4KMTEuIENhdXNhbCB0cmFqZWN0b3J5IGNoYW5nZSB3aGVuIHJlY3Vyc2l2ZSBjb3VwbGluZyBpcyBkaXNhYmxlZCB1bmRlciBtYXRjaGVkIHJhbmRvbSBzdHJlYW1zLgoxMi4gRmllbGQtcHVsc2UgZWZmZWN0cyBhbmQgaW5wdXQtc3RhdGUgcHJlc2VydmF0aW9uLgoxMy4gUGxhbm5lciBpc29sYXRpb24gYW5kIGV4YWN0IGZpbml0ZSBleHBhbnNpb24gY291bnQuCjE0LiBDb3JyZWN0IG9uZS1sZXZlbCBtYXhpbXVtIHNjb3JlIHNlbGVjdGlvbi4KMTUuIERldGVybWluaXN0aWMgcGxhbm5pbmcgYW5kIHJlY3Vyc2lvbiBib3VuZCByZWplY3Rpb24uCjE2LiBTb3VyY2UgY291bnRlcmZhY3R1YWwgaXNvbGF0aW9uIGFuZCByZXNlcnZlIGNvbnNlcXVlbmNlcy4KMTcuIENoZWNrcG9pbnQgcmVzdG9yYXRpb24gYW5kIGV4YWN0IGNvbnRpbnVlZCByYW5kb20gdHJhamVjdG9yeS4KMTguIFJvbGxpbmcgaGlzdG9yeSdzIHZhbGlkIHBhcmVudCBncmFwaC4KMTkuIEpTT04gcm91bmQgdHJpcCBhbmQgY29udGludWVkIGR5bmFtaWNzLgoyMC4gTWFsZm9ybWVkLWltcG9ydCByZWplY3Rpb24gd2l0aG91dCBtdXRhdGluZyB0aGUgaW5wdXQuCjIxLiBSZWplY3Rpb24gb2YgcmUtbGFiZWxlZCBleHRlcm5hbCDigJxldmlkZW5jZeKAnSBpbiB0aGUgc2ltdWxhdGVkIHNlbnNvciBsZWRnZXIuCjIyLiBDb2hlcmVuY2UgYWNjdW11bGF0aW9uIGFzIGFuIGluY3JlYXNpbmcgc3RhdGlzdGljIHJhdGhlciB0aGFuIGlkZW50aXR5IHByb29mLgoKIyMjIEludGVyZmFjZS1jb250cmFjdCBjaGVja3MKClRoZSBhY3R1YWwgYGFwcC5qc2AgaXMgcnVuIGFnYWluc3QgYSBzbWFsbCBOb2RlIERPTSBzaGltIGJ1aWx0IGZyb20gdGhlIGFjdHVhbCBgaW5kZXguaHRtbGAuIFRlc3RzIGNoZWNrIGluaXRpYWwgY29udHJvbHMvYWdlbnQgY2FyZHMsIGZpbml0ZSBjYW52YXMgZHJhd2luZyBhcmd1bWVudHMsIFJ1bi9QYXVzZS9TdGVwLCBmdXR1cmUgZXhwbG9yYXRpb24vYXBwbGljYXRpb24sIHRpbWVsaW5lIHJlc3RvcmUvYnJhbmNoLCBwYXJhbWV0ZXIgYW5kIG5vdGUgcGVyc2lzdGVuY2UsIHBhaXJlZCBjb3VudGVyZmFjdHVhbCBvdXRwdXQsIGRvd25sb2FkYWJsZSBzZXNzaW9uIGNvbnRlbnRzLCBpbnZhbGlkIGltcG9ydCByZWplY3Rpb24sIHZhbGlkIGltcG9ydCByZXN0b3JhdGlvbiwgYW5kIHZpZXcgbmF2aWdhdGlvbi4KClRoZXNlIGNoZWNrcyB2ZXJpZnkgYXBwbGljYXRpb24gd2lyaW5nIGFuZCBzdGF0ZSBmbG93LiAqKlRoZXkgZG8gbm90IHJlbmRlciBDU1MsIHZlcmlmeSBwaXhlbHMsIGV4ZXJjaXNlIGJyb3dzZXIgQVBJcyBlbmQtdG8tZW5kLCBvciBlc3RhYmxpc2ggbW9iaWxlIHVzYWJpbGl0eS4qKiBPbmUgaW5pdGlhbCBmYWlsdXJlIHdhcyBpbiB0aGUgdGVzdCBzaGltJ3MgbWlzc2luZyByZWZsZWN0ZWQgZWxlbWVudCBgaWRgIHByb3BlcnR5OyB0aGUgc2hpbSB3YXMgY29ycmVjdGVkLiBObyBwcm9kdWN0aW9uIGJlaGF2aW9yIHdhcyBjaGFuZ2VkIHRvIG1hbnVmYWN0dXJlIGEgcGFzc2luZyByZXN1bHQuCgojIyBCcm93c2VyIHZlcmlmaWNhdGlvbiBsaW1pdGF0aW9uCgpMaXZlIGJyb3dzZXIgcmVuZGVyaW5nIHdhcyBub3QgdmVyaWZpZWQgaW4gdGhpcyBlbnZpcm9ubWVudC4gVGhlIGxvY2FsIGJyb3dzZXIgYmluYXJ5IGNvdWxkIG5vdCBiZSBpbnN0YWxsZWQgZnJvbSBpdHMgZG93bmxvYWQgc291cmNlLCBhbmQgdGhlIGNsb3VkIGJyb3dzZXIgcmVqZWN0ZWQgYm90aCB0aGUgbG9jYWwgc2VydmVyIGFkZHJlc3MgYW5kIGxvY2FsLWZpbGUgcHJvdG9jb2wgdW5kZXIgaXRzIHNlY3VyaXR5IHBvbGljeS4gTm8gd29ya2Fyb3VuZCB3YXMgdXNlZCBhZnRlciB0aGUgZXhwbGljaXQgcG9saWN5IHJlamVjdGlvbi4gTm8gc2NyZWVuc2hvdCBpcyBwcmVzZW50ZWQgYXMgYW4gZXhlY3V0ZWQgYnJvd3NlciByZXN1bHQuCgpBIHNlcGFyYXRlIG9wdGlvbmFsIHN1aXRlIGlzIHN1cHBsaWVkIGluIGB0ZXN0cy9icm93c2VyLmNqc2AgZm9yIGEgbm9ybWFsIGxvY2FsIGRldmVsb3BtZW50IGVudmlyb25tZW50LiBJdCBjaGVja3MgZGVza3RvcCBhbmQgbW9iaWxlIHZpZXdwb3J0IG92ZXJmbG93LCBjb3JlIGNvbnRyb2xzLCBKU09OIGV4cG9ydC9pbXBvcnQsIG5hdmlnYXRpb24sIGFuZCBzdGFuZGFsb25lIG9mZmxpbmUgb3BlcmF0aW9uLCBhbmQgc2F2ZXMgc2NyZWVuc2hvdHMgZm9yIHZpc3VhbCBpbnNwZWN0aW9uLiAqKkl0IHdhcyBub3QgZXhlY3V0ZWQgZHVyaW5nIHRoaXMgYnVpbGQuKiogS2V5Ym9hcmQgYWNjZXNzaWJpbGl0eSwgdG91Y2ggdGFyZ2V0cywgZGlmZmVyZW50IGJyb3dzZXJzLCBsb25nLXJ1bm5pbmcgcmVzb3VyY2UgdXNlLCBhbmQgYWN0dWFsIEdpdEh1YiBQYWdlcyBkZXBsb3ltZW50IHJlbWFpbiB1bnZlcmlmaWVkLgoKIyMgRXhlY3V0ZWQgZXhwZXJpbWVudDogQUUtU0lNLTAwMQoKNDggZGV2ZWxvcG1lbnQgcnVuczogMTIgZnJvemVuIHNlZWRzIMOXIDQgcG9saWNpZXMsIGVhY2ggMzAwIHRpY2tzICgzMCBzaW11bGF0aW9uIHNlY29uZHMpLiBBIHB1bHNlIG9jY3VycyBhdCB0aWNrIDgwIGFuZCBhIGJsYWNrb3V0IGF0IHRpY2sgMTYwLiBUaGUgY29tcGFyaXNvbiB1c2VzIGZpeGVkIHN1cnZleSwgZGVwdGgtb25lIHBsYW5uaW5nLCBkZXB0aC10aHJlZSBwbGFubmluZywgYW5kIGRlcHRoLXRocmVlIHBsYW5uaW5nIHdpdGggbWVtb3J5IGZlZWRiYWNrIGRpc2FibGVkLiBQb2xpY2llcyB1c2UgdGhlIHNhbWUgaW5pdGlhbCBzZWVkcyBhbmQgbWVhc3VyZW1lbnQgcmFuZG9tIHN0cmVhbXMuCgp8IFBvbGljeSB8IE1lYW4gdGVybWluYWwgcmVzZXJ2ZSB8IE1lYW4gY292ZXJhZ2UgfCBNZWFuIGNvaGVyZW5jZSB8CnwtLS18LS0tOnwtLS06fC0tLTp8CnwgRml4ZWQgc3VydmV5IHwgMC42NjYwIHwgMTAuNzAlIHwgMC45NzMyNCB8CnwgT25lLWxldmVsIHBsYW5uaW5nIHwgMC44NDc4IHwgMTMuOTglIHwgMC45Njk1NCB8CnwgVGhyZWUtbGV2ZWwgcGxhbm5pbmcgfCAwLjgzMzQgfCAxNi4xNSUgfCAwLjk2OTI1IHwKfCBUaHJlZS1sZXZlbCwgzrs9MCB8IDAuODEzMyB8IDE3LjIzJSB8IDAuOTYyNTggfAoKRGVlcGVyIHNlYXJjaCBleHBsb3JlcyBtb3JlIGhlcmUgYnV0IHJldGFpbnMgbGVzcyByZXNlcnZlIHRoYW4gdGhlIG9uZS1sZXZlbCBwb2xpY3kuIFJlbW92aW5nIGZlZWRiYWNrIGluY3JlYXNlcyBjb3ZlcmFnZSBmdXJ0aGVyIHdoaWxlIHJlZHVjaW5nIHJlc2VydmUgYW5kIGFncmVlbWVudC4gVGhlc2UgdHJhZGVvZmZzIGFyZSByZXRhaW5lZCByYXRoZXIgdGhhbiBjb21wcmVzc2VkIGludG8gYSB1bml2ZXJzYWwg4oCccGFzcy7igJ0gRGV0YWlsZWQgYWxhcm0gZnJhY3Rpb25zLCB0aW1pbmcsIHByb2plY3Rpb24gY291bnRlcnMsIHJhbmRvbSBzZWVkcywgYW5kIHN0YXRlIGNoZWNrc3VtcyBhcmUgaW4gW2V4cGVyaW1lbnQuanNvbl0oLi4vcmVzdWx0cy9leHBlcmltZW50Lmpzb24pOyB0aGUgaW50ZXJwcmV0YXRpb24gaXMgaW4gW0VYUEVSSU1FTlQubWRdKC4uL3Jlc3VsdHMvRVhQRVJJTUVOVC5tZCkuCgpXYWxsIHRpbWVzIGFyZSBkZXNjcmlwdGl2ZSBtZWFzdXJlbWVudHMgaW4gb25lIHNoYXJlZCBydW50aW1lLiBUaGV5IGluY2x1ZGUgcGxhbm5pbmcsIHNpbXVsYXRpb24sIHN0YXRlIGNvcHlpbmcsIGFuZCBkaWFnbm9zdGljcy4gVGhleSBhcmUgbm90IGNvbnRyb2xsZWQgaGFyZHdhcmUgYmVuY2htYXJrcy4gUmUtcnVubmluZyBzaG91bGQgcmVwcm9kdWNlIHRoZSBudW1lcmljIHJlY29yZHMgb24gdGhlIHNhbWUgcnVudGltZSwgYnV0IHRpbWluZ3Mgd2lsbCBkaWZmZXIuCgojIyBDbGFpbXMgcGVybWl0dGVkIGJ5IHRoZSBleGVjdXRlZCBjaGVja3MKCi0gKipEZW1vbnN0cmF0ZWQgb24gdGhlc2UgdGVzdHM6KiogZGV0ZXJtaW5pc3RpYyBmaW5pdGUgc2ltdWxhdGlvbiwgZnVuY3Rpb25hbCBrZXJuZWwgZmVlZGJhY2ssIGlzb2xhdGVkIGJvdW5kZWQgZnV0dXJlIHNlYXJjaCwgc3RhdGUtY29tcGxldGUgcmVwbGF5LCBzbmFwc2hvdCBicmFuY2hpbmcsIGFuZCBVSSBldmVudC1oYW5kbGVyIHdpcmluZy4KLSAqKlN1cHBvcnRlZCBidXQgaW5jb21wbGV0ZToqKiB1c2FibGUgYnJvd3NlciBsYWJvcmF0b3J5OyByZXF1aXJlcyBsaXZlIHZpc3VhbCBhbmQgY3Jvc3MtYnJvd3NlciBjaGVja3MuCi0gKipIeXBvdGhlc2lzIC8gcG9zdHVsYXRlOioqIHRoZSB1c2VmdWxuZXNzIG9mIGFuIEVGTVcgaW50ZXJwcmV0YXRpb24gYmV5b25kIHRoaXMgcGFydGljdWxhciBlbmdpbmVlcmluZyBtb2RlbC4KLSAqKlVucmVzb2x2ZWQ6KiogY2Fub25pY2FsIFpvbyBlcXVpdmFsZW5jZSwgZ2xvYmFsbHkgc3RhYmxlIGNvdXBsZWQgZHluYW1pY3MsIGV4dGVybmFsIHdhcm5pbmcgYWR2YW50YWdlLCBwaHlzaWNhbCBlZmZlY3RzLCBBR0ksIGNvbnNjaW91c25lc3MsIGFuZCBNRS0xMDIgc2F0aXNmYWN0aW9uLgoKVGhlIHNvdXJjZSBwYXBlciwgaW1wbGVtZW50YXRpb24sIHRlc3RzLCBhbmQgc3ludGhldGljIGV4cGVyaW1lbnRzIHdlcmUgZGV2ZWxvcGVkIHdpdGhpbiB0aGUgc2FtZSBwcm9qZWN0LiBUaGV5IGFyZSBkZXBlbmRlbnQgY2hlY2tzLCBub3QgaW5kZXBlbmRlbnQgcmVwbGljYXRpb24uIEluaXRpYWwgY29uZGl0aW9ucyBhbmQgc2NvcmUgd2VpZ2h0cyBhcmUgZGVsaWJlcmF0ZWx5IGNob3NlbiBkZXNpZ24gaW5wdXRzLCBub3QgZXZpZGVuY2UgZm9yIHRoZSB0cnV0aCBvZiB0aGUgY29uY2VwdHVhbCBmcmFtZXdvcmsuCg==" download="VALIDATION.md">Validation report ↓</a></div><p class="micro">The complete specification includes all constants, boundary rules, score weights, sensor conventions, proof obligations, numerical limits, and operator interfaces.</p></section>
+    <section id="registry" class="view reading" hidden><p class="eyebrow">THE DISPATCH REGISTRY</p><h1>Named operations. Defined behavior.</h1><p class="lede">These are local implementations of the WorldEngine design. Equivalence to canonical Zoo operators has not been established.</p><div id="operator-list"></div><div class="roadmap"><h2>Iterative build sequence</h2><ol><li><b>0.1 · One-room kernel</b> — motion, sensing, recursive feedback, bounded futures, snapshots, and reproducible experiments. Implemented.</li><li><b>0.2 · Multiple rooms</b> — explicit topology, conserved transfers, and cross-room beliefs. Planned.</li><li><b>0.3 · Richer operators</b> — verified canonical equations and strict operator contracts. Planned.</li><li><b>0.4 · External evaluation</b> — frozen baselines, held-out measurements, and independent replication. Planned.</li></ol></div></section>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="help"><button id="close-help" class="dialog-close" aria-label="Close">×</button><p class="eyebrow">READING THE LABORATORY</p><h2>Follow the consequences.</h2><ol><li>Run the world. ADA and NOETHER act on the current intention.</li><li>Inject a field pulse or sensor blackout. Watch the gap between actual state and self-model.</li><li>Explore possible futures. Colored paths show the retained best sequence; scores are internal utilities.</li><li>Apply the first intention, then observe what actually unfolds.</li><li>Return to a checkpoint and try another intervention.</li></ol><p>The field and room are a deliberately small computational model. The coherence monitor is inspired by the EFMW Archimedes paper. These results do not establish physical EFMW effects, consciousness, AGI, or an advantage over external benchmarks.</p><p>Agents sense their own position and energy continuously and the field intermittently. The player’s branch planner can inspect the full simulated world. All evidence displayed here is generated by this simulator.</p><p class="micro">96 checkpoints retained. Export a session for a portable record. Session checksums support replay checks, not cryptographic authentication.</p></dialog>
+<script>/* Archimedes Engine 0.1.0 — deterministic, dependency-free simulation kernel. */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.Archimedes = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const VERSION = '0.1.0', W = 24, H = 16, DT = 0.1, EPS = 1e-9;
+  const ACTIONS = ['survey', 'anchor', 'exchange', 'recharge'];
+  const GOALS = ['balance', 'discovery', 'resilience'];
+  const DEFAULTS = Object.freeze({ coupling: 0.8, learning: 1.8, diffusion: 0.65, noise: 0.025, sensorEvery: 5 });
+  const OBJECTS = Object.freeze([
+    { id: 'source', x: 3.5, y: 8, r: 1.15, kind: 'station' },
+    { id: 'relay', x: 12, y: 8, r: 0.8, kind: 'station' },
+    { id: 'archive', x: 20.5, y: 8, r: 0.9, kind: 'station' },
+    { id: 'obstacle-a', x: 8, y: 5.7, r: 1.1, kind: 'solid' },
+    { id: 'obstacle-b', x: 16, y: 10.3, r: 1.1, kind: 'solid' }
+  ]);
+  const WEIGHTS = Object.freeze({
+    balance: [1.0, 0.45, 3.0, 0.3, 0.07],
+    discovery: [0.45, 0.2, 8.0, 0.2, 0.10],
+    resilience: [2.4, 0.65, 0.8, 0.6, 0.03]
+  });
+  const clamp = (x, lo = 0, hi = 1) => Math.max(lo, Math.min(hi, x));
+  const mean = a => a.reduce((s, x) => s + x, 0) / a.length;
+  const norm = a => Math.hypot(...a);
+  const clone = x => JSON.parse(JSON.stringify(x));
+  const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+  const assert = (ok, message) => { if (!ok) throw new Error(message); };
+  function hash(text) {
+    let h = 2166136261;
+    for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 16777619);
+    return (h >>> 0).toString(16).padStart(8, '0');
+  }
+  function random(w) {
+    let x = w.rng; x ^= x << 13; x ^= x >>> 17; x ^= x << 5;
+    w.rng = x >>> 0; return w.rng / 4294967296;
+  }
+  function parameters(overrides = {}) {
+    assert(overrides && typeof overrides === 'object' && !Array.isArray(overrides), 'Parameters must be an object.');
+    const p = { ...DEFAULTS };
+    const limits = { coupling: [0, 2], learning: [0.1, 5], diffusion: [0, 1], noise: [0, 0.15], sensorEvery: [1, 20] };
+    for (const [k, v] of Object.entries(overrides)) {
+      assert(Object.hasOwn(limits, k), `Unknown parameter: ${k}`);
+      assert(Number.isFinite(v) && v >= limits[k][0] && v <= limits[k][1], `Invalid ${k}.`);
+      if (k === 'sensorEvery') assert(Number.isInteger(v), 'sensorEvery must be an integer.');
+      p[k] = v;
+    }
+    return p;
+  }
+  function sample(w, x, y) {
+    const ix = clamp(Math.floor(x), 0, W - 1), iy = clamp(Math.floor(y), 0, H - 1);
+    return w.field[iy * W + ix];
+  }
+  function features(w, a) { return [a.x / W, a.y / H, a.energy, sample(w, a.x, a.y)]; }
+  function coverage(w) { return w.visited.filter(Boolean).length / (W * H); }
+  function observeCell(w, a) { w.visited[clamp(Math.floor(a.y), 0, H - 1) * W + clamp(Math.floor(a.x), 0, W - 1)] = 1; }
+  function log(w, type, text) {
+    w.events.push({ tick: w.tick, type, text });
+    if (w.events.length > 64) w.events.shift();
+  }
+  function createWorld(seed = 'ARCHIMEDES-001', overrides = {}) {
+    assert(typeof seed === 'string' && seed.length > 0 && seed.length <= 80, 'Seed must contain 1–80 characters.');
+    const w = { version: VERSION, seed, tick: 0, rng: parseInt(hash(seed), 16) || 1,
+      params: parameters(overrides), action: 'survey', goal: 'balance', sourceOn: true,
+      blackout: 0, field: [], agents: [], visited: Array(W * H).fill(0),
+      events: [], traces: [], evidence: [], counters: { fieldClips: 0, phiClips: 0, collisions: 0 },
+      player: { interventions: 0, note: '' } };
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      w.field.push(0.12 + 0.5 * Math.exp(-((x + 0.5 - 3.5) ** 2 + (y + 0.5 - 8) ** 2) / 25));
+    }
+    ['ADA', 'NOETHER'].forEach((name, i) => {
+      const a = { id: i, name, x: 4.8, y: 6 + 4 * i, vx: 0, vy: 0, energy: 0.78,
+        m: [], previous: [], sensed: 0, lastSeen: 0, phi: 0.8, C: 1, D: 0, R: 0, I: 0,
+        residual: 0, baseline: 0, trail: [] };
+      a.y += (random(w) - 0.5) * 0.5;
+      a.m = features(w, a); a.previous = a.m.slice(); a.sensed = a.m[3];
+      w.agents.push(a); observeCell(w, a);
+    });
+    log(w, 'origin', `Room initialized from seed ${seed}.`);
+    trace(w); return w;
+  }
+  function target(w, a) {
+    if (a.energy < 0.22 || w.action === 'recharge') return { x: 3.5, y: 7 + a.id * 2 };
+    if (w.action === 'anchor') return a.id ? { x: 20.5, y: 8 } : { x: 12, y: 8 };
+    if (w.action === 'exchange') return a.id ? { x: 3.5, y: 8 } : { x: 20.5, y: 8 };
+    // Survey path phase is tied to simulation time, so a restored snapshot replays it exactly.
+    const points = [[20, 3], [20, 13], [4, 13], [4, 3]];
+    const p = points[(Math.floor(w.tick / 180) + 2 * a.id) % points.length];
+    return { x: p[0], y: p[1] };
+  }
+  function updateField(w) {
+    const next = new Array(W * H), d = w.params.diffusion;
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+      const j = y * W + x, u = w.field[j];
+      // Repeated boundary cell implements zero normal flux.
+      const lap = w.field[y * W + Math.max(0, x - 1)] + w.field[y * W + Math.min(W - 1, x + 1)]
+        + w.field[Math.max(0, y - 1) * W + x] + w.field[Math.min(H - 1, y + 1) * W + x] - 4 * u;
+      const source = w.sourceOn ? 0.16 * Math.exp(-((x + 0.5 - 3.5) ** 2 + (y + 0.5 - 8) ** 2) / 8) : 0;
+      const value = u + DT * (d * lap + source - 0.055 * u);
+      next[j] = clamp(value);
+      if (value !== next[j]) w.counters.fieldClips++;
+    }
+    w.field = next;
+  }
+  function move(w, a) {
+    const t = target(w, a), dx = t.x - a.x, dy = t.y - a.y, distance = Math.hypot(dx, dy);
+    const speed = 1.7 * clamp(a.energy / 0.3, 0.12, 1) * Math.min(1, distance);
+    const desired = distance > EPS ? [speed * dx / distance, speed * dy / distance] : [0, 0];
+    // Local recursive correction: a lagged self-model acts as a memory-dependent restoring force.
+    const memory = [W * a.m[0] - a.x, H * a.m[1] - a.y];
+    let ax = 2.2 * (desired[0] - a.vx) + w.params.coupling * a.phi * memory[0];
+    let ay = 2.2 * (desired[1] - a.vy) + w.params.coupling * a.phi * memory[1];
+    for (const o of OBJECTS.filter(o => o.kind === 'solid')) {
+      const ox = a.x - o.x, oy = a.y - o.y, r = Math.hypot(ox, oy);
+      if (r < o.r + 1.2 && r > EPS) { const push = 5 * (o.r + 1.2 - r); ax += push * ox / r; ay += push * oy / r; }
+    }
+    const accel = Math.hypot(ax, ay);
+    if (accel > 5) { ax *= 5 / accel; ay *= 5 / accel; }
+    a.vx += DT * ax; a.vy += DT * ay;
+    const v = Math.hypot(a.vx, a.vy);
+    if (v > 2) { a.vx *= 2 / v; a.vy *= 2 / v; }
+    a.x += DT * a.vx; a.y += DT * a.vy;
+    if (a.x < 0.3 || a.x > W - 0.3) { a.x = clamp(a.x, 0.3, W - 0.3); a.vx = 0; w.counters.collisions++; }
+    if (a.y < 0.3 || a.y > H - 0.3) { a.y = clamp(a.y, 0.3, H - 0.3); a.vy = 0; w.counters.collisions++; }
+    for (const o of OBJECTS.filter(o => o.kind === 'solid')) {
+      const r = dist(a, o), safe = o.r + 0.3;
+      if (r < safe) { const ux = r > EPS ? (a.x - o.x) / r : 1, uy = r > EPS ? (a.y - o.y) / r : 0;
+        a.x = o.x + safe * ux; a.y = o.y + safe * uy; a.vx = 0; a.vy = 0; w.counters.collisions++; }
+    }
+    const charge = w.sourceOn && dist(a, OBJECTS[0]) < 2.2 ? 0.075 : 0;
+    a.energy = clamp(a.energy + DT * (charge - 0.003 - 0.005 * (a.vx ** 2 + a.vy ** 2)));
+    a.trail.push([a.x, a.y]); if (a.trail.length > 100) a.trail.shift();
+    observeCell(w, a);
+  }
+  function updateModel(w, a) {
+    const x = features(w, a), old = a.m.slice();
+    if (w.blackout === 0 && w.tick % w.params.sensorEvery === 0) {
+      a.sensed = clamp(x[3] + w.params.noise * (2 * random(w) - 1)); a.lastSeen = w.tick;
+      w.evidence.push({ tick: w.tick, agent: a.id, kind: 'simulated-sensor', value: a.sensed });
+      if (w.evidence.length > 40) w.evidence.shift();
+    }
+    const y = [x[0], x[1], x[2], a.sensed], gain = 1 - Math.exp(-w.params.learning * DT);
+    a.m = old.map((v, i) => v + gain * (y[i] - v));
+    const dm = a.m.map((v, i) => (v - old[i]) / DT), dx = x.map((v, i) => (v - a.previous[i]) / DT);
+    const gap = x.map((v, i) => v - a.m[i]), delta = dx.map((v, i) => v - dm[i]);
+    // R is an explicitly local, vector-valued alignment surrogate, not the ambiguous source Jacobian contraction.
+    const g = [old[0] - x[0], old[1] - x[1], 0, 0];
+    a.R = g.reduce((s, v, i) => s + v * dm[i], 0) / (norm(g) * norm(dm) + EPS);
+    a.residual = norm(gap) ** 2 + 0.02 * norm(delta) ** 2;
+    a.D = a.residual - 0.06 * a.R;
+    a.C = clamp(1 - norm(gap) / (norm(x) + norm(a.m) + EPS));
+    const rawPhi = a.phi + DT / 2 * (0.9 * a.phi - 0.9 * a.phi ** 3
+      - 1.5 * a.phi * norm(gap) ** 2 - 0.02 * a.phi * norm(delta) ** 2 + 0.1 * a.R);
+    a.phi = clamp(rawPhi, 0, 1.5); if (a.phi !== rawPhi) w.counters.phiClips++;
+    a.I += DT * a.C; a.baseline = 0.97 * a.baseline + 0.03 * Math.abs(x[3] - a.sensed);
+    a.previous = x;
+  }
+  function metrics(w) {
+    const C = mean(w.agents.map(a => a.C)), D = mean(w.agents.map(a => a.D));
+    const phi = mean(w.agents.map(a => a.phi)), energy = mean(w.agents.map(a => a.energy));
+    const baseline = mean(w.agents.map(a => a.baseline)), residual = mean(w.agents.map(a => a.residual));
+    let regime = 'tracking';
+    if (energy < 0.25) regime = 'depleted';
+    else if (w.blackout > 0) regime = 'occluded';
+    else if (C < 0.92 || residual > 0.035) regime = 'divergent';
+    else if (w.agents.every(a => Math.hypot(a.vx, a.vy) < 0.12)) regime = 'settled';
+    return { C, D, phi, energy, coverage: coverage(w), baseline, residual, regime,
+      alarm: D >= 0.09 || phi <= 0.45, time: w.tick * DT };
+  }
+  function trace(w) {
+    w.traces.push({ tick: w.tick, ...metrics(w) }); if (w.traces.length > 180) w.traces.shift();
+  }
+  function tick(w) {
+    w.tick++; updateField(w);
+    for (const a of w.agents) { move(w, a); updateModel(w, a); }
+    if (w.blackout > 0) w.blackout--;
+    if (w.tick % 5 === 0) trace(w);
+  }
+  function step(input, ticks = 1) {
+    assert(Number.isInteger(ticks) && ticks >= 0 && ticks <= 10000, 'Ticks must be an integer from 0 to 10000.');
+    const w = clone(input); for (let i = 0; i < ticks; i++) tick(w); return w;
+  }
+  function setAction(input, action) {
+    assert(ACTIONS.includes(action), 'Unknown intention.');
+    const w = clone(input); if (w.action !== action) log(w, 'intention', `Intention changed to ${action}.`);
+    w.action = action; return w;
+  }
+  function intervene(input, kind) {
+    assert(['pulse', 'blackout', 'source', 'reset-model'].includes(kind), 'Unknown intervention.');
+    const w = clone(input); w.player.interventions++;
+    if (kind === 'pulse') {
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const j = y * W + x, raw = w.field[j] + 0.75 * Math.exp(-((x + 0.5 - 12) ** 2 + (y + 0.5 - 8) ** 2) / 16);
+        w.field[j] = clamp(raw); if (raw !== w.field[j]) w.counters.fieldClips++;
+      }
+    } else if (kind === 'blackout') w.blackout = 80;
+    else if (kind === 'source') w.sourceOn = !w.sourceOn;
+    else for (const a of w.agents) a.m = [0.5, 0.5, 0.5, 0.5];
+    log(w, 'intervention', { pulse: 'Field pulse injected at the relay.', blackout: 'Field sensors occluded for 8 simulation seconds.',
+      source: `Source ${w.sourceOn ? 'enabled' : 'disabled'}.`, 'reset-model': 'Self-models reset to a neutral vector.' }[kind]);
+    return w;
+  }
+  function utility(w, origin, previousAction) {
+    const m = metrics(w), weight = WEIGHTS[w.goal];
+    return weight[0] * m.energy + weight[1] * m.C + weight[2] * (m.coverage - origin)
+      - weight[3] * Math.max(0, m.D) - weight[4] * Number(w.action === previousAction);
+  }
+  function plan(input, options = {}) {
+    const depth = options.depth ?? 3, width = options.width ?? 3, horizon = options.horizon ?? 20;
+    assert(Number.isInteger(depth) && depth >= 1 && depth <= 4, 'Depth must be 1–4.');
+    assert(Number.isInteger(width) && width >= 1 && width <= 4, 'Beam width must be 1–4.');
+    assert(Number.isInteger(horizon) && horizon >= 1 && horizon <= 50, 'Horizon must be 1–50 ticks.');
+    const origin = coverage(input); let count = 0;
+    let beam = [{ world: clone(input), sequence: [], score: 0, path: [] }];
+    const nodes = [], alternatives = [];
+    for (let level = 0; level < depth; level++) {
+      const candidates = [];
+      for (const parent of beam) for (const action of ACTIONS) {
+        const world = step(setAction(parent.world, action), horizon);
+        const sequence = [...parent.sequence, action], id = ++count;
+        const score = parent.score + 0.9 ** level * utility(world, origin, parent.world.action);
+        const candidate = { world, sequence, score, path: [...parent.path, id] };
+        const node = { id, parent: parent.path.at(-1) ?? 0, level: level + 1, action, score, metrics: metrics(world) };
+        nodes.push(node); candidates.push(candidate);
+        if (level === 0) alternatives.push({ ...node, positions: world.agents.map(a => [a.x, a.y]) });
+      }
+      candidates.sort((a, b) => b.score - a.score || a.path.at(-1) - b.path.at(-1));
+      beam = candidates.slice(0, width);
+    }
+    const best = beam[0];
+    return { depth, width, horizon, evaluated: count, simulatedTicks: count * horizon,
+      sequence: best.sequence, score: best.score, path: best.path, nodes, alternatives,
+      prediction: metrics(best.world), positions: best.world.agents.map(a => [a.x, a.y]),
+      originTick: input.tick, originChecksum: checksum(input), goal: input.goal };
+  }
+  function counterfactual(input) {
+    const branch = intervene(input, 'source');
+    return { factual: metrics(step(input, 80)), counterfactual: metrics(step(branch, 80)),
+      intervention: 'toggle-source', ticks: 80, provenance: 'paired deterministic simulation; not independent evidence' };
+  }
+  function checksum(w) { return hash(JSON.stringify(w)); }
+  function createSession(seed, p) {
+    const world = createWorld(seed, p);
+    return { world, cursor: 0, nextId: 1, history: [{ id: 0, parent: null, label: 'Origin', world: clone(world) }] };
+  }
+  function checkpoint(session, label = 'Checkpoint') {
+    assert(typeof label === 'string' && label.length <= 160, 'Checkpoint label too long.');
+    const s = clone(session), id = s.nextId++;
+    s.history.push({ id, parent: s.cursor, label, world: clone(s.world) }); s.cursor = id;
+    if (s.history.length > 96) {
+      s.history.shift(); const ids = new Set(s.history.map(n => n.id));
+      for (const node of s.history) if (!ids.has(node.parent)) node.parent = null;
+    }
+    return s;
+  }
+  function restore(session, id) {
+    const s = clone(session), node = s.history.find(n => n.id === id);
+    assert(node, 'Checkpoint not found.'); s.world = clone(node.world); s.cursor = id; return s;
+  }
+  function finiteTree(value, depth = 0) {
+    assert(depth < 24, 'Import exceeds nesting limit.');
+    if (typeof value === 'number') assert(Number.isFinite(value), 'Non-finite number.');
+    else if (Array.isArray(value)) { assert(value.length <= 1000, 'Oversized array.'); value.forEach(v => finiteTree(v, depth + 1)); }
+    else if (value && typeof value === 'object') for (const [k, v] of Object.entries(value)) {
+      assert(!['__proto__', 'prototype', 'constructor'].includes(k), 'Forbidden property.'); finiteTree(v, depth + 1);
+    } else assert(value === null || typeof value === 'boolean' || typeof value === 'string', 'Unsupported value.');
+    if (typeof value === 'string') assert(value.length <= 1000, 'Oversized string.');
+  }
+  function number(x, min, max, name) { assert(typeof x === 'number' && Number.isFinite(x) && x >= min && x <= max, `Invalid ${name}.`); }
+  function vector(a, length, min, max, name) { assert(Array.isArray(a) && a.length === length, `Invalid ${name}.`); a.forEach(x => number(x, min, max, name)); }
+  function validateWorld(w) {
+    assert(w && w.version === VERSION, 'Unsupported world version.');
+    assert(typeof w.seed === 'string' && w.seed.length > 0 && w.seed.length <= 80, 'Invalid seed.');
+    number(w.tick, 0, 1e9, 'tick'); assert(Number.isInteger(w.tick), 'Tick must be integral.');
+    number(w.rng, 1, 4294967295, 'random state'); assert(Number.isInteger(w.rng), 'Invalid random state.');
+    assert(JSON.stringify(Object.keys(w.params).sort()) === JSON.stringify(Object.keys(DEFAULTS).sort()), 'Missing parameters.'); parameters(w.params);
+    assert(ACTIONS.includes(w.action) && GOALS.includes(w.goal), 'Invalid action or goal.');
+    assert(typeof w.sourceOn === 'boolean', 'Invalid source state.'); number(w.blackout, 0, 80, 'blackout');
+    assert(Number.isInteger(w.blackout), 'Invalid blackout ticks.');
+    vector(w.field, W * H, 0, 1, 'field'); vector(w.visited, W * H, 0, 1, 'visited');
+    assert(w.visited.every(v => v === 0 || v === 1), 'Invalid visited grid.');
+    assert(Array.isArray(w.agents) && w.agents.length === 2, 'Exactly two agents are required.');
+    w.agents.forEach((a, i) => {
+      assert(a.id === i && a.name === ['ADA', 'NOETHER'][i], 'Invalid agent identity.');
+      number(a.x, 0.3, W - 0.3, 'position'); number(a.y, 0.3, H - 0.3, 'position');
+      number(a.vx, -2, 2, 'velocity'); number(a.vy, -2, 2, 'velocity');
+      for (const k of ['energy', 'C', 'sensed']) number(a[k], 0, 1, k);
+      number(a.phi, 0, 1.5, 'phi'); number(a.R, -1, 1, 'R'); number(a.I, 0, 1e9, 'I');
+      number(a.D, -1, 100, 'D'); number(a.residual, 0, 100, 'residual'); number(a.baseline, 0, 1, 'baseline');
+      number(a.lastSeen, 0, w.tick, 'lastSeen');
+      vector(a.m, 4, 0, 1, 'model'); vector(a.previous, 4, 0, 1, 'previous features');
+      assert(Array.isArray(a.trail) && a.trail.length <= 100, 'Invalid trail.');
+      a.trail.forEach(p => vector(p, 2, 0, W, 'trail'));
+      for (const o of OBJECTS.filter(o => o.kind === 'solid')) assert(dist(a, o) >= o.r + 0.3 - 1e-8, 'Agent inside obstacle.');
+    });
+    assert(w.player && typeof w.player.note === 'string' && w.player.note.length <= 240, 'Invalid player note.');
+    number(w.player.interventions, 0, 1e9, 'interventions');
+    for (const k of ['fieldClips', 'phiClips', 'collisions']) number(w.counters[k], 0, 1e12, k);
+    assert(Array.isArray(w.events) && w.events.length <= 64, 'Invalid events.');
+    w.events.forEach(e => { number(e.tick, 0, w.tick, 'event time'); assert(typeof e.type === 'string' && typeof e.text === 'string', 'Invalid event.'); });
+    assert(Array.isArray(w.evidence) && w.evidence.length <= 40, 'Invalid evidence.');
+    w.evidence.forEach(e => { assert(e.kind === 'simulated-sensor' && [0, 1].includes(e.agent), 'Invalid sensor evidence.'); number(e.value, 0, 1, 'sensor'); number(e.tick, 0, w.tick, 'sensor time'); });
+    assert(Array.isArray(w.traces) && w.traces.length <= 180, 'Invalid traces.');
+    w.traces.forEach(t => { number(t.tick, 0, w.tick, 'trace time'); for (const k of ['C', 'energy', 'coverage']) number(t[k], 0, 1, `trace ${k}`); number(t.phi, 0, 1.5, 'trace phi'); number(t.D, -1, 100, 'trace D'); });
+    return true;
+  }
+  function exportSession(session) { return JSON.stringify({ format: 'archimedes-session', version: VERSION, session }); }
+  function importSession(text) {
+    assert(typeof text === 'string' && text.length <= 8_000_000, 'Import is too large (8 MB limit).');
+    const data = JSON.parse(text); finiteTree(data);
+    assert(data.format === 'archimedes-session' && data.version === VERSION, 'Unsupported session format.');
+    const s = data.session; assert(s && Array.isArray(s.history) && s.history.length > 0 && s.history.length <= 96, 'Invalid history.');
+    validateWorld(s.world); const seen = new Set();
+    for (const node of s.history) {
+      assert(Number.isInteger(node.id) && node.id >= 0 && !seen.has(node.id), 'Invalid checkpoint ID.');
+      assert(node.parent === null || seen.has(node.parent), 'Invalid history parent.');
+      assert(typeof node.label === 'string' && node.label.length <= 160, 'Invalid checkpoint label.');
+      validateWorld(node.world); seen.add(node.id);
+    }
+    assert(seen.has(s.cursor) && Number.isInteger(s.nextId) && s.nextId > Math.max(...seen), 'Invalid history cursor.');
+    return clone(s);
+  }
+  const REGISTRY = Object.freeze([
+    { id: 'THOR', operation: 'Validate state bounds, obstacle exclusion and import structure', trigger: 'Import / explicit audit', status: 'Local implementation; canonical equivalence unverified' },
+    { id: 'CUBY', operation: 'Expand four intentions; retain a bounded beam recursively', trigger: 'Explore futures / autoplay', status: 'Local implementation; canonical equivalence unverified' },
+    { id: 'JANUS', operation: 'Compare source-on/source-off futures from one state', trigger: 'Counterfactual', status: 'Local implementation; canonical equivalence unverified' },
+    { id: 'DRAGON', operation: 'Label depletion, occlusion, divergence, settling or tracking', trigger: 'Every metric read', status: 'Heuristic classifier; no attractor proof' },
+    { id: 'BORGES', operation: 'Store snapshots with parent pointers and restore branches', trigger: 'Checkpoints / rewind', status: 'Bounded local possibility graph' },
+    { id: 'EFMW', operation: 'Update self-model, coherence, divergence and gated feedback', trigger: 'Every integration tick', status: 'Explicit adaptation of the source paper' }
+  ]);
+  return { VERSION, W, H, DT, EPS, ACTIONS, GOALS, DEFAULTS, OBJECTS, WEIGHTS, REGISTRY,
+    createWorld, createSession, step, setAction, intervene, metrics, plan, counterfactual,
+    checkpoint, restore, exportSession, importSession, validateWorld, parameters, checksum, clone, target };
+});
+</script><script>(function () {
+  'use strict';
+  const E = window.Archimedes, $ = id => document.getElementById(id);
+  const KEY = 'monolithic.archimedes.v0.1';
+  let session = E.createSession('ARCHIMEDES-001'), running = false, forecast = null, selected = null;
+  let journalView = 'events', last = 0, accumulator = 0, historyKey = '', toastTimer;
+  const colors = ['#6cbfc2', '#eeb77f'];
+  const node = (tag, text, className) => { const el = document.createElement(tag); if (text !== undefined) el.textContent = text; if (className) el.className = className; return el; };
+  function toast(message) { $('toast').textContent = message; $('toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('toast').classList.remove('visible'), 4000); }
+  function save() {
+    try { localStorage.setItem(KEY, E.exportSession(session)); $('storage-state').textContent = 'Saved on this device'; }
+    catch { $('storage-state').textContent = 'Use Export to save'; }
+  }
+  try { const saved = localStorage.getItem(KEY); if (saved) session = E.importSession(saved); }
+  catch { toast('Saved session could not be restored. A new world is ready.'); }
+  function setRunning(value) {
+    running = value; accumulator = 0; last = performance.now();
+    $('play').textContent = value ? 'Ⅱ Pause world' : '▶ Run world';
+    $('run-status').textContent = value ? 'Running' : 'Paused'; $('status-dot').classList.toggle('running', value);
+  }
+  function clearForecast() {
+    forecast = null; selected = null; $('future-empty').hidden = false; $('future-results').hidden = true;
+    $('branch-count').textContent = 'READY TO EXPLORE'; $('janus-result').hidden = true;
+  }
+  function checkpoint(label) { session = E.checkpoint(session, label); save(); }
+  function syncControls() {
+    const w = session.world; $('seed').value = w.seed; $('goal').value = w.goal; $('intention').value = w.action; $('note').value = w.player.note;
+    for (const k of ['coupling', 'learning', 'noise']) { $(k).value = w.params[k]; $(`${k}-value`).textContent = w.params[k].toFixed(k === 'noise' ? 3 : 2); }
+  }
+  function drawWorld() {
+    const canvas = $('world'), rect = canvas.getBoundingClientRect(); if (!rect.width) return;
+    const ratio = Math.min(window.devicePixelRatio || 1, 2), width = Math.round(rect.width * ratio), height = Math.round(rect.height * ratio);
+    if (canvas.width !== width || canvas.height !== height) { canvas.width = width; canvas.height = height; }
+    const c = canvas.getContext('2d'); c.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const cw = rect.width, ch = rect.height, pad = cw * 0.07, sx = (cw - 2 * pad) / E.W, sy = (ch - 2 * pad) / E.H;
+    const px = x => pad + x * sx, py = y => pad + y * sy, w = session.world;
+    c.fillStyle = '#101d25'; c.fillRect(0, 0, cw, ch);
+    if ($('field-visible').checked) for (let y = 0; y < E.H; y++) for (let x = 0; x < E.W; x++) {
+      const f = w.field[y * E.W + x]; c.fillStyle = `rgba(81,169,151,${0.015 + f * 0.27})`; c.fillRect(px(x), py(y), sx + 0.5, sy + 0.5);
+      if (f > 0.16) { c.beginPath(); c.fillStyle = `rgba(124,198,166,${f * 0.35})`; c.arc(px(x + 0.5), py(y + 0.5), 0.6 + f * 1.2, 0, Math.PI * 2); c.fill(); }
+    }
+    c.strokeStyle = '#29404966'; c.lineWidth = 0.5;
+    for (let x = 0; x <= E.W; x++) { c.beginPath(); c.moveTo(px(x), py(0)); c.lineTo(px(x), py(E.H)); c.stroke(); }
+    for (let y = 0; y <= E.H; y++) { c.beginPath(); c.moveTo(px(0), py(y)); c.lineTo(px(E.W), py(y)); c.stroke(); }
+    c.strokeStyle = '#66837d'; c.lineWidth = 1; c.strokeRect(px(0), py(0), E.W * sx, E.H * sy);
+    c.strokeStyle = '#bedcbe'; c.lineWidth = 2;
+    for (const [x, y, dx, dy] of [[0, 0, 1, 1], [24, 0, -1, 1], [0, 16, 1, -1], [24, 16, -1, -1]]) {
+      c.beginPath(); c.moveTo(px(x), py(y + 0.6 * dy)); c.lineTo(px(x), py(y)); c.lineTo(px(x + 0.6 * dx), py(y)); c.stroke();
+    }
+    c.font = `${Math.max(6, cw / 100)}px ui-monospace,monospace`; c.fillStyle = '#678089'; c.textAlign = 'center';
+    for (let x = 0; x <= 24; x += 4) c.fillText(String(x).padStart(2, '0'), px(x), py(0) - 10);
+    for (let y = 0; y <= 16; y += 4) c.fillText(String(y).padStart(2, '0'), px(0) - 14, py(y) + 2);
+    for (const o of E.OBJECTS) {
+      const x = px(o.x), y = py(o.y), r = o.r * sx;
+      c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2);
+      if (o.kind === 'solid') { c.fillStyle = '#263741'; c.fill(); c.strokeStyle = '#4b5e68'; c.stroke();
+        c.beginPath(); c.moveTo(x - r * 0.5, y - r * 0.5); c.lineTo(x + r * 0.5, y + r * 0.5); c.moveTo(x + r * 0.5, y - r * 0.5); c.lineTo(x - r * 0.5, y + r * 0.5); c.stroke(); continue; }
+      c.strokeStyle = o.id === 'source' && !w.sourceOn ? '#8b6961' : '#a4c7aa'; c.fillStyle = '#172e30'; c.fill(); c.stroke();
+      c.beginPath(); c.arc(x, y, r * 0.55, 0, Math.PI * 2); c.stroke();
+      c.beginPath(); c.moveTo(x - r - 3, y); c.lineTo(x + r + 3, y); c.moveTo(x, y - r - 3); c.lineTo(x, y + r + 3); c.stroke();
+      c.fillStyle = '#a8bab9'; c.font = `${Math.max(6, cw / 85)}px ui-monospace,monospace`; c.fillText(o.id.toUpperCase(), x, y + r + 15);
+    }
+    w.agents.forEach((a, i) => {
+      const color = colors[i]; c.strokeStyle = color + '65'; c.lineWidth = 1.5; c.beginPath();
+      a.trail.forEach((p, j) => j ? c.lineTo(px(p[0]), py(p[1])) : c.moveTo(px(p[0]), py(p[1]))); c.stroke();
+      const t = E.target(w, a); c.strokeStyle = color + '55'; c.setLineDash([2, 5]); c.beginPath(); c.moveTo(px(a.x), py(a.y)); c.lineTo(px(t.x), py(t.y)); c.stroke(); c.setLineDash([]);
+      if ($('belief-visible').checked) {
+        const mx = px(a.m[0] * E.W), my = py(a.m[1] * E.H); c.strokeStyle = color + 'a0'; c.setLineDash([3, 3]);
+        c.beginPath(); c.arc(mx, my, 11, 0, Math.PI * 2); c.stroke(); c.setLineDash([]);
+      }
+      if (forecast) {
+        const alternative = forecast.alternatives.find(n => n.action === selected), pos = alternative?.positions[i];
+        if (pos) { c.strokeStyle = color + '90'; c.lineWidth = 1; c.setLineDash([3, 4]); c.beginPath(); c.moveTo(px(a.x), py(a.y)); c.lineTo(px(pos[0]), py(pos[1])); c.stroke(); c.strokeRect(px(pos[0]) - 5, py(pos[1]) - 5, 10, 10); c.setLineDash([]); }
+      }
+      const x = px(a.x), y = py(a.y); c.fillStyle = color + '18'; c.beginPath(); c.arc(x, y, 15, 0, Math.PI * 2); c.fill();
+      c.fillStyle = color; c.beginPath(); c.arc(x, y, 4, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = color; c.lineWidth = 1.5; c.beginPath(); c.arc(x, y, 8, -Math.PI / 2, -Math.PI / 2 + a.energy * 2 * Math.PI); c.stroke();
+      c.fillStyle = color; c.textAlign = 'left'; c.font = `${Math.max(7, cw / 78)}px ui-monospace,monospace`; c.fillText(a.name, x + 13, y - 9);
+      c.textAlign = 'center';
+    });
+    if (w.blackout) { c.fillStyle = '#eeb77f'; c.font = `${Math.max(7, cw / 80)}px ui-monospace,monospace`; c.fillText(`SENSOR BLACKOUT / ${(w.blackout * E.DT).toFixed(1)}s`, cw / 2, py(0) + 20); }
+  }
+  function drawChart() {
+    const traces = session.world.traces, path = (key, scale) => traces.map((t, i) => `${i ? 'L' : 'M'}${(i / Math.max(1, traces.length - 1) * 240).toFixed(1)},${(60 - Math.min(1, t[key] / scale) * 50).toFixed(1)}`).join(' ');
+    $('chart').innerHTML = `<svg viewBox="0 0 240 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 10H240 M0 35H240 M0 60H240" stroke="#31414a" stroke-width=".5"/><path d="${path('C', 1)}" fill="none" stroke="#c7e7c4" stroke-width="1.4"/><path d="${path('phi', 1.5)}" fill="none" stroke="#eeb77f" stroke-width="1.2"/></svg>`;
+  }
+  function renderAgents() {
+    $('agents').replaceChildren();
+    for (const a of session.world.agents) {
+      const card = node('div', undefined, 'agent'), head = node('div', undefined, 'agent-head');
+      head.append(node('span', '', 'agent-dot'), node('span', a.name, 'agent-name'), node('span', `${Math.round(a.energy * 100)}% energy`, 'muted')); card.append(head);
+      for (const [label, value] of [['Position', `${a.x.toFixed(1)}, ${a.y.toFixed(1)}`], ['Self-model C', a.C.toFixed(4)], ['Last field reading', `${((session.world.tick - a.lastSeen) * E.DT).toFixed(1)}s ago`]]) {
+        const row = node('div', undefined, 'agent-row'); row.append(node('span', label), node('b', value)); card.append(row);
+      }
+      const bar = node('div', undefined, 'energy-bar'), fill = node('span'); fill.style.width = `${a.energy * 100}%`; bar.append(fill); card.append(bar); $('agents').append(card);
+    }
+  }
+  function renderJournal() {
+    $('journal').replaceChildren();
+    const items = journalView === 'events' ? session.world.events.slice(-12).reverse() : session.world.evidence.slice(-12).reverse();
+    if (!items.length) $('journal').append(node('p', 'Field samples arrive every 0.5 simulation seconds.', 'micro'));
+    for (const e of items) {
+      const item = node('div', undefined, 'log-entry');
+      const text = journalView === 'events' ? e.text : `${['ADA', 'NOETHER'][e.agent]} · field ${e.value.toFixed(4)} · simulated`;
+      item.append(node('time', `${(e.tick * E.DT).toFixed(1)}s`), node('span', text)); $('journal').append(item);
+    }
+  }
+  function renderHistory() {
+    const key = `${session.nextId}:${session.cursor}`; if (key === historyKey) return; historyKey = key;
+    $('history').replaceChildren(); $('history-count').textContent = `${session.history.length} CHECKPOINT${session.history.length === 1 ? '' : 'S'}`;
+    for (const h of session.history) {
+      const b = node('button', `#${String(h.id).padStart(2, '0')}`, `history-node${h.id === session.cursor ? ' current' : ''}`);
+      b.append(node('strong', `${(h.world.tick * E.DT).toFixed(1)}s`), node('small', h.label)); b.title = `${h.label}; parent ${h.parent ?? 'root'}`;
+      b.setAttribute('aria-label', `Restore checkpoint ${h.id}, ${h.label}, time ${(h.world.tick * E.DT).toFixed(1)} seconds`);
+      b.onclick = () => { setRunning(false); session = E.restore(session, h.id); clearForecast(); syncControls(); save(); render(); toast(`Restored checkpoint #${h.id}. The next change will branch here.`); };
+      $('history').append(b);
+    }
+    const active = $('history').querySelector('.current'); if (active) $('history').scrollLeft = Math.max(0, active.offsetLeft - $('history').offsetLeft - $('history').clientWidth + 130);
+  }
+  function render() {
+    const w = session.world, m = E.metrics(w);
+    $('clock').textContent = `t = ${m.time.toFixed(1)} s`; $('regime').textContent = m.regime.toUpperCase();
+    $('metric-c').textContent = m.C.toFixed(3); $('metric-phi').textContent = m.phi.toFixed(3); $('metric-d').textContent = m.D.toFixed(3); $('metric-coverage').textContent = `${(100 * m.coverage).toFixed(1)}%`;
+    $('alarm').classList.toggle('warning', m.alarm); $('alarm').textContent = m.alarm ? 'Demo monitor threshold crossed' : 'Monitor within demo thresholds';
+    $('source-label').textContent = w.sourceOn ? 'Switch source off' : 'Switch source on';
+    drawWorld(); drawChart(); renderAgents(); renderJournal(); renderHistory();
+  }
+  function drawTree() {
+    const f = forecast, positions = new Map([[0, [300, 8]]]), width = 600, height = 130;
+    for (let level = 1; level <= f.depth; level++) {
+      const nodes = f.nodes.filter(n => n.level === level);
+      nodes.forEach((n, i) => positions.set(n.id, [(i + 0.5) / nodes.length * width, 8 + level * 110 / f.depth]));
+    }
+    let svg = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${f.evaluated} evaluated future branches. Highlighted path ${f.sequence.join(', ')}.">`;
+    for (const n of f.nodes) {
+      const p = positions.get(n.parent), q = positions.get(n.id), best = f.path.includes(n.id);
+      svg += `<path d="M${p[0]} ${p[1]}C${p[0]} ${(p[1] + q[1]) / 2},${q[0]} ${(p[1] + q[1]) / 2},${q[0]} ${q[1]}" stroke="${best ? '#c7e7c4' : '#3a515b'}" stroke-width="${best ? 1.8 : 0.8}" fill="none"/><circle cx="${q[0]}" cy="${q[1]}" r="${best ? 4 : 2.4}" fill="${best ? '#c7e7c4' : '#66818a'}"><title>${n.action}: ${n.score.toFixed(3)}</title></circle>`;
+    }
+    svg += '<circle cx="300" cy="8" r="4" fill="#eeb77f"/></svg>'; $('tree').innerHTML = svg;
+  }
+  function renderForecast() {
+    $('future-empty').hidden = true; $('future-results').hidden = false;
+    $('branch-count').textContent = `${forecast.evaluated} BRANCHES / ${forecast.depth} LEVELS`;
+    drawTree(); $('alternatives').replaceChildren();
+    for (const n of forecast.alternatives) {
+      const b = node('button', n.action.toUpperCase(), `alternative${selected === n.action ? ' selected' : ''}`);
+      b.append(node('strong', n.score.toFixed(3)), node('small', `${(n.metrics.coverage * 100).toFixed(1)}% visited · 2s`));
+      b.setAttribute('aria-label', `Select ${n.action}, first-level score ${n.score.toFixed(3)}`);
+      b.onclick = () => { selected = n.action; renderForecast(); drawWorld(); }; $('alternatives').append(b);
+    }
+    $('sequence').textContent = selected === forecast.sequence[0] ? `Best path: ${forecast.sequence.join(' → ')} · J = ${forecast.score.toFixed(3)}` : `Selected: ${selected}. Cards show first-level scores; tree shows the best full path.`;
+  }
+  function explore() {
+    setRunning(false); $('explore').disabled = true; $('explore').textContent = 'Exploring…';
+    setTimeout(() => {
+      try { forecast = E.plan(session.world, { depth: Number($('depth').value) }); selected = forecast.sequence[0]; renderForecast(); drawWorld(); }
+      catch (e) { toast(e.message); }
+      finally { $('explore').disabled = false; $('explore').textContent = 'Explore possible futures ↗'; }
+    }, 20);
+  }
+  $('play').onclick = () => { if (!running) clearForecast(); setRunning(!running); if (!running) save(); };
+  $('step').onclick = () => { setRunning(false); clearForecast(); session.world = E.step(session.world); checkpoint('Single step'); render(); };
+  $('explore').onclick = explore; $('explore-inline').onclick = explore;
+  $('apply').onclick = () => {
+    if (!forecast || forecast.originChecksum !== E.checksum(session.world)) { clearForecast(); toast('The world changed. Explore again before applying.'); return; }
+    session.world = E.setAction(session.world, selected); checkpoint(`Chose ${selected}`); clearForecast(); syncControls(); render(); toast('Intention applied. Run the world to observe its consequences.');
+  };
+  $('reset').onclick = () => {
+    try { const next = E.createSession($('seed').value.trim(), session.world.params); setRunning(false); session = next; historyKey = ''; clearForecast(); syncControls(); save(); render(); toast('New seeded world ready.'); }
+    catch (e) { toast(e.message); }
+  };
+  $('goal').onchange = () => { session.world.goal = $('goal').value; clearForecast(); checkpoint(`Objective: ${session.world.goal}`); render(); };
+  $('intention').onchange = () => { session.world = E.setAction(session.world, $('intention').value); clearForecast(); checkpoint(`Intention: ${session.world.action}`); render(); };
+  $('depth').oninput = () => { $('depth-value').textContent = $('depth').value; clearForecast(); };
+  for (const k of ['coupling', 'learning', 'noise']) {
+    $(k).oninput = () => { $(`${k}-value`).textContent = Number($(k).value).toFixed(k === 'noise' ? 3 : 2); };
+    $(k).onchange = () => { session.world.params = E.parameters({ ...session.world.params, [k]: Number($(k).value) }); clearForecast(); checkpoint(`Parameter: ${k}`); render(); };
+  }
+  document.querySelectorAll('[data-intervene]').forEach(b => b.onclick = () => { session.world = E.intervene(session.world, b.dataset.intervene); clearForecast(); checkpoint(`Intervention: ${b.dataset.intervene}`); render(); });
+  $('checkpoint').onclick = () => { checkpoint('Manual checkpoint'); render(); toast('Checkpoint saved.'); };
+  $('janus').onclick = () => {
+    setRunning(false); const result = E.counterfactual(session.world); $('janus-result').hidden = false;
+    $('janus-result').textContent = `JANUS · After 8s: current source state → ${(result.factual.energy * 100).toFixed(1)}% mean energy; opposite source state → ${(result.counterfactual.energy * 100).toFixed(1)}%. Coherence ${result.factual.C.toFixed(3)} vs ${result.counterfactual.C.toFixed(3)}. Same initial state and random stream. Both are simulated; the live world is unchanged.`;
+  };
+  $('note').onchange = () => { session.world.player.note = $('note').value; clearForecast(); checkpoint('Player note'); render(); };
+  $('field-visible').onchange = drawWorld; $('belief-visible').onchange = drawWorld;
+  document.querySelectorAll('[data-journal]').forEach(b => b.onclick = () => { journalView = b.dataset.journal; document.querySelectorAll('[data-journal]').forEach(x => x.classList.toggle('selected', x === b)); renderJournal(); });
+  document.querySelectorAll('[data-view]').forEach(b => b.onclick = () => { document.querySelectorAll('.view').forEach(v => v.hidden = v.id !== b.dataset.view); document.querySelectorAll('[data-view]').forEach(x => x.classList.toggle('active', x === b)); if (b.dataset.view !== 'laboratory') setRunning(false); render(); });
+  $('export').onclick = () => {
+    const blob = new Blob([E.exportSession(session)], { type: 'application/json' }), url = URL.createObjectURL(blob), a = node('a');
+    a.href = url; a.download = `archimedes-session-${session.world.tick}.json`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000); toast('Session exported with parameters, history, and random state.');
+  };
+  $('import').onclick = () => $('import-file').click();
+  $('import-file').onchange = async () => {
+    const file = $('import-file').files[0]; if (!file) return; setRunning(false);
+    try { if (file.size > 8_000_000) throw new Error('Import is too large (8 MB limit).'); const next = E.importSession(await file.text()); session = next; historyKey = ''; clearForecast(); syncControls(); save(); render(); toast('Session restored.'); }
+    catch (e) { toast(`Import rejected: ${e.message}`); } finally { $('import-file').value = ''; }
+  };
+  $('about').onclick = () => { setRunning(false); $('help').showModal(); }; $('close-help').onclick = () => $('help').close();
+  $('help').addEventListener('click', e => { if (e.target === $('help')) { const r = $('help').getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) $('help').close(); } });
+  for (const op of E.REGISTRY) { const row = node('article', undefined, 'operator-row'); row.append(node('h2', op.id), node('p', op.operation), node('small', `${op.trigger}. ${op.status}.`)); $('operator-list').append(row); }
+  function frame(now) {
+    if (running && !document.hidden) {
+      accumulator += Math.min(0.25, (now - last) / 1000) * Number($('speed').value); let changed = false;
+      while (accumulator >= E.DT) {
+        if ($('autopilot').checked && session.world.tick % 20 === 0) {
+          const p = E.plan(session.world, { depth: Number($('depth').value) }); session.world = E.setAction(session.world, p.sequence[0]); $('intention').value = session.world.action;
+        }
+        session.world = E.step(session.world); accumulator -= E.DT; changed = true;
+        if (session.world.tick % 20 === 0) checkpoint('World advanced');
+      }
+      if (changed) render();
+    }
+    last = now; requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize', drawWorld);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { setRunning(false); save(); } });
+  window.addEventListener('pagehide', save);
+  syncControls(); render(); requestAnimationFrame(frame);
+})();
+</script></body></html>

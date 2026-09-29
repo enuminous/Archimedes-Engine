@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Please cite this implementation and distinguish its synthetic results from external validation."
+title: "The Archimedes Engine: A Recursive WorldEngine Laboratory"
+version: 0.1.0
+date-released: 2026-09-27
+type: software
+authors:
+  - family-names: Wright
+    given-names: Matthew Chenoweth
+    affiliation: Monolithic LLC
+abstract: "A deterministic one-room simulation with two partially observed agents, an EFMW-inspired coherence kernel, bounded recursive search, and checkpoint branching. Developed with OpenAI Codex assistance. Physical and AGI interpretations remain unvalidated."
