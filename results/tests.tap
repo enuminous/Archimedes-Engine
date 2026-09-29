@@ -1,0 +1,202 @@
+TAP version 13
+# Subtest: neutral initialization has matching model, C=1, D=0, R=0
+ok 1 - neutral initialization has matching model, C=1, D=0, R=0
+  ---
+  duration_ms: 3.803938
+  type: 'test'
+  ...
+# Subtest: fixed seed and action/intervention schedule replay exactly
+ok 2 - fixed seed and action/intervention schedule replay exactly
+  ---
+  duration_ms: 23.851185
+  type: 'test'
+  ...
+# Subtest: different seeds produce distinct initial states
+ok 3 - different seeds produce distinct initial states
+  ---
+  duration_ms: 1.543392
+  type: 'test'
+  ...
+# Subtest: integrator is pure and zero steps preserve the complete state
+ok 4 - integrator is pure and zero steps preserve the complete state
+  ---
+  duration_ms: 2.610516
+  type: 'test'
+  ...
+# Subtest: uniform field obeys exact discrete decay under zero source and zero flux
+ok 5 - uniform field obeys exact discrete decay under zero source and zero flux
+  ---
+  duration_ms: 1.282699
+  type: 'test'
+  ...
+# Subtest: diffusion conserves mass apart from declared decay without source
+ok 6 - diffusion conserves mass apart from declared decay without source
+  ---
+  duration_ms: 0.632315
+  type: 'test'
+  ...
+# Subtest: exponential observer update matches its closed-form held-observation solution
+ok 7 - exponential observer update matches its closed-form held-observation solution
+  ---
+  duration_ms: 0.299343
+  type: 'test'
+  ...
+# Subtest: blackout suppresses field updates for exactly its 80 ticks
+ok 8 - blackout suppresses field updates for exactly its 80 ticks
+  ---
+  duration_ms: 6.810051
+  type: 'test'
+  ...
+# Subtest: bounded parameters satisfy explicit field positivity condition
+ok 9 - bounded parameters satisfy explicit field positivity condition
+  ---
+  duration_ms: 0.725807
+  type: 'test'
+  ...
+# Subtest: state and obstacle bounds hold across seeds, extreme parameters and interventions
+ok 10 - state and obstacle bounds hold across seeds, extreme parameters and interventions
+  ---
+  duration_ms: 165.696002
+  type: 'test'
+  ...
+# Subtest: recursive coupling is causally active under matched seeds
+ok 11 - recursive coupling is causally active under matched seeds
+  ---
+  duration_ms: 7.485883
+  type: 'test'
+  ...
+# Subtest: pulse changes the field but preserves the source input snapshot
+ok 12 - pulse changes the field but preserves the source input snapshot
+  ---
+  duration_ms: 0.868112
+  type: 'test'
+  ...
+# Subtest: planner isolates futures and respects bounded expansion accounting
+ok 13 - planner isolates futures and respects bounded expansion accounting
+  ---
+  duration_ms: 29.477657
+  type: 'test'
+  ...
+# Subtest: one-level selection equals highest first-level utility
+ok 14 - one-level selection equals highest first-level utility
+  ---
+  duration_ms: 3.77851
+  type: 'test'
+  ...
+# Subtest: planner is deterministic and rejects unbounded recursion settings
+ok 15 - planner is deterministic and rejects unbounded recursion settings
+  ---
+  duration_ms: 55.208678
+  type: 'test'
+  ...
+# Subtest: counterfactual leaves live state intact and source toggle has consequences
+ok 16 - counterfactual leaves live state intact and source toggle has consequences
+  ---
+  duration_ms: 2.774934
+  type: 'test'
+  ...
+# Subtest: checkpoint restore reproduces continuation including random state
+ok 17 - checkpoint restore reproduces continuation including random state
+  ---
+  duration_ms: 6.260871
+  type: 'test'
+  ...
+# Subtest: history cap retains a valid directed acyclic graph
+ok 18 - history cap retains a valid directed acyclic graph
+  ---
+  duration_ms: 459.410149
+  type: 'test'
+  ...
+# Subtest: JSON export/import round trip reproduces the next trajectory
+ok 19 - JSON export/import round trip reproduces the next trajectory
+  ---
+  duration_ms: 6.039767
+  type: 'test'
+  ...
+# Subtest: imports reject malformed data atomically
+ok 20 - imports reject malformed data atomically
+  ---
+  duration_ms: 2.288479
+  type: 'test'
+  ...
+# Subtest: simulator evidence cannot be relabeled as external evidence by import
+ok 21 - simulator evidence cannot be relabeled as external evidence by import
+  ---
+  duration_ms: 1.569011
+  type: 'test'
+  ...
+# Subtest: identity integral is an accumulating statistic, not a convergent state component
+ok 22 - identity integral is an accumulating statistic, not a convergent state component
+  ---
+  duration_ms: 1.910938
+  type: 'test'
+  ...
+# Subtest: UI initializes all controls, agent cards and finite canvas drawing commands
+ok 23 - UI initializes all controls, agent cards and finite canvas drawing commands
+  ---
+  duration_ms: 13.831713
+  type: 'test'
+  ...
+# Subtest: run, pause and step controls advance the fixed-step world
+ok 24 - run, pause and step controls advance the fixed-step world
+  ---
+  duration_ms: 16.246712
+  type: 'test'
+  ...
+# Subtest: future exploration is isolated and applying records a chosen intention
+ok 25 - future exploration is isolated and applying records a chosen intention
+  ---
+  duration_ms: 383.067289
+  type: 'test'
+  ...
+# Subtest: restoring through the timeline permits a distinct child branch
+ok 26 - restoring through the timeline permits a distinct child branch
+  ---
+  duration_ms: 15.413173
+  type: 'test'
+  ...
+# Subtest: parameters, goal and literal note persist through controls
+ok 27 - parameters, goal and literal note persist through controls
+  ---
+  duration_ms: 9.579577
+  type: 'test'
+  ...
+# Subtest: counterfactual button displays a paired result without advancing the live state
+ok 28 - counterfactual button displays a paired result without advancing the live state
+  ---
+  duration_ms: 114.247032
+  type: 'test'
+  ...
+# Subtest: JSON download contains a valid versioned session
+ok 29 - JSON download contains a valid versioned session
+  ---
+  duration_ms: 7.983506
+  type: 'test'
+  ...
+# Subtest: file import rejects malformed content and preserves the prior state
+ok 30 - file import rejects malformed content and preserves the prior state
+  ---
+  duration_ms: 9.704636
+  type: 'test'
+  ...
+# Subtest: valid imported sessions restore through the actual input handler
+ok 31 - valid imported sessions restore through the actual input handler
+  ---
+  duration_ms: 15.264148
+  type: 'test'
+  ...
+# Subtest: view navigation pauses the simulation and shows the selected content
+ok 32 - view navigation pauses the simulation and shows the selected content
+  ---
+  duration_ms: 7.36508
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 907.861417
