@@ -85,6 +85,6 @@ No new license grant is made by this repository. Licensing of the project and pr
 
 ## Archimedes Observatory
 
-Open `observatory.html` for the EFMW experiment workbench. Observatory adds deterministic counterfactual twins, delayed intervention feedback, seeded ensembles, local parameter sensitivity, final-state checksums, and an epistemic/provenance ledger. See [docs/OBSERVATORY.md](docs/OBSERVATORY.md).
+Open the **[Archimedes Observatory](https://enuminous.github.io/Archimedes-Engine/observatory.html)** for the live EFMW experiment workbench. Observatory adds deterministic counterfactual twins, delayed intervention feedback, seeded ensembles, local parameter sensitivity, final-state checksums, and an epistemic/provenance ledger. See [docs/OBSERVATORY.md](docs/OBSERVATORY.md).
 
 The Observatory treats EFMW quantities as experimental model constructs and keeps simulation output distinct from empirical evidence.
