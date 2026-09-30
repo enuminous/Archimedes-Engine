@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Archimedes Observatory — EFMW Experiment Workbench</title>
+<style>
+:root{color-scheme:dark;--bg:#091116;--panel:#101c23;--line:#29414b;--ink:#d7e6e2;--muted:#86a09e;--hot:#eeb77f;--cool:#7bc4c5;--good:#a9d7ad}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px system-ui,sans-serif}header{padding:22px 5vw;border-bottom:1px solid var(--line);display:flex;gap:18px;align-items:end;justify-content:space-between}h1{margin:0;font-size:clamp(24px,4vw,46px);letter-spacing:.03em}.kicker,.mono{font:12px ui-monospace,monospace;color:var(--muted);letter-spacing:.12em}.wrap{padding:24px 5vw 50px;display:grid;gap:18px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}.span4{grid-column:span 4}.span8{grid-column:span 8}.span12{grid-column:span 12}h2{margin:0 0 14px;font-size:15px;text-transform:uppercase;letter-spacing:.1em}label{display:grid;gap:5px;color:var(--muted);margin:9px 0}input,select,button,textarea{background:#0a151b;color:var(--ink);border:1px solid #36515b;border-radius:7px;padding:9px}button{cursor:pointer}button.primary{border-color:#75a89f;background:#17312f}.row{display:flex;gap:9px;flex-wrap:wrap}.metric{display:grid;grid-template-columns:1fr auto;gap:7px;border-bottom:1px solid #21343d;padding:7px 0}.bar{height:8px;background:#0a1419;border:1px solid #263c45;border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:currentColor}.sens{display:grid;grid-template-columns:120px 1fr 70px;gap:10px;align-items:center;margin:9px 0}.ledger{max-height:280px;overflow:auto}.entry{padding:9px 0;border-bottom:1px solid #21343d}.tag{display:inline-block;border:1px solid #3a5963;border-radius:99px;padding:2px 7px;font:10px ui-monospace,monospace;margin-right:6px}.hyp{color:var(--hot)}.est{color:var(--good)}canvas{width:100%;height:260px;background:#0a1419;border-radius:8px}pre{white-space:pre-wrap;color:#b8cfca;font-size:11px}.notice{border-left:3px solid var(--hot);padding:10px 13px;background:#171a19;color:#c9d5d1}@media(max-width:850px){.span4,.span8{grid-column:span 12}}
+</style></head><body>
+<header><div><div class="kicker">MONOLITHIC / ARCHIMEDES ENGINE</div><h1>Archimedes Observatory</h1><div>EFMW experiment workbench · counterfactual twins · sensitivity · provenance</div></div><a href="index.html" style="color:var(--cool)">Field Lab / Engine</a></header>
+<main class="wrap">
+<div class="notice"><b>Epistemic boundary:</b> EFMW quantities in this instrument are experimental model constructs. Simulation output is not empirical confirmation. Reference dynamics and EFMW extensions are labeled separately in the evidence ledger.</div>
+<div class="grid">
+<section class="panel span4"><h2>01 / Experiment</h2>
+<label>Seed<input id="seed" value="OBS-001"></label><label>Horizon (ticks)<input id="horizon" type="number" min="50" max="3000" value="600"></label>
+<label>Shock<select id="shock"><option value="pulse">Field pulse</option><option value="blackout">Sensor blackout</option><option value="source">Toggle source</option><option value="reset-model">Reset self-model</option></select></label>
+<label>Intervention B<select id="policy"><option value="none">No response</option><option value="recharge">Recharge intention</option><option value="anchor">Anchor intention</option><option value="source">Toggle source</option></select></label>
+<label>Policy delay<input id="delay" type="number" min="0" max="2000" value="80"></label>
+<div class="row"><button class="primary" id="run">Run twin experiment</button><button id="ensemble">Run 32-seed ensemble</button></div></section>
+<section class="panel span8"><h2>02 / Counterfactual twins</h2><canvas id="chart" width="900" height="260"></canvas><div id="summary"></div></section>
+<section class="panel span8"><h2>03 / Sensitivity map</h2><div id="sensitivity">Run an experiment to perturb EFMW parameters around the same initial condition.</div></section>
+<section class="panel span4"><h2>04 / Model layers</h2><div id="registry"></div></section>
+<section class="panel span8"><h2>05 / Evidence & provenance ledger</h2><div id="ledger" class="ledger"></div></section>
+<section class="panel span4"><h2>06 / Reproducibility</h2><pre id="record"></pre><button id="download">Download experiment JSON</button></section>
+</div></main>
+<script src="engine.js"></script><script src="observatory.js"></script></body></html>
