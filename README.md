@@ -81,3 +81,10 @@ That address is a proposed destination, **not an already published site**. Branc
 This release demonstrates a functioning computational model. Its scalar field is a generic source–diffusion–decay model, **not a numerical solution of the canonical EFMW root wave equation**. Its physical constants are simulation choices. High C measures agreement between a state and its internal estimate; it does not establish truth, identity, consciousness, or AGI. Monitors use illustrative, uncalibrated thresholds. ME-102 and external control-warning claims remain unresolved.
 
 No new license grant is made by this repository. Licensing of the project and prior EFMW material remains for the rights holder to choose. See [RIGHTS.md](RIGHTS.md). No upstream code or external imagery has been copied into this release.
+
+
+## Archimedes Observatory
+
+Open `observatory.html` for the EFMW experiment workbench. Observatory adds deterministic counterfactual twins, delayed intervention feedback, seeded ensembles, local parameter sensitivity, final-state checksums, and an epistemic/provenance ledger. See [docs/OBSERVATORY.md](docs/OBSERVATORY.md).
+
+The Observatory treats EFMW quantities as experimental model constructs and keeps simulation output distinct from empirical evidence.
