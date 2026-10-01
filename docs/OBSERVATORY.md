@@ -42,4 +42,4 @@ Every run exports:
 - epistemic/provenance ledger;
 - checksums for both final worlds.
 
-The next validation step is a test harness that verifies deterministic replay, twin identity before intervention, finite sensitivity outputs and exported-record schema.
+The regression harness in `tests/observatory.test.js` verifies deterministic replay, twin identity before intervention, finite sensitivity outputs, and the exported-record schema. It runs with the repository's standard `npm test` command.
