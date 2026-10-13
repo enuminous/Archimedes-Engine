@@ -104,6 +104,7 @@ def plannerNodes (depth width : ℕ) : ℕ := 4 + 4 * width * (depth - 1)
 theorem planner_default : plannerNodes 3 3 = 28 := by decide +kernel
 theorem planner_maximum (d b : ℕ) (hd : d ≤ 4) (hb : b ≤ 4) : plannerNodes d b ≤ 52 := by
   unfold plannerNodes
+  rw [Nat.mul_assoc]
   have h := Nat.mul_le_mul hb (show d - 1 ≤ 3 by omega)
   omega
 
