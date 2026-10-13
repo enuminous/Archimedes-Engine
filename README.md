@@ -116,3 +116,10 @@ No new license grant is made by this repository. Licensing of the project and pr
 Open the **[Archimedes Observatory](https://enuminous.github.io/Archimedes-Engine/observatory.html)** for the live EFMW experiment workbench. Observatory adds deterministic counterfactual twins, delayed intervention feedback, seeded ensembles, local parameter sensitivity, final-state checksums, and an epistemic/provenance ledger. See [docs/OBSERVATORY.md](docs/OBSERVATORY.md).
 
 The Observatory treats EFMW quantities as experimental model constructs and keeps simulation output distinct from empirical evidence.
+
+## Lean 4 verification
+
+The pinned [formal package](formal/VERIFICATION.md) contains kernel-checked mathematical
+statements with an explicit [coverage and obligation ledger](formal/COVERAGE.md).
+The `Lean verification` workflow builds the package and tests its strict axiom audit.
+The workflow result for a commit, rather than this link alone, establishes compilation.
