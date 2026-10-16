@@ -1,5 +1,13 @@
 # The Archimedes Engine
 
+<!-- ENUMINOUS-LIFECYCLE:START -->
+**Lifecycle review — 2026-10-16: shared 2D implementation; distinct extensions retained.**
+
+Seven source/test blobs are exact copies across `Archimedes-Engine` and `Archimedes-3D`, including the original `app.js` and `engine.js`. This repository retains its distinct Observatory work; [Archimedes-3D](https://github.com/enuminous/Archimedes-3D) retains its own extension. Neither repository wholly supersedes the other. Changes to the common 2D files should be coordinated; copied tests are not independent corroboration. `MANIFEST.json` and older publication instructions retain packaging-time status, not the current publication state. The current repository is `Archimedes-Engine`.
+
+[Portfolio review and evidence](https://github.com/enuminous/EFMW_Post156_Zoo_Audit/blob/main/portfolio/REPOSITORY_LIFECYCLE_2026-10-16.md).
+<!-- ENUMINOUS-LIFECYCLE:END -->
+
 <!-- ENUMINOUS-NETWORK:START -->
 **eNuminous network:** [All repositories](https://enuminous.github.io/EFMW/repositories.html) · [EFMW](https://enuminous.github.io/EFMW/) · [102 equations](https://github.com/enuminous/Monolithic_102_EFMW) · [165 triplets](https://enuminous.github.io/FieldSpace/) · [Zoo](https://enuminous.github.io/Tortoise/) · [Lean](https://enuminous.github.io/Aristotle-102-Monolithic-Lean/) · [Engine](https://enuminous.github.io/Archimedes-Engine/) · [Papers](https://enuminous.github.io/medium/papers-essays-index.html) · [Audit](https://github.com/enuminous/EFMW_Post156_Zoo_Audit/blob/main/portfolio/INTERLOCK_AUDIT.md)
 
